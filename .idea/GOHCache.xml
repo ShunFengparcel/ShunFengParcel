@@ -1,6 +1,346 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="GoORMHelperCache">
-    <option name="lastTimeChecked" value="1760528003374" />
+    <option name="schemaMapping">
+      <map>
+        <entry key="Bootstrap">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/data/data.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data_Database">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data_Redis">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Greeter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GreeterHTTPClientImpl">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GreeterService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GreeterUsecase">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="HelloReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="HelloRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server_GRPC">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server_HTTP">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedGreeterServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="greeterClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="greeterRepo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/data/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="x">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159544" />
+              <option name="schema">
+                <list>
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159574" />
+              <option name="schema">
+                <list>
+                  <option value="HelloRequest" />
+                  <option value="HelloReply" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159613" />
+              <option name="schema">
+                <list>
+                  <option value="greeterClient" />
+                  <option value="UnimplementedGreeterServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159638" />
+              <option name="schema">
+                <list>
+                  <option value="GreeterHTTPClientImpl" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159661" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159679" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528234385" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/inits.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760679265011" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760679391711" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/biz.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159762" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/greeter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159780" />
+              <option name="schema">
+                <list>
+                  <option value="Greeter" />
+                  <option value="GreeterUsecase" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159803" />
+              <option name="schema">
+                <list>
+                  <option value="Bootstrap" />
+                  <option value="Server" />
+                  <option value="Data" />
+                  <option value="Server_HTTP" />
+                  <option value="Server_GRPC" />
+                  <option value="Data_Database" />
+                  <option value="Data_Redis" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/data.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159847" />
+              <option name="schema">
+                <list>
+                  <option value="Data" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/greeter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159864" />
+              <option name="schema">
+                <list>
+                  <option value="greeterRepo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/grpc.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159887" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/http.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159910" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159912" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159940" />
+              <option name="schema">
+                <list>
+                  <option value="GreeterService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/service.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760528159941" />
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="bootstrap" value="Bootstrap" />
+        <entry key="data" value="Data" />
+        <entry key="data__database" value="Data_Database" />
+        <entry key="data__redis" value="Data_Redis" />
+        <entry key="greeter" value="Greeter" />
+        <entry key="greeter_client" value="greeterClient" />
+        <entry key="greeter_http_client_impl" value="GreeterHTTPClientImpl" />
+        <entry key="greeter_repo" value="greeterRepo" />
+        <entry key="greeter_service" value="GreeterService" />
+        <entry key="greeter_usecase" value="GreeterUsecase" />
+        <entry key="hello_reply" value="HelloReply" />
+        <entry key="hello_request" value="HelloRequest" />
+        <entry key="server" value="Server" />
+        <entry key="server_grpc" value="Server_GRPC" />
+        <entry key="server_http" value="Server_HTTP" />
+        <entry key="unimplemented_greeter_server" value="UnimplementedGreeterServer" />
+        <entry key="x" value="x" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1760679094307" />
   </component>
 </project>

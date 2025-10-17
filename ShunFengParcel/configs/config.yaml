@@ -8,8 +8,9 @@ server:
 data:
   database:
     driver: mysql
-    source: root:root@tcp(127.0.0.1:3306)/test?parseTime=True&loc=Local
+    source: root:mysql_8tDfmn@tcp(14.103.136.136:3306)/shunfeng?parseTime=True&loc=Local
   redis:
-    addr: 127.0.0.1:6379
+    addr: 14.103.136.136:6379
+    password: mysql_8tDfmn
     read_timeout: 0.2s
     write_timeout: 0.2s
