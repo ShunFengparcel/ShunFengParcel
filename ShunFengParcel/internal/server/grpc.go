@@ -2,9 +2,9 @@ package server
 
 import (
 	v1 "ShunFengParcel/api/helloworld/v1"
+	_ "ShunFengParcel/inits"
 	"ShunFengParcel/internal/conf"
 	"ShunFengParcel/internal/service"
-
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/grpc"

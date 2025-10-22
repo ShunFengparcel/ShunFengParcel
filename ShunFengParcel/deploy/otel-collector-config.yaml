@@ -1,0 +1,49 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 10s
+    send_batch_size: 1024
+  
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+
+exporters:
+  # 输出到控制台（用于调试）
+  logging:
+    loglevel: info
+  
+  # 输出到文件
+  file:
+    path: /var/log/otel-collector/traces.json
+  
+  # 如果有 APM 后端，配置这里
+  # otlp:
+  #   endpoint: "apmplus-cn-beijing.ivolces.com:4317"
+  #   headers:
+  #     X-ByteAPIM-AppKey: "57b69ddefb13e20e8277e8d2861f4a4f"
+  #   tls:
+  #     insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [logging, file]
+    
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [logging, file]
+  
+  telemetry:
+    logs:
+      level: info
