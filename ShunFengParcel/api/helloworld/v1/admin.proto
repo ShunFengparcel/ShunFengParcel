@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package stream;
+
+import "google/api/annotations.proto";
+
+option go_package = "ShunFengParcel/api/helloworld/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.helloworld.v1";
+option java_outer_classname = "HelloworldProtoV1";
+
+// The greeting service definition.
+service Admin {
+  // Sends a greeting
+  rpc AdminRegister (AdminRegisterReq) returns (AdminRegisterResp) {
+    option (google.api.http) = {
+      post: "/admin/register"//运营注册
+      body:"*"
+    };
+  }
+  rpc FindAdminByUsername (FindAdminByUsernameReq) returns (FindAdminByUsernameResp) {
+    option (google.api.http) = {
+      post: "/admin/findadminbyusername"//运营查询
+      body: "*"
+    };
+  }
+  rpc UpdateAdminPersonal (UpdateAdminPersonalReq) returns (UpdateAdminPersonalResp) {
+    option (google.api.http) = {
+      post: "/admin/update/prsonal"//运营个人信息修改
+      body:"*"
+    };
+  }
+  rpc AdminStatus (AdminStatusReq) returns (AdminStatusResp) {
+    option (google.api.http) = {
+      post: "/admin/status"//运营状态查询
+      body:"*"
+    };
+  }
+  rpc UpdateAdminStatus (UpdateAdminStatusReq) returns (UpdateAdminStatusResp) {
+    option (google.api.http) = {
+    post: "/admin/status/update"//修改运营状态
+        body:"*"
+        };
+  }
+  rpc SendSms (SendSmsReq) returns (SendSmsResp) {
+    option (google.api.http) = {
+      post: "/sendsms"//修改运营状态
+      body:"*"
+    };
+  }
+}
+
+// The request message containing the user's name.
+message AdminRegisterReq {
+  string username = 1;
+  string password=2;
+}
+// The response message containing the greetings
+message AdminRegisterResp {
+  int64 id = 1;
+}
+message FindAdminByUsernameReq {
+  string username = 1;
+  string password=2;
+}
+
+// The response message containing the greetings
+message FindAdminByUsernameResp {
+  int64 id = 1;
+}
+message UpdateAdminPersonalReq {
+  int64 id =1;
+  string nickname = 2;
+  string phone =3;
+  string email =4;
+
+}
+
+// The response message containing the greetings
+message UpdateAdminPersonalResp {}
+
+message AdminStatusReq {
+  string username=1;
+
+}
+// The response message containing the greetings
+message AdminStatusResp {
+  int64 status =1;
+}
+message UpdateAdminStatusReq {
+  int64  id=1;
+  int64 status =2;
+
+}
+// The response message containing the greetings
+message UpdateAdminStatusResp {       
+}
+message SendSmsReq {
+  int64  id=1;
+  int64 status =2;
+
+}
+// The response message containing the greetings
+message SendSmsResp {
+}

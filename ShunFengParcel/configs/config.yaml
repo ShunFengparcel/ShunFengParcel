@@ -5,6 +5,7 @@ server:
   grpc:
     addr: 0.0.0.0:9000
     timeout: 1s
+
 data:
   database:
     driver: mysql
@@ -14,3 +15,23 @@ data:
     password: mysql_8tDfmn
     read_timeout: 0.2s
     write_timeout: 0.2s
+
+# 日志配置
+log:
+  level: info              # 日志级别: debug, info, warn, error
+  format: json             # 日志格式: json 或 text
+  output_path: ./logs/app.log  # 日志文件路径
+  max_size: 100            # 单个日志文件最大大小（MB）
+  console: true            # 是否同时输出到控制台
+  
+# ELK 配置（可选）
+elk:
+  enabled: false
+  elasticsearch:
+    addresses:
+      - http://localhost:9200
+    username: elastic
+    password: ""
+  logstash:
+    address: localhost:5044
+    protocol: tcp
