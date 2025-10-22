@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package api.helloworld.payment;
+
+import "google/api/annotations.proto";
+
+option go_package = "ShunFengParcel/api/helloworld/payment;payment";
+option java_multiple_files = true;
+option java_package = "api.helloworld.payment";
+
+service Payment {
+
+
+	rpc UpdatePayment (UpdatePaymentRequest) returns (UpdatePaymentReply){
+    option (google.api.http) = {
+      post: "payment/update"
+      body: "*"
+    };
+  }
+}
+message UpdatePaymentRequest {
+
+}
+
+message UpdatePaymentReply {
+    string Result = 1;
+}

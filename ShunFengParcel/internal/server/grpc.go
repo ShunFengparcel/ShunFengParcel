@@ -1,6 +1,8 @@
 package server
 
 import (
+	pay "ShunFengParcel/api/helloworld/payment"
+
 	v1 "ShunFengParcel/api/helloworld/v1"
 	"ShunFengParcel/internal/conf"
 	"ShunFengParcel/internal/service"
@@ -11,7 +13,15 @@ import (
 )
 
 // NewGRPCServer new a gRPC server.
-func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *grpc.Server {
+func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, payment *service.PaymentService, logger log.Logger) *grpc.Server {
+
+	//logger = log.DefaultLogger
+	//var logs = []grpc.ServerOption{
+	//	grpc.Middleware(
+	//		logging.Server(logger),
+	//	),
+	//}
+	//srvc := grpc.NewServer(logs...)
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
@@ -28,5 +38,6 @@ func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 	}
 	srv := grpc.NewServer(opts...)
 	v1.RegisterGreeterServer(srv, greeter)
+	pay.RegisterPaymentServer(srv, payment)
 	return srv
 }

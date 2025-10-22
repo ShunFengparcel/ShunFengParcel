@@ -3,10 +3,24 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
+        <entry key="AliPay">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/utils/payment.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Bootstrap">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Chats">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/websocket.go" />
             </set>
           </value>
         </entry>
@@ -74,6 +88,34 @@
             </set>
           </value>
         </entry>
+        <entry key="Node">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/websocket.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PaymentHTTPClientImpl">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment_http.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PaymentService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/payment.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RabbitMQ">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/inits/rabbitmq.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Server">
           <value>
             <set>
@@ -95,10 +137,45 @@
             </set>
           </value>
         </entry>
+        <entry key="SfOrders">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/config/order.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UnimplementedGreeterServer">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedPaymentServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdatePaymentReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdatePaymentRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WxPay">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/utils/payment.go" />
             </set>
           </value>
         </entry>
@@ -116,9 +193,17 @@
             </set>
           </value>
         </entry>
+        <entry key="paymentClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="x">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment.pb.go" />
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go" />
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
               <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
@@ -129,10 +214,49 @@
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760929264097" />
+              <option name="schema">
+                <list>
+                  <option value="UpdatePaymentRequest" />
+                  <option value="UpdatePaymentReply" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760929264097" />
+              <option name="schema">
+                <list>
+                  <option value="paymentClient" />
+                  <option value="UnimplementedPaymentServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/payment/payment_http.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760929264097" />
+              <option name="schema">
+                <list>
+                  <option value="PaymentHTTPClientImpl" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159544" />
+              <option name="lastModified" value="1760754586250" />
               <option name="schema">
                 <list>
                   <option value="x" />
@@ -144,7 +268,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159574" />
+              <option name="lastModified" value="1760754586250" />
               <option name="schema">
                 <list>
                   <option value="HelloRequest" />
@@ -158,7 +282,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159613" />
+              <option name="lastModified" value="1760754586251" />
               <option name="schema">
                 <list>
                   <option value="greeterClient" />
@@ -171,7 +295,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159638" />
+              <option name="lastModified" value="1760754586251" />
               <option name="schema">
                 <list>
                   <option value="GreeterHTTPClientImpl" />
@@ -183,49 +307,73 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159661" />
+              <option name="lastModified" value="1761043170182" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159679" />
+              <option name="lastModified" value="1760754586252" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528234385" />
+              <option name="lastModified" value="1760937650495" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/config/order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760927124700" />
+              <option name="schema">
+                <list>
+                  <option value="SfOrders" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/inits.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760679265011" />
+              <option name="lastModified" value="1761006737852" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/mysql.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760679391711" />
+              <option name="lastModified" value="1761006732533" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/rabbitmq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761011161613" />
+              <option name="schema">
+                <list>
+                  <option value="RabbitMQ" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/biz.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159762" />
+              <option name="lastModified" value="1760754586254" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159780" />
+              <option name="lastModified" value="1760754586254" />
               <option name="schema">
                 <list>
                   <option value="Greeter" />
@@ -238,7 +386,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159803" />
+              <option name="lastModified" value="1760754586254" />
               <option name="schema">
                 <list>
                   <option value="Bootstrap" />
@@ -257,7 +405,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/data.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159847" />
+              <option name="lastModified" value="1760754586255" />
               <option name="schema">
                 <list>
                   <option value="Data" />
@@ -269,7 +417,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159864" />
+              <option name="lastModified" value="1760754586255" />
               <option name="schema">
                 <list>
                   <option value="greeterRepo" />
@@ -281,28 +429,28 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/grpc.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159887" />
+              <option name="lastModified" value="1761104928668" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/http.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159910" />
+              <option name="lastModified" value="1761007002282" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159912" />
+              <option name="lastModified" value="1760754586256" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159940" />
+              <option name="lastModified" value="1760754586256" />
               <option name="schema">
                 <list>
                   <option value="GreeterService" />
@@ -311,10 +459,69 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/payment.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761112078223" />
+              <option name="schema">
+                <list>
+                  <option value="PaymentService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/service.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159941" />
+              <option name="lastModified" value="1760931021661" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/websocket.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761026077266" />
+              <option name="schema">
+                <list>
+                  <option value="Node" />
+                  <option value="Chats" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/utils/alipay.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761043984626" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/utils/payment.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761010600970" />
+              <option name="schema">
+                <list>
+                  <option value="AliPay" />
+                  <option value="WxPay" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/utils/wx.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760877648669" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/utils/zap.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104258816" />
             </ScannedPath>
           </value>
         </entry>
@@ -322,7 +529,9 @@
     </option>
     <option name="tableStructMapping">
       <map>
+        <entry key="ali_pay" value="AliPay" />
         <entry key="bootstrap" value="Bootstrap" />
+        <entry key="chats" value="Chats" />
         <entry key="data" value="Data" />
         <entry key="data__database" value="Data_Database" />
         <entry key="data__redis" value="Data_Redis" />
@@ -334,13 +543,23 @@
         <entry key="greeter_usecase" value="GreeterUsecase" />
         <entry key="hello_reply" value="HelloReply" />
         <entry key="hello_request" value="HelloRequest" />
+        <entry key="node" value="Node" />
+        <entry key="payment_client" value="paymentClient" />
+        <entry key="payment_http_client_impl" value="PaymentHTTPClientImpl" />
+        <entry key="payment_service" value="PaymentService" />
+        <entry key="rabbit_mq" value="RabbitMQ" />
         <entry key="server" value="Server" />
         <entry key="server_grpc" value="Server_GRPC" />
         <entry key="server_http" value="Server_HTTP" />
+        <entry key="sf_orders" value="SfOrders" />
         <entry key="unimplemented_greeter_server" value="UnimplementedGreeterServer" />
+        <entry key="unimplemented_payment_server" value="UnimplementedPaymentServer" />
+        <entry key="update_payment_reply" value="UpdatePaymentReply" />
+        <entry key="update_payment_request" value="UpdatePaymentRequest" />
+        <entry key="wx_pay" value="WxPay" />
         <entry key="x" value="x" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1760679094307" />
+    <option name="lastTimeChecked" value="1761093034459" />
   </component>
 </project>
