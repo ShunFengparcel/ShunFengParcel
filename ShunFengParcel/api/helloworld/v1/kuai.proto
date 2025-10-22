@@ -1,0 +1,299 @@
+syntax = "proto3";
+
+package helloworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "ShunFengParcel/api/helloworld/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.helloworld.v1";
+option java_outer_classname = "HelloworldProtoV1";
+
+service Kuai {
+	rpc DeleteKuai (DeleteKuaiRequest) returns (DeleteKuaiReply);
+	rpc GetTask (GetTaskRequest) returns (GetTaskReply){//个人任务详情
+    option (google.api.http) = {
+      post: "/gettask"
+      body: "*"
+    };
+  };
+	rpc TaskList (TaskListRequest) returns (TaskListReply){//任务展示
+    option (google.api.http) = {
+      post: "/taskList"
+      body: "*"
+    };
+  };
+	rpc Login (LoginRequest) returns (LoginReply){
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+  };
+  rpc Register(RegisterRequest) returns (RegisterReply) {
+    option (google.api.http) = {
+      post: "/register",
+      body: "*"
+    };
+  }
+  rpc StuUpd(StuUpdRequest) returns (StuUpdReply) {//修改快递员在线状态
+    option (google.api.http) = {
+      post: "/stuUpd",
+      body: "*"
+    };
+  }
+  rpc TakeTask(TakeTaskRequest) returns (TakeTaskReply) {//快递员点击接单
+    option (google.api.http) = {
+      post: "/addTask",
+      body: "*"
+    };
+  }
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderReply) {//生成订单
+    option (google.api.http) = {
+      post: "/createOrder",
+      body: "*"
+    };
+  }
+  rpc Performance(PerformanceRequest) returns (PerformanceReply) {//绩效排行榜
+    option (google.api.http) = {
+      post: "/performance",
+      body: "*"
+    };
+  }
+  rpc OrderList(OrderListRequest) returns (OrderListReply) {//订单列表
+    option (google.api.http) = {
+      post: "/orders",
+      body: "*"
+    };
+  }
+  rpc HandleException(HandleExceptionRequest) returns (HandleExceptionReply) {//异常处理接口
+    option (google.api.http) = {
+      post: "/handleException",
+      body: "*"
+    };
+  }
+}
+message PerformanceRequest {
+  int32 top_n = 1; // 要前几名
+}
+message PerformanceReply {
+  repeated CourierRank rank_list = 1;
+}
+message CourierRank {
+  int32 rank = 1;
+  int64 courier_id = 2;
+  string courier_name = 3;
+  double performance_score = 4;
+}
+
+message CreateOrderRequest {
+  int64  user_id                    = 3;   // 用户ID
+  string sender_name                = 6;   // 寄件人
+  string sender_phone               = 7;   // 寄件电话
+  string sender_address             = 8;   // 寄件地址（JSON 字符串）
+  string receiver_name              = 9;   // 收件人
+  string receiver_phone             = 10;  // 收件电话
+  string receiver_address           = 11;  // 收件地址（JSON 字符串）
+  ServiceType service_type          = 12; // 服务类型枚举
+  string product_type               = 13; // 物品类型
+  int32   is_insured                 = 14; // 是否保价
+  double insured_value              = 15; // 保价金额
+  double estimated_weight           = 16; // 预估重量kg
+  double actual_weight              = 17; // 实际重量kg
+  double volume_weight              = 18; // 体积重量kg
+  double estimated_fee              = 20; // 预估费用
+  double actual_fee                 = 21; // 实际费用
+  PaymentMethod payment_method      = 22; // 支付方式枚举
+  PaymentStatus payment_status      = 23; // 支付状态枚举
+  int64  expected_pickup_time       = 24; // 期望上门时间（Unix秒）
+  int64  actual_pickup_time         = 25; // 实际上门时间（Unix秒）
+  int64  expected_delivery_time     = 26; // 期望送达时间（Unix秒）
+  int64  actual_delivery_time       = 27; // 实际送达时间（Unix秒）
+  OrderStatus order_status          = 28; // 订单状态枚举
+}
+message CreateOrderReply {
+int32 order_id=1;
+}
+// 枚举定义（示例）protobuf 枚举是“数字”，数据库枚举是“字符串”
+enum ServiceType {
+  DELIVERY_OPTION_SAME_DAY = 0;
+  DELIVERY_OPTION_NEXT_DAY = 1;
+  DELIVERY_OPTION_STANDARD = 2;
+  DELIVERY_OPTION_ECONOMY = 3;
+}
+
+enum PaymentMethod {
+  PAYMENT_METHOD_UNSPECIFIED = 0;
+  PAYMENT_METHOD_SENDER_PAY   = 3;
+  PAYMENT_METHOD_RECEIVER_PAY = 4;
+  PAYMENT_METHOD_MONTHLY      = 5;
+}
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_PENDING  = 1;   // 待支付
+  PAYMENT_STATUS_PAID     = 2;   // 已支付
+  PAYMENT_STATUS_FAILED   = 3;   // 支付失败
+  PAYMENT_STATUS_REFUNDED = 4;   // 已退款
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED     = 0;
+  ORDER_STATUS_PENDING         = 1;  // 待接单
+  ORDER_STATUS_ACCEPTED        = 2;  // 已接单
+  ORDER_STATUS_PICKED_UP       = 3;  // 已取件
+  ORDER_STATUS_IN_TRANSIT      = 4;  // 运输中
+  ORDER_STATUS_OUT_FOR_DELIVERY= 5;  // 派送中
+  ORDER_STATUS_DELIVERED       = 6;  // 已签收
+  ORDER_STATUS_CANCELLED       = 7;  // 已取消
+  ORDER_STATUS_EXCEPTION       = 8;  // 异常
+}
+
+message TakeTaskRequest  {
+  int64 courier_id = 1;
+}
+message TakeTaskReply  {
+  Task task = 1; // 抢到的任务
+}
+
+
+message GetTaskRequest {
+  int64 id = 1;
+}
+message GetTaskReply {
+  int64 id = 1;
+  int64 courier_id = 2;
+  string courier_name = 3;
+  TaskType task_type = 4;
+  int32 priority = 5;         // 优先级 P0最高(超时订单) P1高(预约即将到期) P2中(已接单) P3低(新订单)
+  TaskStatus task_status = 6;
+}
+
+
+message StuUpdRequest {
+  string status=1;
+  int64 phone=2;
+}
+message StuUpdReply {
+  string status=1;
+}
+
+
+message RegisterRequest {
+  string phone=1;
+  string password_hash=2;
+}
+message RegisterReply {
+  int64 id=1;
+}
+
+
+message LoginRequest {
+string phone=1;
+string password_hash=2;
+}
+message LoginReply {
+int64 id=1;
+}
+
+
+message TaskListRequest {}
+message TaskListReply {
+  repeated Task tasks=1;
+  int32 total=2;
+}
+message Task {
+  int64 id = 1;               // 任务ID
+  int64 courier_id = 2;
+  string courier_name = 3;   // 新增
+  TaskType task_type = 4;     // 任务类型
+  int32 priority = 5;         // 优先级 P0最高(超时订单) P1高(预约即将到期) P2中(已接单) P3低(新订单)
+  TaskStatus task_status = 6;
+  string created_at = 7;      // 创建时间
+  string sender_address = 8;  // 寄件地址
+  string receiver_address = 9; // 收件地址
+}
+enum TaskType {
+  TASK_TYPE_UNSPECIFIED = 0;
+  Pickup = 1;       // 揽件
+  Delivery = 2;     // 派件
+
+}
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0; // 未指定
+  Pending= 1;     // 待处理
+  Accepted = 2;    // 已接单
+  Completed = 3;   // 已完成
+  Cancelled = 4;   // 已取消
+}
+
+message DeleteKuaiRequest {}
+message DeleteKuaiReply {}
+
+message GetKuaiRequest {}
+message GetKuaiReply {}
+
+// 订单列表
+message OrderListRequest {
+  // 不需要任何参数，默认只查询 pending 状态
+}
+message OrderItem {
+  int64 id = 1;
+  string order_no = 2;
+  string sender_name = 3;
+  string receiver_name = 4;
+  string service_type = 5;
+  string order_status = 6;
+  string created_at = 7;
+  int64 user_id = 8;
+  int64 courier_id = 9;
+  string sender_phone = 10;
+  string sender_address = 11;
+  string receiver_phone = 12;
+  string receiver_address = 13;
+  string product_type = 14;
+  int32 is_insured = 15;
+  double insured_value = 16;
+  double estimated_weight = 17;
+  double actual_weight = 18;
+  double volume_weight = 19;
+  double estimated_fee = 20;
+  double actual_fee = 21;
+  string payment_method = 22;
+  string payment_status = 23;
+  int64 expected_pickup_time = 24;
+  int64 actual_pickup_time = 25;
+  int64 expected_delivery_time = 26;
+  int64 actual_delivery_time = 27;
+  string updated_at = 28;
+  string deleted_at = 29;
+}
+message OrderListReply {
+  repeated OrderItem list = 1;
+}
+
+// 异常处理请求
+message HandleExceptionRequest {
+  int64 order_id = 1;           // 订单ID`
+  ExceptionType exception_type = 2; // 异常类型
+  string reason = 3;            // 异常原因
+  int64 courier_id = 4;         // 快递员ID
+}
+
+// 异常处理响应
+message HandleExceptionReply {
+  bool success = 1;             // 处理是否成功
+  string message = 2;           // 返回消息
+  OrderStatus new_status = 3;   // 新的订单状态
+  bool requires_negotiation = 4; // 是否需要协商空跑费
+  double suggested_fee = 5;     // 建议的空跑费金额(0-10元)
+}
+
+// 异常类型枚举
+enum ExceptionType {
+  EXCEPTION_TYPE_UNSPECIFIED = 0;
+  USER_CANCEL = 1;              // 用户取消订单
+  COURIER_CANCEL = 2;           // 快递员取消订单
+  DELIVERY_FAILED = 3;          // 派送失败
+  PICKUP_FAILED = 4;            // 取件失败
+  ADDRESS_ERROR = 5;            // 地址错误
+  CONTACT_FAILED = 6;           // 联系不上收件人
+}

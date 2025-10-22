@@ -17,6 +17,7 @@ import (
 )
 
 import (
+	_ "github.com/go-kratos/kratos/v2/encoding/json"
 	_ "go.uber.org/automaxprocs"
 )
 
@@ -38,3 +39,4 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 		cleanup()
 	}, nil
 }
+

@@ -11,20 +11,89 @@ option java_outer_classname = "HelloworldProtoV1";
 
 // The greeting service definition.
 service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {
+  // 快递员 App 每 5 秒上报一次
+  rpc ReportCourierLocation (ReportCourierLocationRequest) returns (ReportCourierLocationReply) {
     option (google.api.http) = {
-      get: "/helloworld/{name}"
+      post: "/location/v1/report"
+      body: "*"
+    };
+  }
+
+  // 前端 / 运营后台实时拉轨迹
+  rpc GetCourierTrajectory (GetCourierTrajectoryRequest) returns (GetCourierTrajectoryReply) {
+    option (google.api.http) = {
+      get: "/location/v1/trajectory/{courier_id}"
+    };
+  }
+
+  // 单次发货→收货距离（复用前一天算法）
+  rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+    option (google.api.http) = {
+      post: "/location/v1/task_distance"
+      body: "*"
+    };
+  }
+
+  // 地址解析接口，将寄件地址和收件地址转换为经纬度
+  rpc GeocodeAddress (GeocodeAddressRequest) returns (GeocodeAddressResponse) {
+    option (google.api.http) = {
+      post: "/location/v1/geocode"
+      body: "*"
     };
   }
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+/*========== 上报 ==========*/
+message ReportCourierLocationRequest {
+  int64                 courier_id = 1;
+  double                lng        = 2; // GCJ-02
+  double                lat        = 3;
+//  google.protobuf.Timestamp ts = 4; // 客户端时间
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+message ReportCourierLocationReply {}
+
+/*========== 轨迹 ==========*/
+message GetCourierTrajectoryRequest {
+  int64 courier_id = 1;
+  int32  last_seconds = 2; // 回看最近 N 秒，默认 300（5 分钟）
+}
+
+message GetCourierTrajectoryReply {
+  repeated Point points = 1;
+}
+
+message Point {
+  double lng = 1;
+  double lat = 2;
+//  google.protobuf.Timestamp ts = 3;
+}
+
+/*========== 发货→收货距离 ==========*/
+message GetTaskDistanceRequest {
+  double from_lng = 1;
+  double from_lat = 2;
+  double to_lng   = 3;
+  double to_lat   = 4;
+}
+
+message GetTaskDistanceReply {
+  int32 distance = 1; // 米
+  int32 duration = 2; // 秒
+}
+
+/*========== 地址解析 ==========*/
+message GeocodeAddressRequest {
+  string sender_address = 1;    // 寄件地址
+  string receiver_address = 2;  // 收件地址
+}
+
+message GeocodeAddressResponse {
+  LocationInfo sender_location = 1;    // 寄件地址经纬度信息
+  LocationInfo receiver_location = 2;  // 收件地址经纬度信息
+}
+
+message LocationInfo {
+  double lng = 1;        // 经度
+  double lat = 2;        // 纬度
 }

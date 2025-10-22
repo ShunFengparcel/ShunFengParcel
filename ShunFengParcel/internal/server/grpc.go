@@ -4,6 +4,9 @@ import (
 	v1 "ShunFengParcel/api/helloworld/v1"
 	"ShunFengParcel/internal/conf"
 	"ShunFengParcel/internal/service"
+	"ShunFengParcel/internal/basic/config"
+
+	_ "ShunFengParcel/internal/basic/inits"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
@@ -28,5 +31,12 @@ func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 	}
 	srv := grpc.NewServer(opts...)
 	v1.RegisterGreeterServer(srv, greeter)
+
+	// 注入 Redis 客户端，避免 KuaiService.RDB 为空
+	k := service.NewKuaiService(nil, config.RDB)
+	v1.RegisterKuaiServer(srv, k)
+
+	m := &service.WeiService{}
+	v1.RegisterWeiServer(srv, m)
 	return srv
 }

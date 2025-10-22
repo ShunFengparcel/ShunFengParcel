@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package helloworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/go-kratos/service-layout/api/helloworld/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.helloworld.v1";
+option java_outer_classname = "HelloWorldProtoV1";
+
+// The greeting service definition.
+service Wei {
+  // Sends a greeting
+  rpc WX (WXRequest) returns (WXReply)  {
+    option (google.api.http) = {
+      // 定义一个 GET 接口，并且把 name 映射到 HelloRequest
+      get: "/wx",
+    };
+  }
+  rpc WechatLogin (WechatLoginRequest) returns (WechatLoginReply)  {
+    option (google.api.http) = {
+      // 定义一个 GET 接口，并且把 name 映射到 HelloRequest
+      get: "/wechatLogin",
+
+    };
+  }
+  rpc Callback (CallbackRequest) returns (CallbackReply)  {
+    option (google.api.http) = {
+      // 定义一个 GET 接口，并且把 name 映射到 HelloRequest
+      get: "/callback",
+
+    };
+  }
+}
+
+// The request message containing the user's name.
+message WXRequest {
+}
+
+// The response message containing the greetings
+message WXReply {
+}
+// The request message containing the user's name.
+message WechatLoginRequest {
+}
+
+// The response message containing the greetings
+message WechatLoginReply {
+}
+// The request message containing the user's name.
+message CallbackRequest {
+}
+
+// The response message containing the greetings
+message CallbackReply {
+
+}

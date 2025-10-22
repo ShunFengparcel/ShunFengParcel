@@ -14,6 +14,7 @@ import (
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 
+	_ "github.com/go-kratos/kratos/v2/encoding/json"
 	_ "go.uber.org/automaxprocs"
 )
 

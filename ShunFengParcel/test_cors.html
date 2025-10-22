@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS 测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            min-height: 20px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 CORS 跨域测试页面</h1>
+        
+        <div class="test-section">
+            <h3>📡 API 接口测试</h3>
+            <p>测试服务器的跨域配置是否正常工作</p>
+            
+            <button onclick="testGreeterAPI()">测试 Greeter API</button>
+            <button onclick="testKuaiAPI()">测试 Kuai API</button>
+            <button onclick="testTakeTaskAPI()">测试 TakeTask API (addTask)</button>
+            <button onclick="testOptionsRequest()">测试 OPTIONS 预检请求</button>
+            
+            <div id="apiResult" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔧 CORS 头部检查</h3>
+            <p>检查服务器返回的 CORS 相关头部信息</p>
+            
+            <button onclick="checkCORSHeaders()">检查 CORS 头部</button>
+            
+            <div id="corsResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:8888';
+        
+        function displayResult(elementId, message, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${isSuccess ? 'success' : 'error'}`;
+        }
+
+        async function testGreeterAPI() {
+            try {
+                const response = await fetch(`${API_BASE}/helloworld.Greeter/SayHello`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: 'CORS Test' })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResult('apiResult', `✅ Greeter API 测试成功: ${JSON.stringify(data)}`, true);
+                } else {
+                    displayResult('apiResult', `⚠️ Greeter API 响应错误: ${response.status} ${response.statusText}`, false);
+                }
+            } catch (error) {
+                displayResult('apiResult', `❌ Greeter API 测试失败: ${error.message}`, false);
+            }
+        }
+
+        async function testKuaiAPI() {
+            try {
+                const response = await fetch(`${API_BASE}/kuai.Kuai/GetKuai`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResult('apiResult', `✅ Kuai API 测试成功: ${JSON.stringify(data)}`, true);
+                } else {
+                    displayResult('apiResult', `⚠️ Kuai API 响应错误: ${response.status} ${response.statusText}`, false);
+                }
+            } catch (error) {
+                displayResult('apiResult', `❌ Kuai API 测试失败: ${error.message}`, false);
+            }
+        }
+
+        async function testTakeTaskAPI() {
+            try {
+                const response = await fetch(`${API_BASE}/addTask`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ courier_id: 1 })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResult('apiResult', `✅ TakeTask API 测试成功: ${JSON.stringify(data)}`, true);
+                } else {
+                    displayResult('apiResult', `⚠️ TakeTask API 响应错误: ${response.status} ${response.statusText}`, false);
+                }
+            } catch (error) {
+                displayResult('apiResult', `❌ TakeTask API 测试失败: ${error.message}`, false);
+            }
+        }
+
+        async function testOptionsRequest() {
+            try {
+                const response = await fetch(`${API_BASE}/helloworld.Greeter/SayHello`, {
+                    method: 'OPTIONS',
+                    headers: {
+                        'Origin': 'http://localhost:3000',
+                        'Access-Control-Request-Method': 'POST',
+                        'Access-Control-Request-Headers': 'Content-Type'
+                    }
+                });
+                
+                displayResult('apiResult', `✅ OPTIONS 预检请求成功: ${response.status} ${response.statusText}`, true);
+            } catch (error) {
+                displayResult('apiResult', `❌ OPTIONS 预检请求失败: ${error.message}`, false);
+            }
+        }
+
+        async function checkCORSHeaders() {
+            try {
+                const response = await fetch(`${API_BASE}/helloworld.Greeter/SayHello`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Origin': 'http://localhost:3000'
+                    },
+                    body: JSON.stringify({ name: 'CORS Header Test' })
+                });
+                
+                const corsHeaders = {
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                    'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers'),
+                    'Access-Control-Expose-Headers': response.headers.get('Access-Control-Expose-Headers')
+                };
+                
+                let headerInfo = '🔍 CORS 头部信息:\n';
+                for (const [key, value] of Object.entries(corsHeaders)) {
+                    headerInfo += `${key}: ${value || '未设置'}\n`;
+                }
+                
+                displayResult('corsResult', headerInfo, true);
+            } catch (error) {
+                displayResult('corsResult', `❌ CORS 头部检查失败: ${error.message}`, false);
+            }
+        }
+
+        // 页面加载时自动检查服务器状态
+        window.onload = function() {
+            displayResult('apiResult', '🚀 页面已加载，点击按钮开始测试 CORS 配置');
+            displayResult('corsResult', '💡 点击"检查 CORS 头部"按钮查看服务器返回的跨域头部信息');
+        };
+    </script>
+</body>
+</html>
