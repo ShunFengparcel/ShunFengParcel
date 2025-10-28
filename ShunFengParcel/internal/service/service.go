@@ -1,6 +1,13 @@
 package service
 
-import "github.com/google/wire"
+import (
+	"ShunFengParcel/internal/biz"
+	"github.com/google/wire"
+)
 
 // ProviderSet is service providers.
-var ProviderSet = wire.NewSet(NewGreeterService)
+var ProviderSet = wire.NewSet(
+	NewGreeterService,
+	NewOrderServiceImpl,
+	biz.NewPricingUsecase,
+)

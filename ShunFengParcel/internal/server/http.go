@@ -2,6 +2,7 @@ package server
 
 import (
 	v1 "ShunFengParcel/api/helloworld/v1"
+	orderv1 "ShunFengParcel/api/order/v1"
 	"ShunFengParcel/internal/conf"
 	"ShunFengParcel/internal/service"
 
@@ -11,7 +12,7 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, orderSvc *service.OrderServiceImpl, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -28,5 +29,9 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 	}
 	srv := http.NewServer(opts...)
 	v1.RegisterGreeterHTTPServer(srv, greeter)
+
+	// 注册订单服务（使用proto生成的HTTP handler）
+	orderv1.RegisterOrderServiceHTTPServer(srv, orderSvc)
+
 	return srv
 }

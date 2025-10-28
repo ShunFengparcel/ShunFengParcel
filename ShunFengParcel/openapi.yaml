@@ -7,33 +7,74 @@ info:
     description: The greeting service definition.
     version: 0.0.1
 paths:
-    /helloworld/{name}:
-        get:
+    /user/login:
+        post:
             tags:
                 - Greeter
-                - subgroup
             description: Sends a greeting
-            operationId: Greeter_SayHello
-            parameters:
-                - name: name
-                  in: path
-                  required: true
-                  schema:
-                    type: string
+            operationId: Greeter_UserLoginSendSms
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.UserLoginSendSmsRequest'
+                required: true
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/helloworld.v1.UserLoginSendSmsReply'
+    /user/sendsms:
+        post:
+            tags:
+                - Greeter
+            operationId: Greeter_SendSms
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.SendSmsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.SendSmsReply'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        helloworld.v1.SendSmsReply:
             type: object
             properties:
-                message:
+                Code:
                     type: string
-            description: The response message containing the greetings
+                Message:
+                    type: string
+                Data:
+                    type: string
+        helloworld.v1.SendSmsRequest:
+            type: object
+            properties:
+                Phone:
+                    type: string
+        helloworld.v1.UserLoginSendSmsReply:
+            type: object
+            properties:
+                Code:
+                    type: string
+                Message:
+                    type: string
+                Data:
+                    type: string
+        helloworld.v1.UserLoginSendSmsRequest:
+            type: object
+            properties:
+                Phone:
+                    type: string
+                SendSms:
+                    type: string
 tags:
     - name: Greeter

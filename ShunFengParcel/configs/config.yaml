@@ -1,15 +1,24 @@
 server:
   http:
-    addr: 0.0.0.0:8000
+    addr: 0.0.0.0:18000
     timeout: 1s
   grpc:
-    addr: 0.0.0.0:9000
+    addr: 0.0.0.0:19000
     timeout: 1s
+wechat:
+  appid: wx7f11be428011deb9  # 替换成你的小程序 AppID
+  secret: 70672af859b3b98c97d3a8cab6590c43  # 替换成你的小程序 AppSecret
 data:
   database:
     driver: mysql
-    source: root:root@tcp(127.0.0.1:3306)/test?parseTime=True&loc=Local
+    source: root:mysql_8tDfmn@tcp(14.103.136.136:3306)/shunfeng?parseTime=True&loc=Local&charset=utf8mb4&timeout=10s&readTimeout=5s&writeTimeout=5s
+    max_idle_conns: 10
+    max_open_conns: 100
+    conn_max_lifetime: 3600s
   redis:
-    addr: 127.0.0.1:6379
+    addr: 14.103.136.136:6379
+    password: b914572bdc69c888f90ce7bafa9cbb7e
+    db: 0
     read_timeout: 0.2s
     write_timeout: 0.2s
+    pool_size: 10

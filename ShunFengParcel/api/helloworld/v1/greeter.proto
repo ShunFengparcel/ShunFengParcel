@@ -11,20 +11,65 @@ option java_outer_classname = "HelloworldProtoV1";
 
 // The greeting service definition.
 service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {
+  // 微信小程序登录
+  rpc WxLogin (WxLoginRequest) returns (WxLoginReply) {
     option (google.api.http) = {
-      get: "/helloworld/{name}"
+      post: "/user/wxlogin"
+      body: "*"
+    };
+  }
+  // 手机号验证码登录
+  rpc UserLoginSendSms (UserLoginSendSmsRequest) returns (UserLoginSendSmsReply) {
+    option (google.api.http) = {
+      post: "/user/login"
+      body: "*"
+    };
+  }
+  //发送验证码
+  rpc SendSms (SendSmsRequest) returns (SendSmsReply) {
+    option (google.api.http) = {
+      post: "/user/sendsms"
+      body: "*"
     };
   }
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message SendSmsRequest {
+  string Phone = 1;
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+
+message SendSmsReply {
+  int64 Code = 1;
+  string Message = 2;
+  string Data = 3;
+}
+
+message UserLoginSendSmsRequest {
+  string Phone = 1;
+  string SendSms = 2;
+}
+
+
+message UserLoginSendSmsReply {
+  int64 Code = 1;
+  string Message = 2;
+  string Data = 3;
+}
+
+// 微信小程序登录请求
+message WxLoginRequest {
+  string code = 1;  // 微信登录凭证
+  string nickname = 2;  // 用户昵称
+  string avatar_url = 3;  // 用户头像
+}
+
+// 微信小程序登录响应
+message WxLoginReply {
+  int64 code = 1;
+  string message = 2;
+  string token = 3;  // 自定义登录态
+  string openid = 4;  // 用户openid
+  string nickname = 5;  // 用户昵称
+  int64 user_id = 6;  // 用户ID
 }
