@@ -4,13 +4,16 @@ import (
 	pb "ShunFengParcel/api/helloworld/payment"
 	"ShunFengParcel/config"
 	"ShunFengParcel/inits"
+	"ShunFengParcel/utils"
 	"context"
 	"fmt"
-
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/google/uuid"
 	"github.com/smartwalle/alipay/v3"
+	logs "log"
+	"time"
 )
 
 type PaymentService struct {
@@ -43,16 +46,14 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 		}, nil
 	}
 
-	// 2. 解析支付宝回调的表单参数（支付宝以 application/x-www-form-urlencoded 格式提交）
 	if err := rawReq.ParseForm(); err != nil {
 		s.log.Error("解析表单参数失败:", err)
 		return &pb.UpdatePaymentReply{
 			Result: "fail",
 		}, nil
 	}
-	params := rawReq.PostForm // 类型：url.Values（key-value 形式的参数）
+	params := rawReq.PostForm
 
-	// 3. 转换参数格式并验证签名（关键步骤，防止伪造请求）
 	paramMap := make(map[string]string)
 	for k, v := range params {
 		if len(v) > 0 {
@@ -66,7 +67,6 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 		}, nil
 	}
 
-	// 3. 解析回调参数（核心参数：out_trade_no 商户订单号，trade_status 支付状态）
 	outTradeNo := paramMap["out_trade_no"] // 你的系统订单号
 	fmt.Println(outTradeNo)
 	tradeStatus := paramMap["trade_status"] // 支付状态（SUCCESS 表示成功）
@@ -94,4 +94,97 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 
 	// 5. 返回结果（必须返回 "success"，否则支付宝会重复回调）
 	return &pb.UpdatePaymentReply{Result: "success"}, nil
+}
+
+func (s *PaymentService) CreatedReconciliation(ctx context.Context, req *pb.CreatedReconciliationRequest) (*pb.CreatedReconciliationReply, error) {
+	var orders []config.SfOrders
+	todaystr3 := time.Now().Format("2006-01-02")
+	fmt.Println("todaystr3:", todaystr3)
+
+	// 使用请求中的日期，如果没有则使用今天
+	queryDate := req.CreatedTime
+	if queryDate == "" {
+		queryDate = todaystr3
+	}
+
+	err := inits.DB.Model(orders).Where("created_at like ?", "%"+queryDate+"%").Find(&orders).Error
+	if err != nil {
+		fmt.Println("查询今日订单失败", err.Error())
+		return nil, err
+	}
+	fmt.Println(orders)
+
+	sum := 0.00
+	for _, order := range orders {
+		sum += order.ActualFee
+	}
+
+	// 查询前一天的对账数据
+	var previousReconciliation config.Reconciliation
+	nowTime := time.Now()
+	getTime := nowTime.AddDate(0, 0, -1) //年，月，日   获取一天前的时间
+	resTime := getTime.Format("2006-01-02")
+
+	err = inits.DB.Model(previousReconciliation).Where("created_at like ?", "%"+resTime+"%").Limit(1).Find(&previousReconciliation).Error
+	if err != nil {
+		fmt.Println("查询前一天数据失败", err.Error())
+		return nil, err
+	}
+
+	// 计算涨幅比例，避免除零错误
+	var proportion float64
+	if previousReconciliation.ActualAmount > 0 {
+		proportion = sum / previousReconciliation.ActualAmount
+	} else {
+		proportion = 0.0 // 如果没有前一天数据，设为0.0
+	}
+
+	reconciliation := config.Reconciliation{
+		TaskName:           fmt.Sprintf("%s对账", todaystr3),
+		ReconciliationNo:   uuid.NewString(),
+		ReconciliationDate: time.Now(),
+		Amount:             sum,
+		ActualAmount:       sum,
+		Proportion:         proportion,
+		HandlerStatus:      "待处理", // 设置默认状态
+	}
+
+	err = reconciliation.Created(inits.DB)
+	if err != nil {
+		fmt.Println("添加日账单失败", err.Error())
+		return nil, err
+	}
+
+	return &pb.CreatedReconciliationReply{
+		ReconciliationId: int64(reconciliation.ID),
+	}, nil
+}
+func (s *PaymentService) ListReconciliation(ctx context.Context, req *pb.ListReconciliationRequest) (*pb.ListReconciliationReply, error) {
+	var ra config.Reconciliation
+
+	list, err := ra.ReconciliationItemList(inits.DB, req.PlayTime, req.EndTime)
+	if err != nil {
+		fmt.Println("查询失败", err.Error())
+		return nil, err
+	}
+	return &pb.ListReconciliationReply{
+		List: list,
+	}, nil
+}
+
+func (s *PaymentService) PaymentOrder(ctx context.Context, req *pb.PaymentOrderRequest) (*pb.PaymentOrderReply, error) {
+	var o config.SfOrders
+	err := o.FIndByOrderSn(inits.DB, req.OrderSn)
+	if err != nil {
+		logs.Println("查询订单号错误", err.Error())
+		return nil, err
+	}
+
+	var pay utils.AliPay
+
+	price := fmt.Sprintf("%.2f", o.ActualFee)
+	url := pay.Pay(o.OrderNo, price)
+	return &pb.PaymentOrderReply{
+		Url: url,
+	}, nil
 }

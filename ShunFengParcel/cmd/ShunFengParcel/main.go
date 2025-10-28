@@ -1,12 +1,12 @@
 package main
 
 import (
-	"ShunFengParcel/utils"
 	"flag"
 	"os"
 
 	_ "ShunFengParcel/inits"
 	"ShunFengParcel/internal/conf"
+
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
@@ -14,8 +14,6 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/google/uuid"
-
 	_ "go.uber.org/automaxprocs"
 )
 
@@ -81,8 +79,6 @@ func main() {
 		panic(err)
 	}
 	defer cleanup()
-	var alipay utils.AliPay
-	alipay.Pay(uuid.NewString(), "10.00")
 	// start and wait for stop signal
 	if err := app.Run(); err != nil {
 		panic(err)

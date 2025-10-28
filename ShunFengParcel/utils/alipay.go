@@ -15,7 +15,7 @@ func Alipayment(orderNo, price string) string {
 	}
 
 	var p = alipay.TradeWapPay{}
-	p.NotifyURL = "http://3a277788.r34.cpolar.top/payment/update"
+	p.NotifyURL = "http://5b39d13f.r34.cpolar.top/payment/update"
 	p.ReturnURL = "http://www.baidu.com"
 	p.Subject = "顺丰速递"
 	p.OutTradeNo = orderNo

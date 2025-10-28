@@ -9,19 +9,73 @@ option java_multiple_files = true;
 option java_package = "api.helloworld.payment";
 
 service Payment {
-
-
 	rpc UpdatePayment (UpdatePaymentRequest) returns (UpdatePaymentReply){
     option (google.api.http) = {
       post: "payment/update"
       body: "*"
     };
   }
+
+  rpc CreatedReconciliation (CreatedReconciliationRequest) returns (CreatedReconciliationReply){
+    option (google.api.http) = {
+      post: "reconciliation/create"
+      body: "*"
+    };
+  }
+
+  rpc ListReconciliation (ListReconciliationRequest) returns (ListReconciliationReply){
+    option (google.api.http) = {
+      get: "reconciliation/list"
+    };
+  }
+
+  rpc PaymentOrder (PaymentOrderRequest) returns (PaymentOrderReply){
+    option (google.api.http) = {
+      post: "payment/order"
+      body: "*"
+    };
+  }
 }
+
 message UpdatePaymentRequest {
 
 }
 
 message UpdatePaymentReply {
     string Result = 1;
+}
+
+message CreatedReconciliationRequest{
+  string  CreatedTime = 1;
+}
+
+message CreatedReconciliationReply{
+  int64 ReconciliationId = 1;
+}
+
+message ReconciliationItem{
+  string  TaskName = 1;
+  string  ReconciliationNo = 2;
+  string  ReconciliationDate = 3;
+  float   Amount = 4;
+  float   ActualAmount = 5;
+  string  Proportion = 6;
+  string  HandlerStatus = 7;
+}
+
+message ListReconciliationRequest{
+  string PlayTime = 1;
+  string EndTime = 2;
+}
+
+message ListReconciliationReply{
+  repeated ReconciliationItem list = 1;
+}
+
+message PaymentOrderRequest{
+  string OrderSn = 1;
+}
+
+message PaymentOrderReply{
+  string Url = 1;
 }

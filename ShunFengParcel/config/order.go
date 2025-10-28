@@ -42,3 +42,7 @@ type SfOrders struct {
 func (o *SfOrders) UpdateOrderStatus(DB *gorm.DB, orderno string) error {
 	return DB.Model(o).Where("order_no = ?", orderno).Updates(&o).Error
 }
+
+func (o *SfOrders) FIndByOrderSn(DB *gorm.DB, sn string) error {
+	return DB.Model(o).Where("order_no = ?", sn).Limit(1).Find(&o).Error
+}

@@ -5,13 +5,16 @@ import (
 	v1 "ShunFengParcel/api/helloworld/v1"
 	"ShunFengParcel/internal/conf"
 	"ShunFengParcel/internal/service"
+
 	"github.com/go-kratos/kratos/v2/log"
+
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/http"
 )
 
 // NewHTTPServer new an HTTP server.
 func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, paymentService *service.PaymentService, logger log.Logger) *http.Server {
+
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -30,6 +33,7 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, paymentServi
 	rount := srv.Route("/")
 	rount.GET("/websocket", service.Chat)
 	rount.GET("/httpwebsocket", service.HandleWebSocket)
+
 	v1.RegisterGreeterHTTPServer(srv, greeter)
 	pay.RegisterPaymentHTTPServer(srv, paymentService)
 	return srv

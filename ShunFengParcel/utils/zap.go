@@ -2,16 +2,14 @@ package utils
 
 //import (
 //	"ShunFengParcel/internal/server"
+//	"github.com/go-kratos/kratos/contrib/log/zap/v2"
 //	"github.com/go-kratos/kratos/v2"
 //	"github.com/go-kratos/kratos/v2/log"
-//	"zap"
 //)
 //
 //func Zap() {
-//	logger, err := zap.NewLogger(zap.WithName("kratos"))
-//	if err != nil {
-//		panic(err)
-//	}
+//	logger := zap.NewLogger(zap.WithMessageKey("kratos"))
+//
 //	log.SetLogger(logger)
 //
 //	// 创建Kratos应用

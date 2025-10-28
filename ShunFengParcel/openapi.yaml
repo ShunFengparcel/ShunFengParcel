@@ -6,6 +6,30 @@ info:
     title: Payment API
     version: 0.0.1
 paths:
+    payment/order:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_PaymentOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PaymentOrderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PaymentOrderReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     payment/update:
         post:
             tags:
@@ -30,8 +54,69 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    reconciliation/create:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_CreatedReconciliation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreatedReconciliationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreatedReconciliationReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    reconciliation/list:
+        get:
+            tags:
+                - Payment
+            operationId: Payment_ListReconciliation
+            parameters:
+                - name: PlayTime
+                  in: query
+                  schema:
+                    type: string
+                - name: EndTime
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListReconciliationReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
+        CreatedReconciliationReply:
+            type: object
+            properties:
+                ReconciliationId:
+                    type: string
+        CreatedReconciliationRequest:
+            type: object
+            properties:
+                CreatedTime:
+                    type: string
         GoogleProtobufAny:
             type: object
             properties:
@@ -40,6 +125,42 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        ListReconciliationReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ReconciliationItem'
+        PaymentOrderReply:
+            type: object
+            properties:
+                Url:
+                    type: string
+        PaymentOrderRequest:
+            type: object
+            properties:
+                OrderSn:
+                    type: string
+        ReconciliationItem:
+            type: object
+            properties:
+                TaskName:
+                    type: string
+                ReconciliationNo:
+                    type: string
+                ReconciliationDate:
+                    type: string
+                Amount:
+                    type: number
+                    format: float
+                ActualAmount:
+                    type: number
+                    format: float
+                Proportion:
+                    type: string
+                HandlerStatus:
+                    type: string
         Status:
             type: object
             properties:

@@ -102,6 +102,370 @@ func (x *UpdatePaymentReply) GetResult() string {
 	return ""
 }
 
+type CreatedReconciliationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CreatedTime   string                 `protobuf:"bytes,1,opt,name=CreatedTime,proto3" json:"CreatedTime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreatedReconciliationRequest) Reset() {
+	*x = CreatedReconciliationRequest{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatedReconciliationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatedReconciliationRequest) ProtoMessage() {}
+
+func (x *CreatedReconciliationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatedReconciliationRequest.ProtoReflect.Descriptor instead.
+func (*CreatedReconciliationRequest) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreatedReconciliationRequest) GetCreatedTime() string {
+	if x != nil {
+		return x.CreatedTime
+	}
+	return ""
+}
+
+type CreatedReconciliationReply struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ReconciliationId int64                  `protobuf:"varint,1,opt,name=ReconciliationId,proto3" json:"ReconciliationId,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CreatedReconciliationReply) Reset() {
+	*x = CreatedReconciliationReply{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatedReconciliationReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatedReconciliationReply) ProtoMessage() {}
+
+func (x *CreatedReconciliationReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatedReconciliationReply.ProtoReflect.Descriptor instead.
+func (*CreatedReconciliationReply) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreatedReconciliationReply) GetReconciliationId() int64 {
+	if x != nil {
+		return x.ReconciliationId
+	}
+	return 0
+}
+
+type ReconciliationItem struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TaskName           string                 `protobuf:"bytes,1,opt,name=TaskName,proto3" json:"TaskName,omitempty"`
+	ReconciliationNo   string                 `protobuf:"bytes,2,opt,name=ReconciliationNo,proto3" json:"ReconciliationNo,omitempty"`
+	ReconciliationDate string                 `protobuf:"bytes,3,opt,name=ReconciliationDate,proto3" json:"ReconciliationDate,omitempty"`
+	Amount             float32                `protobuf:"fixed32,4,opt,name=Amount,proto3" json:"Amount,omitempty"`
+	ActualAmount       float32                `protobuf:"fixed32,5,opt,name=ActualAmount,proto3" json:"ActualAmount,omitempty"`
+	Proportion         string                 `protobuf:"bytes,6,opt,name=Proportion,proto3" json:"Proportion,omitempty"`
+	HandlerStatus      string                 `protobuf:"bytes,7,opt,name=HandlerStatus,proto3" json:"HandlerStatus,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ReconciliationItem) Reset() {
+	*x = ReconciliationItem{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReconciliationItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReconciliationItem) ProtoMessage() {}
+
+func (x *ReconciliationItem) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReconciliationItem.ProtoReflect.Descriptor instead.
+func (*ReconciliationItem) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ReconciliationItem) GetTaskName() string {
+	if x != nil {
+		return x.TaskName
+	}
+	return ""
+}
+
+func (x *ReconciliationItem) GetReconciliationNo() string {
+	if x != nil {
+		return x.ReconciliationNo
+	}
+	return ""
+}
+
+func (x *ReconciliationItem) GetReconciliationDate() string {
+	if x != nil {
+		return x.ReconciliationDate
+	}
+	return ""
+}
+
+func (x *ReconciliationItem) GetAmount() float32 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *ReconciliationItem) GetActualAmount() float32 {
+	if x != nil {
+		return x.ActualAmount
+	}
+	return 0
+}
+
+func (x *ReconciliationItem) GetProportion() string {
+	if x != nil {
+		return x.Proportion
+	}
+	return ""
+}
+
+func (x *ReconciliationItem) GetHandlerStatus() string {
+	if x != nil {
+		return x.HandlerStatus
+	}
+	return ""
+}
+
+type ListReconciliationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PlayTime      string                 `protobuf:"bytes,1,opt,name=PlayTime,proto3" json:"PlayTime,omitempty"`
+	EndTime       string                 `protobuf:"bytes,2,opt,name=EndTime,proto3" json:"EndTime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReconciliationRequest) Reset() {
+	*x = ListReconciliationRequest{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReconciliationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReconciliationRequest) ProtoMessage() {}
+
+func (x *ListReconciliationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReconciliationRequest.ProtoReflect.Descriptor instead.
+func (*ListReconciliationRequest) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListReconciliationRequest) GetPlayTime() string {
+	if x != nil {
+		return x.PlayTime
+	}
+	return ""
+}
+
+func (x *ListReconciliationRequest) GetEndTime() string {
+	if x != nil {
+		return x.EndTime
+	}
+	return ""
+}
+
+type ListReconciliationReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*ReconciliationItem  `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReconciliationReply) Reset() {
+	*x = ListReconciliationReply{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReconciliationReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReconciliationReply) ProtoMessage() {}
+
+func (x *ListReconciliationReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReconciliationReply.ProtoReflect.Descriptor instead.
+func (*ListReconciliationReply) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListReconciliationReply) GetList() []*ReconciliationItem {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+type PaymentOrderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderSn       string                 `protobuf:"bytes,1,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PaymentOrderRequest) Reset() {
+	*x = PaymentOrderRequest{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PaymentOrderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PaymentOrderRequest) ProtoMessage() {}
+
+func (x *PaymentOrderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PaymentOrderRequest.ProtoReflect.Descriptor instead.
+func (*PaymentOrderRequest) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PaymentOrderRequest) GetOrderSn() string {
+	if x != nil {
+		return x.OrderSn
+	}
+	return ""
+}
+
+type PaymentOrderReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=Url,proto3" json:"Url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PaymentOrderReply) Reset() {
+	*x = PaymentOrderReply{}
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PaymentOrderReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PaymentOrderReply) ProtoMessage() {}
+
+func (x *PaymentOrderReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_helloworld_payment_payment_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PaymentOrderReply.ProtoReflect.Descriptor instead.
+func (*PaymentOrderReply) Descriptor() ([]byte, []int) {
+	return file_api_helloworld_payment_payment_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *PaymentOrderReply) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
 var File_api_helloworld_payment_payment_proto protoreflect.FileDescriptor
 
 const file_api_helloworld_payment_payment_proto_rawDesc = "" +
@@ -109,9 +473,35 @@ const file_api_helloworld_payment_payment_proto_rawDesc = "" +
 	"$api/helloworld/payment/payment.proto\x12\x16api.helloworld.payment\x1a\x1cgoogle/api/annotations.proto\"\x16\n" +
 	"\x14UpdatePaymentRequest\",\n" +
 	"\x12UpdatePaymentReply\x12\x16\n" +
-	"\x06Result\x18\x01 \x01(\tR\x06Result2\x90\x01\n" +
+	"\x06Result\x18\x01 \x01(\tR\x06Result\"@\n" +
+	"\x1cCreatedReconciliationRequest\x12 \n" +
+	"\vCreatedTime\x18\x01 \x01(\tR\vCreatedTime\"H\n" +
+	"\x1aCreatedReconciliationReply\x12*\n" +
+	"\x10ReconciliationId\x18\x01 \x01(\x03R\x10ReconciliationId\"\x8e\x02\n" +
+	"\x12ReconciliationItem\x12\x1a\n" +
+	"\bTaskName\x18\x01 \x01(\tR\bTaskName\x12*\n" +
+	"\x10ReconciliationNo\x18\x02 \x01(\tR\x10ReconciliationNo\x12.\n" +
+	"\x12ReconciliationDate\x18\x03 \x01(\tR\x12ReconciliationDate\x12\x16\n" +
+	"\x06Amount\x18\x04 \x01(\x02R\x06Amount\x12\"\n" +
+	"\fActualAmount\x18\x05 \x01(\x02R\fActualAmount\x12\x1e\n" +
+	"\n" +
+	"Proportion\x18\x06 \x01(\tR\n" +
+	"Proportion\x12$\n" +
+	"\rHandlerStatus\x18\a \x01(\tR\rHandlerStatus\"Q\n" +
+	"\x19ListReconciliationRequest\x12\x1a\n" +
+	"\bPlayTime\x18\x01 \x01(\tR\bPlayTime\x12\x18\n" +
+	"\aEndTime\x18\x02 \x01(\tR\aEndTime\"Y\n" +
+	"\x17ListReconciliationReply\x12>\n" +
+	"\x04list\x18\x01 \x03(\v2*.api.helloworld.payment.ReconciliationItemR\x04list\"/\n" +
+	"\x13PaymentOrderRequest\x12\x18\n" +
+	"\aOrderSn\x18\x01 \x01(\tR\aOrderSn\"%\n" +
+	"\x11PaymentOrderReply\x12\x10\n" +
+	"\x03Url\x18\x01 \x01(\tR\x03Url2\xd1\x04\n" +
 	"\aPayment\x12\x84\x01\n" +
-	"\rUpdatePayment\x12,.api.helloworld.payment.UpdatePaymentRequest\x1a*.api.helloworld.payment.UpdatePaymentReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0epayment/updateBI\n" +
+	"\rUpdatePayment\x12,.api.helloworld.payment.UpdatePaymentRequest\x1a*.api.helloworld.payment.UpdatePaymentReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0epayment/update\x12\xa3\x01\n" +
+	"\x15CreatedReconciliation\x124.api.helloworld.payment.CreatedReconciliationRequest\x1a2.api.helloworld.payment.CreatedReconciliationReply\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15reconciliation/create\x12\x95\x01\n" +
+	"\x12ListReconciliation\x121.api.helloworld.payment.ListReconciliationRequest\x1a/.api.helloworld.payment.ListReconciliationReply\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13reconciliation/list\x12\x80\x01\n" +
+	"\fPaymentOrder\x12+.api.helloworld.payment.PaymentOrderRequest\x1a).api.helloworld.payment.PaymentOrderReply\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\rpayment/orderBI\n" +
 	"\x16api.helloworld.paymentP\x01Z-ShunFengParcel/api/helloworld/payment;paymentb\x06proto3"
 
 var (
@@ -126,19 +516,33 @@ func file_api_helloworld_payment_payment_proto_rawDescGZIP() []byte {
 	return file_api_helloworld_payment_payment_proto_rawDescData
 }
 
-var file_api_helloworld_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_api_helloworld_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_helloworld_payment_payment_proto_goTypes = []any{
-	(*UpdatePaymentRequest)(nil), // 0: api.helloworld.payment.UpdatePaymentRequest
-	(*UpdatePaymentReply)(nil),   // 1: api.helloworld.payment.UpdatePaymentReply
+	(*UpdatePaymentRequest)(nil),         // 0: api.helloworld.payment.UpdatePaymentRequest
+	(*UpdatePaymentReply)(nil),           // 1: api.helloworld.payment.UpdatePaymentReply
+	(*CreatedReconciliationRequest)(nil), // 2: api.helloworld.payment.CreatedReconciliationRequest
+	(*CreatedReconciliationReply)(nil),   // 3: api.helloworld.payment.CreatedReconciliationReply
+	(*ReconciliationItem)(nil),           // 4: api.helloworld.payment.ReconciliationItem
+	(*ListReconciliationRequest)(nil),    // 5: api.helloworld.payment.ListReconciliationRequest
+	(*ListReconciliationReply)(nil),      // 6: api.helloworld.payment.ListReconciliationReply
+	(*PaymentOrderRequest)(nil),          // 7: api.helloworld.payment.PaymentOrderRequest
+	(*PaymentOrderReply)(nil),            // 8: api.helloworld.payment.PaymentOrderReply
 }
 var file_api_helloworld_payment_payment_proto_depIdxs = []int32{
-	0, // 0: api.helloworld.payment.Payment.UpdatePayment:input_type -> api.helloworld.payment.UpdatePaymentRequest
-	1, // 1: api.helloworld.payment.Payment.UpdatePayment:output_type -> api.helloworld.payment.UpdatePaymentReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: api.helloworld.payment.ListReconciliationReply.list:type_name -> api.helloworld.payment.ReconciliationItem
+	0, // 1: api.helloworld.payment.Payment.UpdatePayment:input_type -> api.helloworld.payment.UpdatePaymentRequest
+	2, // 2: api.helloworld.payment.Payment.CreatedReconciliation:input_type -> api.helloworld.payment.CreatedReconciliationRequest
+	5, // 3: api.helloworld.payment.Payment.ListReconciliation:input_type -> api.helloworld.payment.ListReconciliationRequest
+	7, // 4: api.helloworld.payment.Payment.PaymentOrder:input_type -> api.helloworld.payment.PaymentOrderRequest
+	1, // 5: api.helloworld.payment.Payment.UpdatePayment:output_type -> api.helloworld.payment.UpdatePaymentReply
+	3, // 6: api.helloworld.payment.Payment.CreatedReconciliation:output_type -> api.helloworld.payment.CreatedReconciliationReply
+	6, // 7: api.helloworld.payment.Payment.ListReconciliation:output_type -> api.helloworld.payment.ListReconciliationReply
+	8, // 8: api.helloworld.payment.Payment.PaymentOrder:output_type -> api.helloworld.payment.PaymentOrderReply
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_api_helloworld_payment_payment_proto_init() }
@@ -152,7 +556,7 @@ func file_api_helloworld_payment_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_helloworld_payment_payment_proto_rawDesc), len(file_api_helloworld_payment_payment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -19,7 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Payment_UpdatePayment_FullMethodName = "/api.helloworld.payment.Payment/UpdatePayment"
+	Payment_UpdatePayment_FullMethodName         = "/api.helloworld.payment.Payment/UpdatePayment"
+	Payment_CreatedReconciliation_FullMethodName = "/api.helloworld.payment.Payment/CreatedReconciliation"
+	Payment_ListReconciliation_FullMethodName    = "/api.helloworld.payment.Payment/ListReconciliation"
+	Payment_PaymentOrder_FullMethodName          = "/api.helloworld.payment.Payment/PaymentOrder"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -27,6 +30,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentClient interface {
 	UpdatePayment(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*UpdatePaymentReply, error)
+	CreatedReconciliation(ctx context.Context, in *CreatedReconciliationRequest, opts ...grpc.CallOption) (*CreatedReconciliationReply, error)
+	ListReconciliation(ctx context.Context, in *ListReconciliationRequest, opts ...grpc.CallOption) (*ListReconciliationReply, error)
+	PaymentOrder(ctx context.Context, in *PaymentOrderRequest, opts ...grpc.CallOption) (*PaymentOrderReply, error)
 }
 
 type paymentClient struct {
@@ -47,11 +53,44 @@ func (c *paymentClient) UpdatePayment(ctx context.Context, in *UpdatePaymentRequ
 	return out, nil
 }
 
+func (c *paymentClient) CreatedReconciliation(ctx context.Context, in *CreatedReconciliationRequest, opts ...grpc.CallOption) (*CreatedReconciliationReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatedReconciliationReply)
+	err := c.cc.Invoke(ctx, Payment_CreatedReconciliation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) ListReconciliation(ctx context.Context, in *ListReconciliationRequest, opts ...grpc.CallOption) (*ListReconciliationReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReconciliationReply)
+	err := c.cc.Invoke(ctx, Payment_ListReconciliation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) PaymentOrder(ctx context.Context, in *PaymentOrderRequest, opts ...grpc.CallOption) (*PaymentOrderReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentOrderReply)
+	err := c.cc.Invoke(ctx, Payment_PaymentOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
 type PaymentServer interface {
 	UpdatePayment(context.Context, *UpdatePaymentRequest) (*UpdatePaymentReply, error)
+	CreatedReconciliation(context.Context, *CreatedReconciliationRequest) (*CreatedReconciliationReply, error)
+	ListReconciliation(context.Context, *ListReconciliationRequest) (*ListReconciliationReply, error)
+	PaymentOrder(context.Context, *PaymentOrderRequest) (*PaymentOrderReply, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -64,6 +103,15 @@ type UnimplementedPaymentServer struct{}
 
 func (UnimplementedPaymentServer) UpdatePayment(context.Context, *UpdatePaymentRequest) (*UpdatePaymentReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePayment not implemented")
+}
+func (UnimplementedPaymentServer) CreatedReconciliation(context.Context, *CreatedReconciliationRequest) (*CreatedReconciliationReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatedReconciliation not implemented")
+}
+func (UnimplementedPaymentServer) ListReconciliation(context.Context, *ListReconciliationRequest) (*ListReconciliationReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReconciliation not implemented")
+}
+func (UnimplementedPaymentServer) PaymentOrder(context.Context, *PaymentOrderRequest) (*PaymentOrderReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PaymentOrder not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -104,6 +152,60 @@ func _Payment_UpdatePayment_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_CreatedReconciliation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatedReconciliationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).CreatedReconciliation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_CreatedReconciliation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).CreatedReconciliation(ctx, req.(*CreatedReconciliationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_ListReconciliation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReconciliationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).ListReconciliation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_ListReconciliation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).ListReconciliation(ctx, req.(*ListReconciliationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_PaymentOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaymentOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).PaymentOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_PaymentOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).PaymentOrder(ctx, req.(*PaymentOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +216,18 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdatePayment",
 			Handler:    _Payment_UpdatePayment_Handler,
+		},
+		{
+			MethodName: "CreatedReconciliation",
+			Handler:    _Payment_CreatedReconciliation_Handler,
+		},
+		{
+			MethodName: "ListReconciliation",
+			Handler:    _Payment_ListReconciliation_Handler,
+		},
+		{
+			MethodName: "PaymentOrder",
+			Handler:    _Payment_PaymentOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

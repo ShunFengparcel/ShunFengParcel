@@ -19,15 +19,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationPaymentCreatedReconciliation = "/api.helloworld.payment.Payment/CreatedReconciliation"
+const OperationPaymentListReconciliation = "/api.helloworld.payment.Payment/ListReconciliation"
+const OperationPaymentPaymentOrder = "/api.helloworld.payment.Payment/PaymentOrder"
 const OperationPaymentUpdatePayment = "/api.helloworld.payment.Payment/UpdatePayment"
 
 type PaymentHTTPServer interface {
+	CreatedReconciliation(context.Context, *CreatedReconciliationRequest) (*CreatedReconciliationReply, error)
+	ListReconciliation(context.Context, *ListReconciliationRequest) (*ListReconciliationReply, error)
+	PaymentOrder(context.Context, *PaymentOrderRequest) (*PaymentOrderReply, error)
 	UpdatePayment(context.Context, *UpdatePaymentRequest) (*UpdatePaymentReply, error)
 }
 
 func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r := s.Route("/")
 	r.POST("payment/update", _Payment_UpdatePayment0_HTTP_Handler(srv))
+	r.POST("reconciliation/create", _Payment_CreatedReconciliation0_HTTP_Handler(srv))
+	r.GET("reconciliation/list", _Payment_ListReconciliation0_HTTP_Handler(srv))
+	r.POST("payment/order", _Payment_PaymentOrder0_HTTP_Handler(srv))
 }
 
 func _Payment_UpdatePayment0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -52,7 +61,73 @@ func _Payment_UpdatePayment0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.C
 	}
 }
 
+func _Payment_CreatedReconciliation0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreatedReconciliationRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentCreatedReconciliation)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreatedReconciliation(ctx, req.(*CreatedReconciliationRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreatedReconciliationReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_ListReconciliation0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListReconciliationRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentListReconciliation)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListReconciliation(ctx, req.(*ListReconciliationRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListReconciliationReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_PaymentOrder0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PaymentOrderRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentPaymentOrder)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PaymentOrder(ctx, req.(*PaymentOrderRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*PaymentOrderReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
+	CreatedReconciliation(ctx context.Context, req *CreatedReconciliationRequest, opts ...http.CallOption) (rsp *CreatedReconciliationReply, err error)
+	ListReconciliation(ctx context.Context, req *ListReconciliationRequest, opts ...http.CallOption) (rsp *ListReconciliationReply, err error)
+	PaymentOrder(ctx context.Context, req *PaymentOrderRequest, opts ...http.CallOption) (rsp *PaymentOrderReply, err error)
 	UpdatePayment(ctx context.Context, req *UpdatePaymentRequest, opts ...http.CallOption) (rsp *UpdatePaymentReply, err error)
 }
 
@@ -62,6 +137,45 @@ type PaymentHTTPClientImpl struct {
 
 func NewPaymentHTTPClient(client *http.Client) PaymentHTTPClient {
 	return &PaymentHTTPClientImpl{client}
+}
+
+func (c *PaymentHTTPClientImpl) CreatedReconciliation(ctx context.Context, in *CreatedReconciliationRequest, opts ...http.CallOption) (*CreatedReconciliationReply, error) {
+	var out CreatedReconciliationReply
+	pattern := "reconciliation/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentCreatedReconciliation))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) ListReconciliation(ctx context.Context, in *ListReconciliationRequest, opts ...http.CallOption) (*ListReconciliationReply, error) {
+	var out ListReconciliationReply
+	pattern := "reconciliation/list"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPaymentListReconciliation))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) PaymentOrder(ctx context.Context, in *PaymentOrderRequest, opts ...http.CallOption) (*PaymentOrderReply, error) {
+	var out PaymentOrderReply
+	pattern := "payment/order"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentPaymentOrder))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *PaymentHTTPClientImpl) UpdatePayment(ctx context.Context, in *UpdatePaymentRequest, opts ...http.CallOption) (*UpdatePaymentReply, error) {

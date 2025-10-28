@@ -1,6 +1,8 @@
 package inits
 
 import (
+	"ShunFengParcel/config"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -15,4 +17,6 @@ func InitMysql() {
 	if err != nil {
 		panic(err)
 	}
+
+	DB.AutoMigrate(&config.Reconciliation{})
 }

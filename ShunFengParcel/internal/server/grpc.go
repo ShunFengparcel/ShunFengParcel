@@ -15,13 +15,6 @@ import (
 // NewGRPCServer new a gRPC server.
 func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, payment *service.PaymentService, logger log.Logger) *grpc.Server {
 
-	//logger = log.DefaultLogger
-	//var logs = []grpc.ServerOption{
-	//	grpc.Middleware(
-	//		logging.Server(logger),
-	//	),
-	//}
-	//srvc := grpc.NewServer(logs...)
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
