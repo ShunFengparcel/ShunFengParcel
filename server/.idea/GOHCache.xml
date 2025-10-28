@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="Address">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AddressResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Bootstrap">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateAddressRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateOrderRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateOrderResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/data.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data_Database">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data_Redis">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetOrderRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetTrackingRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetTrackingResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Greeter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GreeterHTTPClientImpl">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GreeterService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GreeterUsecase">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JWTClaims">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/wxlogin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListAddressesRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListAddressesResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListOrdersRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ListOrdersResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Order">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderTracking">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderUsecase">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SendSmsReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SendSmsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server_GRPC">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server_HTTP">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SfAddresses">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/config/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SfOrderTracking">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/config/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SfOrders">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/config/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SfUsers">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/config/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TrackingResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedGreeterServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/cmd/migrate/main.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserLoginSendSmsReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserLoginSendSmsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserUsecase">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Wechat">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WxLoginReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WxLoginRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/wxlogin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WxLoginResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/wxlogin.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/pkg/wechat.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="greeterClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="greeterRepo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/greeter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="orderRepo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="userRepo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="x">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/error_reason.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/error_reason.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760929378559" />
+              <option name="schema">
+                <list>
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761012155613" />
+              <option name="schema">
+                <list>
+                  <option value="SendSmsRequest" />
+                  <option value="SendSmsReply" />
+                  <option value="UserLoginSendSmsRequest" />
+                  <option value="UserLoginSendSmsReply" />
+                  <option value="WxLoginRequest" />
+                  <option value="WxLoginReply" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761012155613" />
+              <option name="schema">
+                <list>
+                  <option value="greeterClient" />
+                  <option value="UnimplementedGreeterServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761012155613" />
+              <option name="schema">
+                <list>
+                  <option value="GreeterHTTPClientImpl" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/cmd/ShunFengParcel/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760922045922" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/cmd/ShunFengParcel/wire.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760699107014" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104412460" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/cmd/migrate/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104082614" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/config/order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104244901" />
+              <option name="schema">
+                <list>
+                  <option value="SfOrders" />
+                  <option value="SfAddresses" />
+                  <option value="SfOrderTracking" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/config/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760922230727" />
+              <option name="schema">
+                <list>
+                  <option value="SfUsers" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/biz.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104056820" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/greeter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761010398101" />
+              <option name="schema">
+                <list>
+                  <option value="Greeter" />
+                  <option value="GreeterUsecase" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761103848406" />
+              <option name="schema">
+                <list>
+                  <option value="Order" />
+                  <option value="Address" />
+                  <option value="OrderTracking" />
+                  <option value="OrderUsecase" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/biz/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760931713108" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                  <option value="UserUsecase" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/conf/conf.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761013333058" />
+              <option name="schema">
+                <list>
+                  <option value="Bootstrap" />
+                  <option value="Wechat" />
+                  <option value="Server" />
+                  <option value="Data" />
+                  <option value="Server_HTTP" />
+                  <option value="Server_GRPC" />
+                  <option value="Data_Database" />
+                  <option value="Data_Redis" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/data.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104041821" />
+              <option name="schema">
+                <list>
+                  <option value="Data" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/greeter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761009394227" />
+              <option name="schema">
+                <list>
+                  <option value="greeterRepo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761112079058" />
+              <option name="schema">
+                <list>
+                  <option value="orderRepo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/data/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760931417380" />
+              <option name="schema">
+                <list>
+                  <option value="userRepo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/server/grpc.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760699107016" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/server/http.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761103988305" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/server/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1760699107016" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/greeter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761024986554" />
+              <option name="schema">
+                <list>
+                  <option value="GreeterService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761114437721" />
+              <option name="schema">
+                <list>
+                  <option value="OrderService" />
+                  <option value="CreateOrderRequest" />
+                  <option value="CreateOrderResponse" />
+                  <option value="GetOrderRequest" />
+                  <option value="OrderResponse" />
+                  <option value="ListOrdersRequest" />
+                  <option value="ListOrdersResponse" />
+                  <option value="CreateAddressRequest" />
+                  <option value="AddressResponse" />
+                  <option value="ListAddressesRequest" />
+                  <option value="ListAddressesResponse" />
+                  <option value="TrackingResponse" />
+                  <option value="GetTrackingRequest" />
+                  <option value="GetTrackingResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/service.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761104071256" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/internal/service/wxlogin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761051210712" />
+              <option name="schema">
+                <list>
+                  <option value="WxLoginRequest" />
+                  <option value="WxLoginResponse" />
+                  <option value="JWTClaims" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/pkg/sendsms.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761024866575" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/ShunFengParcel/pkg/wechat.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761010365174" />
+              <option name="schema">
+                <list>
+                  <option value="WxLoginResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="address" value="Address" />
+        <entry key="address_response" value="AddressResponse" />
+        <entry key="bootstrap" value="Bootstrap" />
+        <entry key="create_address_request" value="CreateAddressRequest" />
+        <entry key="create_order_request" value="CreateOrderRequest" />
+        <entry key="create_order_response" value="CreateOrderResponse" />
+        <entry key="data" value="Data" />
+        <entry key="data__database" value="Data_Database" />
+        <entry key="data__redis" value="Data_Redis" />
+        <entry key="get_order_request" value="GetOrderRequest" />
+        <entry key="get_tracking_request" value="GetTrackingRequest" />
+        <entry key="get_tracking_response" value="GetTrackingResponse" />
+        <entry key="greeter" value="Greeter" />
+        <entry key="greeter_client" value="greeterClient" />
+        <entry key="greeter_http_client_impl" value="GreeterHTTPClientImpl" />
+        <entry key="greeter_repo" value="greeterRepo" />
+        <entry key="greeter_service" value="GreeterService" />
+        <entry key="greeter_usecase" value="GreeterUsecase" />
+        <entry key="jwt_claims" value="JWTClaims" />
+        <entry key="list_addresses_request" value="ListAddressesRequest" />
+        <entry key="list_addresses_response" value="ListAddressesResponse" />
+        <entry key="list_orders_request" value="ListOrdersRequest" />
+        <entry key="list_orders_response" value="ListOrdersResponse" />
+        <entry key="order" value="Order" />
+        <entry key="order_repo" value="orderRepo" />
+        <entry key="order_response" value="OrderResponse" />
+        <entry key="order_service" value="OrderService" />
+        <entry key="order_tracking" value="OrderTracking" />
+        <entry key="order_usecase" value="OrderUsecase" />
+        <entry key="send_sms_reply" value="SendSmsReply" />
+        <entry key="send_sms_request" value="SendSmsRequest" />
+        <entry key="server" value="Server" />
+        <entry key="server_grpc" value="Server_GRPC" />
+        <entry key="server_http" value="Server_HTTP" />
+        <entry key="sf_addresses" value="SfAddresses" />
+        <entry key="sf_order_tracking" value="SfOrderTracking" />
+        <entry key="sf_orders" value="SfOrders" />
+        <entry key="sf_users" value="SfUsers" />
+        <entry key="tracking_response" value="TrackingResponse" />
+        <entry key="unimplemented_greeter_server" value="UnimplementedGreeterServer" />
+        <entry key="user" value="User" />
+        <entry key="user_login_send_sms_reply" value="UserLoginSendSmsReply" />
+        <entry key="user_login_send_sms_request" value="UserLoginSendSmsRequest" />
+        <entry key="user_repo" value="userRepo" />
+        <entry key="user_usecase" value="UserUsecase" />
+        <entry key="wechat" value="Wechat" />
+        <entry key="wx_login_reply" value="WxLoginReply" />
+        <entry key="wx_login_request" value="WxLoginRequest" />
+        <entry key="wx_login_response" value="WxLoginResponse" />
+        <entry key="x" value="x" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1761093141648" />
+  </component>
+</project>

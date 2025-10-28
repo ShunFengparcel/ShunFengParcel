@@ -1,0 +1,18 @@
+{
+  "user_id": 1,
+  "sender_name": "测试寄件人",
+  "sender_phone": "13800138000",
+  "sender_address": "上海市 上海市 浦东新区 测试地址123号",
+  "receiver_name": "测试收件人",
+  "receiver_phone": "13900139000",
+  "receiver_address": "北京市 北京市 朝阳区 测试地址456号",
+  "pickup_mode": "pickup",
+  "pickup_time": "今天 一小时内",
+  "service_type": "顺丰标快",
+  "product_type": "文件",
+  "weight": 1.5,
+  "payment_method": "寄付现结",
+  "estimated_fee": 15.00,
+  "is_insured": 0,
+  "insured_value": 0
+}
