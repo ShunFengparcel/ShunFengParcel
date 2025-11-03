@@ -23,6 +23,11 @@ const (
 	Payment_CreatedReconciliation_FullMethodName = "/api.helloworld.payment.Payment/CreatedReconciliation"
 	Payment_ListReconciliation_FullMethodName    = "/api.helloworld.payment.Payment/ListReconciliation"
 	Payment_PaymentOrder_FullMethodName          = "/api.helloworld.payment.Payment/PaymentOrder"
+	Payment_MonitorCreate_FullMethodName         = "/api.helloworld.payment.Payment/MonitorCreate"
+	Payment_MonitorUpdate_FullMethodName         = "/api.helloworld.payment.Payment/MonitorUpdate"
+	Payment_MonitorDelete_FullMethodName         = "/api.helloworld.payment.Payment/MonitorDelete"
+	Payment_OrderList_FullMethodName             = "/api.helloworld.payment.Payment/OrderList"
+	Payment_PaymentList_FullMethodName           = "/api.helloworld.payment.Payment/PaymentList"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -33,6 +38,11 @@ type PaymentClient interface {
 	CreatedReconciliation(ctx context.Context, in *CreatedReconciliationRequest, opts ...grpc.CallOption) (*CreatedReconciliationReply, error)
 	ListReconciliation(ctx context.Context, in *ListReconciliationRequest, opts ...grpc.CallOption) (*ListReconciliationReply, error)
 	PaymentOrder(ctx context.Context, in *PaymentOrderRequest, opts ...grpc.CallOption) (*PaymentOrderReply, error)
+	MonitorCreate(ctx context.Context, in *MonitorCreateRequest, opts ...grpc.CallOption) (*MonitorCreateReply, error)
+	MonitorUpdate(ctx context.Context, in *MonitorUpdateRequest, opts ...grpc.CallOption) (*MonitorUpdateReply, error)
+	MonitorDelete(ctx context.Context, in *MonitorDeleteRequest, opts ...grpc.CallOption) (*MonitorDeleteReply, error)
+	OrderList(ctx context.Context, in *OrderListRequest, opts ...grpc.CallOption) (*OrderListReply, error)
+	PaymentList(ctx context.Context, in *PaymentListRequest, opts ...grpc.CallOption) (*PaymentListReply, error)
 }
 
 type paymentClient struct {
@@ -83,6 +93,56 @@ func (c *paymentClient) PaymentOrder(ctx context.Context, in *PaymentOrderReques
 	return out, nil
 }
 
+func (c *paymentClient) MonitorCreate(ctx context.Context, in *MonitorCreateRequest, opts ...grpc.CallOption) (*MonitorCreateReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MonitorCreateReply)
+	err := c.cc.Invoke(ctx, Payment_MonitorCreate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) MonitorUpdate(ctx context.Context, in *MonitorUpdateRequest, opts ...grpc.CallOption) (*MonitorUpdateReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MonitorUpdateReply)
+	err := c.cc.Invoke(ctx, Payment_MonitorUpdate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) MonitorDelete(ctx context.Context, in *MonitorDeleteRequest, opts ...grpc.CallOption) (*MonitorDeleteReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MonitorDeleteReply)
+	err := c.cc.Invoke(ctx, Payment_MonitorDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) OrderList(ctx context.Context, in *OrderListRequest, opts ...grpc.CallOption) (*OrderListReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OrderListReply)
+	err := c.cc.Invoke(ctx, Payment_OrderList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) PaymentList(ctx context.Context, in *PaymentListRequest, opts ...grpc.CallOption) (*PaymentListReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentListReply)
+	err := c.cc.Invoke(ctx, Payment_PaymentList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -91,6 +151,11 @@ type PaymentServer interface {
 	CreatedReconciliation(context.Context, *CreatedReconciliationRequest) (*CreatedReconciliationReply, error)
 	ListReconciliation(context.Context, *ListReconciliationRequest) (*ListReconciliationReply, error)
 	PaymentOrder(context.Context, *PaymentOrderRequest) (*PaymentOrderReply, error)
+	MonitorCreate(context.Context, *MonitorCreateRequest) (*MonitorCreateReply, error)
+	MonitorUpdate(context.Context, *MonitorUpdateRequest) (*MonitorUpdateReply, error)
+	MonitorDelete(context.Context, *MonitorDeleteRequest) (*MonitorDeleteReply, error)
+	OrderList(context.Context, *OrderListRequest) (*OrderListReply, error)
+	PaymentList(context.Context, *PaymentListRequest) (*PaymentListReply, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -112,6 +177,21 @@ func (UnimplementedPaymentServer) ListReconciliation(context.Context, *ListRecon
 }
 func (UnimplementedPaymentServer) PaymentOrder(context.Context, *PaymentOrderRequest) (*PaymentOrderReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PaymentOrder not implemented")
+}
+func (UnimplementedPaymentServer) MonitorCreate(context.Context, *MonitorCreateRequest) (*MonitorCreateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MonitorCreate not implemented")
+}
+func (UnimplementedPaymentServer) MonitorUpdate(context.Context, *MonitorUpdateRequest) (*MonitorUpdateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MonitorUpdate not implemented")
+}
+func (UnimplementedPaymentServer) MonitorDelete(context.Context, *MonitorDeleteRequest) (*MonitorDeleteReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MonitorDelete not implemented")
+}
+func (UnimplementedPaymentServer) OrderList(context.Context, *OrderListRequest) (*OrderListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderList not implemented")
+}
+func (UnimplementedPaymentServer) PaymentList(context.Context, *PaymentListRequest) (*PaymentListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PaymentList not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -206,6 +286,96 @@ func _Payment_PaymentOrder_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_MonitorCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MonitorCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).MonitorCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_MonitorCreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).MonitorCreate(ctx, req.(*MonitorCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_MonitorUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MonitorUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).MonitorUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_MonitorUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).MonitorUpdate(ctx, req.(*MonitorUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_MonitorDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MonitorDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).MonitorDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_MonitorDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).MonitorDelete(ctx, req.(*MonitorDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_OrderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).OrderList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_OrderList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).OrderList(ctx, req.(*OrderListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_PaymentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaymentListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).PaymentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_PaymentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).PaymentList(ctx, req.(*PaymentListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +398,26 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PaymentOrder",
 			Handler:    _Payment_PaymentOrder_Handler,
+		},
+		{
+			MethodName: "MonitorCreate",
+			Handler:    _Payment_MonitorCreate_Handler,
+		},
+		{
+			MethodName: "MonitorUpdate",
+			Handler:    _Payment_MonitorUpdate_Handler,
+		},
+		{
+			MethodName: "MonitorDelete",
+			Handler:    _Payment_MonitorDelete_Handler,
+		},
+		{
+			MethodName: "OrderList",
+			Handler:    _Payment_OrderList_Handler,
+		},
+		{
+			MethodName: "PaymentList",
+			Handler:    _Payment_PaymentList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

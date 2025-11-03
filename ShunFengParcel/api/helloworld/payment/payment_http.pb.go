@@ -21,12 +21,22 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationPaymentCreatedReconciliation = "/api.helloworld.payment.Payment/CreatedReconciliation"
 const OperationPaymentListReconciliation = "/api.helloworld.payment.Payment/ListReconciliation"
+const OperationPaymentMonitorCreate = "/api.helloworld.payment.Payment/MonitorCreate"
+const OperationPaymentMonitorDelete = "/api.helloworld.payment.Payment/MonitorDelete"
+const OperationPaymentMonitorUpdate = "/api.helloworld.payment.Payment/MonitorUpdate"
+const OperationPaymentOrderList = "/api.helloworld.payment.Payment/OrderList"
+const OperationPaymentPaymentList = "/api.helloworld.payment.Payment/PaymentList"
 const OperationPaymentPaymentOrder = "/api.helloworld.payment.Payment/PaymentOrder"
 const OperationPaymentUpdatePayment = "/api.helloworld.payment.Payment/UpdatePayment"
 
 type PaymentHTTPServer interface {
 	CreatedReconciliation(context.Context, *CreatedReconciliationRequest) (*CreatedReconciliationReply, error)
 	ListReconciliation(context.Context, *ListReconciliationRequest) (*ListReconciliationReply, error)
+	MonitorCreate(context.Context, *MonitorCreateRequest) (*MonitorCreateReply, error)
+	MonitorDelete(context.Context, *MonitorDeleteRequest) (*MonitorDeleteReply, error)
+	MonitorUpdate(context.Context, *MonitorUpdateRequest) (*MonitorUpdateReply, error)
+	OrderList(context.Context, *OrderListRequest) (*OrderListReply, error)
+	PaymentList(context.Context, *PaymentListRequest) (*PaymentListReply, error)
 	PaymentOrder(context.Context, *PaymentOrderRequest) (*PaymentOrderReply, error)
 	UpdatePayment(context.Context, *UpdatePaymentRequest) (*UpdatePaymentReply, error)
 }
@@ -37,6 +47,11 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("reconciliation/create", _Payment_CreatedReconciliation0_HTTP_Handler(srv))
 	r.GET("reconciliation/list", _Payment_ListReconciliation0_HTTP_Handler(srv))
 	r.POST("payment/order", _Payment_PaymentOrder0_HTTP_Handler(srv))
+	r.POST("Monitor/Create", _Payment_MonitorCreate0_HTTP_Handler(srv))
+	r.POST("Monitor/Update", _Payment_MonitorUpdate0_HTTP_Handler(srv))
+	r.POST("Monitor/Delete", _Payment_MonitorDelete0_HTTP_Handler(srv))
+	r.GET("Order/List", _Payment_OrderList0_HTTP_Handler(srv))
+	r.GET("payment/List", _Payment_PaymentList0_HTTP_Handler(srv))
 }
 
 func _Payment_UpdatePayment0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -124,9 +139,118 @@ func _Payment_PaymentOrder0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Co
 	}
 }
 
+func _Payment_MonitorCreate0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in MonitorCreateRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentMonitorCreate)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.MonitorCreate(ctx, req.(*MonitorCreateRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*MonitorCreateReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_MonitorUpdate0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in MonitorUpdateRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentMonitorUpdate)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.MonitorUpdate(ctx, req.(*MonitorUpdateRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*MonitorUpdateReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_MonitorDelete0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in MonitorDeleteRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentMonitorDelete)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.MonitorDelete(ctx, req.(*MonitorDeleteRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*MonitorDeleteReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_OrderList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in OrderListRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentOrderList)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.OrderList(ctx, req.(*OrderListRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OrderListReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_PaymentList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PaymentListRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentPaymentList)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PaymentList(ctx, req.(*PaymentListRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*PaymentListReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
 	CreatedReconciliation(ctx context.Context, req *CreatedReconciliationRequest, opts ...http.CallOption) (rsp *CreatedReconciliationReply, err error)
 	ListReconciliation(ctx context.Context, req *ListReconciliationRequest, opts ...http.CallOption) (rsp *ListReconciliationReply, err error)
+	MonitorCreate(ctx context.Context, req *MonitorCreateRequest, opts ...http.CallOption) (rsp *MonitorCreateReply, err error)
+	MonitorDelete(ctx context.Context, req *MonitorDeleteRequest, opts ...http.CallOption) (rsp *MonitorDeleteReply, err error)
+	MonitorUpdate(ctx context.Context, req *MonitorUpdateRequest, opts ...http.CallOption) (rsp *MonitorUpdateReply, err error)
+	OrderList(ctx context.Context, req *OrderListRequest, opts ...http.CallOption) (rsp *OrderListReply, err error)
+	PaymentList(ctx context.Context, req *PaymentListRequest, opts ...http.CallOption) (rsp *PaymentListReply, err error)
 	PaymentOrder(ctx context.Context, req *PaymentOrderRequest, opts ...http.CallOption) (rsp *PaymentOrderReply, err error)
 	UpdatePayment(ctx context.Context, req *UpdatePaymentRequest, opts ...http.CallOption) (rsp *UpdatePaymentReply, err error)
 }
@@ -157,6 +281,71 @@ func (c *PaymentHTTPClientImpl) ListReconciliation(ctx context.Context, in *List
 	pattern := "reconciliation/list"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationPaymentListReconciliation))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) MonitorCreate(ctx context.Context, in *MonitorCreateRequest, opts ...http.CallOption) (*MonitorCreateReply, error) {
+	var out MonitorCreateReply
+	pattern := "Monitor/Create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentMonitorCreate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) MonitorDelete(ctx context.Context, in *MonitorDeleteRequest, opts ...http.CallOption) (*MonitorDeleteReply, error) {
+	var out MonitorDeleteReply
+	pattern := "Monitor/Delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentMonitorDelete))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) MonitorUpdate(ctx context.Context, in *MonitorUpdateRequest, opts ...http.CallOption) (*MonitorUpdateReply, error) {
+	var out MonitorUpdateReply
+	pattern := "Monitor/Update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentMonitorUpdate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) OrderList(ctx context.Context, in *OrderListRequest, opts ...http.CallOption) (*OrderListReply, error) {
+	var out OrderListReply
+	pattern := "Order/List"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPaymentOrderList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) PaymentList(ctx context.Context, in *PaymentListRequest, opts ...http.CallOption) (*PaymentListReply, error) {
+	var out PaymentListReply
+	pattern := "payment/List"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPaymentPaymentList))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

@@ -80,7 +80,8 @@ func sendMassage(node *Node, msg *Chats) {
 			log.Println("接收失败")
 			return
 		}
-		node, ok := ClientMap[msg.SendId+"_"+msg.UserId]
+		var ok bool
+		node, ok = ClientMap[msg.SendId+"_"+msg.UserId]
 
 		if ok {
 

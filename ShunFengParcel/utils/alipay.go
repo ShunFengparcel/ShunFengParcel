@@ -14,8 +14,15 @@ func Alipayment(orderNo, price string) string {
 		return ""
 	}
 
+	// 加载支付宝公钥用于验证回调签名
+	publicKey := "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4ggbHWY0sLakPRJ1e/nFZsKC8D3y2+JrKNaE1LuAjpLCLZ/Kst36p6OY0SnHUuqf2oMkPiSAp/S1DfZhBBrJUKdzVR4gqPQTKnE2K4Uk7bA+Y7NVcLvMO3jCJiUy0yZnV8V5YvhLKTqbqUDZvKGsNJzJSUlIJDl6/lvcz9+/0qlXMjXdGseFHsJPKYO9BYU4l6cLZsKqL8k/HVrFLBxz2nRfXPrYUBxPfKKfWhDuPz8KUwBZLqsHWMiHJhLtXfXPvN3JzQQnBBQG0JWZXMeLTLqbLJPfDQfCvLjyEjnOiAyhFYJ3oP+0VTYTzj8j5+CgaLzVPBfLNKkPSZKEj/BPQwIDAQAB"
+	if err := client.LoadAliPayPublicKey(publicKey); err != nil {
+		fmt.Println("加载支付宝公钥失败:", err)
+		return ""
+	}
+
 	var p = alipay.TradeWapPay{}
-	p.NotifyURL = "http://5b39d13f.r34.cpolar.top/payment/update"
+	p.NotifyURL = "http://2fb20eb.r34.cpolar.top/payment/update"
 	p.ReturnURL = "http://www.baidu.com"
 	p.Subject = "顺丰速递"
 	p.OutTradeNo = orderNo

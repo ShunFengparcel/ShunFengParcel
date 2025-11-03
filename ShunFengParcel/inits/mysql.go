@@ -18,5 +18,5 @@ func InitMysql() {
 		panic(err)
 	}
 
-	DB.AutoMigrate(&config.Reconciliation{})
+	DB.AutoMigrate(&config.Reconciliation{}, &config.TransactionMonitor{}, &config.SfPayments{})
 }

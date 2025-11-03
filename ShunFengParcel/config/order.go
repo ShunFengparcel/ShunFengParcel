@@ -46,3 +46,13 @@ func (o *SfOrders) UpdateOrderStatus(DB *gorm.DB, orderno string) error {
 func (o *SfOrders) FIndByOrderSn(DB *gorm.DB, sn string) error {
 	return DB.Model(o).Where("order_no = ?", sn).Limit(1).Find(&o).Error
 }
+
+func (o *SfOrders) FIndByList(DB *gorm.DB, OrderStatus string) (List []*SfOrders, err error) {
+	query := DB.Model(o)
+	if OrderStatus != "" {
+		query = query.Where("order_status = ?", OrderStatus)
+	}
+
+	err = query.Order("created_at desc").Find(&List).Error
+	return
+}

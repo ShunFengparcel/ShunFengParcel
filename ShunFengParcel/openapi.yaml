@@ -6,6 +6,124 @@ info:
     title: Payment API
     version: 0.0.1
 paths:
+    Monitor/Create:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_MonitorCreate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MonitorCreateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MonitorCreateReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    Monitor/Delete:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_MonitorDelete
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MonitorDeleteRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MonitorDeleteReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    Monitor/Update:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_MonitorUpdate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MonitorUpdateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MonitorUpdateReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    Order/List:
+        get:
+            tags:
+                - Payment
+            operationId: Payment_OrderList
+            parameters:
+                - name: Status
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/OrderListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    payment/List:
+        get:
+            tags:
+                - Payment
+            operationId: Payment_PaymentList
+            parameters:
+                - name: Status
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PaymentListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     payment/order:
         post:
             tags:
@@ -132,6 +250,105 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/ReconciliationItem'
+        MonitorCreateReply:
+            type: object
+            properties:
+                Id:
+                    type: string
+        MonitorCreateRequest:
+            type: object
+            properties:
+                OrderNo:
+                    type: string
+                MonitorType:
+                    type: string
+        MonitorDeleteReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        MonitorDeleteRequest:
+            type: object
+            properties:
+                Id:
+                    type: string
+        MonitorUpdateReply:
+            type: object
+            properties:
+                Id:
+                    type: string
+        MonitorUpdateRequest:
+            type: object
+            properties:
+                MonitorNo:
+                    type: string
+                HandleResult:
+                    type: string
+        OrderItem:
+            type: object
+            properties:
+                OrderNo:
+                    type: string
+                SenderName:
+                    type: string
+                SenderPhone:
+                    type: string
+                SenderAddress:
+                    type: string
+                ReceiverName:
+                    type: string
+                ReceiverPhone:
+                    type: string
+                ReceiverAddress:
+                    type: string
+                ProductType:
+                    type: string
+                ActualFee:
+                    type: string
+                CreatedAt:
+                    type: string
+        OrderListReply:
+            type: object
+            properties:
+                List:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/OrderItem'
+                AliPay:
+                    type: string
+                Wx:
+                    type: string
+                BankCard:
+                    type: string
+        PaymentItem:
+            type: object
+            properties:
+                OrderId:
+                    type: string
+                PayNo:
+                    type: string
+                Channel:
+                    type: string
+                Amount:
+                    type: number
+                    format: float
+                Currency:
+                    type: string
+                Status:
+                    type: string
+                PaidAt:
+                    type: string
+                ThirdTxId:
+                    type: string
+                CreatedAt:
+                    type: string
+        PaymentListReply:
+            type: object
+            properties:
+                List:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/PaymentItem'
         PaymentOrderReply:
             type: object
             properties:
@@ -141,6 +358,8 @@ components:
             type: object
             properties:
                 OrderSn:
+                    type: string
+                PaymentType:
                     type: string
         ReconciliationItem:
             type: object

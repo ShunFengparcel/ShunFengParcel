@@ -35,6 +35,39 @@ service Payment {
       body: "*"
     };
   }
+
+  rpc MonitorCreate (MonitorCreateRequest) returns (MonitorCreateReply){
+    option (google.api.http) = {
+      post: "Monitor/Create"
+      body: "*"
+    };
+  }
+
+  rpc MonitorUpdate (MonitorUpdateRequest) returns (MonitorUpdateReply){
+    option (google.api.http) = {
+      post: "Monitor/Update"
+      body: "*"
+    };
+  }
+
+  rpc MonitorDelete (MonitorDeleteRequest) returns (MonitorDeleteReply){
+    option (google.api.http) = {
+      post: "Monitor/Delete"
+      body: "*"
+    };
+  }
+
+  rpc OrderList (OrderListRequest) returns (OrderListReply){
+    option (google.api.http) = {
+      get: "Order/List"
+    };
+  }
+
+  rpc PaymentList (PaymentListRequest) returns (PaymentListReply){
+    option (google.api.http) = {
+      get: "payment/List"
+    };
+  }
 }
 
 message UpdatePaymentRequest {
@@ -74,8 +107,80 @@ message ListReconciliationReply{
 
 message PaymentOrderRequest{
   string OrderSn = 1;
+  string PaymentType = 2;
 }
 
 message PaymentOrderReply{
   string Url = 1;
+}
+
+message MonitorCreateRequest{
+  string OrderNo = 1;
+  string  MonitorType = 2;
+}
+
+message MonitorCreateReply{
+  int64 Id = 1;
+}
+
+message MonitorUpdateRequest{
+  string MonitorNo = 1;
+  string  HandleResult = 2;
+}
+
+message MonitorUpdateReply{
+  int64 Id = 1;
+}
+
+message MonitorDeleteRequest{
+  int64 Id = 1;
+}
+
+message MonitorDeleteReply{
+  string message = 1;
+}
+
+message OrderItem{
+  string OrderNo = 1;
+  string SenderName= 2;
+  string SenderPhone= 3;
+  string SenderAddress= 4;
+  string ReceiverName= 5;
+  string ReceiverPhone= 6;
+  string ReceiverAddress= 7;
+  string ProductType= 8;
+  string ActualFee= 9;
+  string CreatedAt= 10;
+}
+
+message OrderListRequest {
+  string Status = 1;
+}
+
+message OrderListReply{
+  repeated OrderItem List = 1;
+  int64 AliPay = 2;
+  int64 Wx  = 3;
+  int64 BankCard =4;
+}
+
+message PaymentItem {
+  int64  OrderId = 1;
+  string PayNo = 2;
+  string Channel = 3;
+  float  Amount =4;
+  string Currency =5 ;
+  string Status = 6;
+  string PaidAt = 7;
+  string ThirdTxId = 8;
+  string CreatedAt = 9;
+}
+
+message PaymentListRequest {
+  string Status = 1;
+}
+
+
+message PaymentListReply {
+   repeated  PaymentItem List = 1;
 }

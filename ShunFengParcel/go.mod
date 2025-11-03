@@ -33,6 +33,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/smartwalle/ncrypto v1.0.4 // indirect
 	github.com/smartwalle/ngx v1.0.11 // indirect
 	github.com/smartwalle/nsign v1.0.9 // indirect
@@ -46,5 +47,6 @@ require (
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240528184218-531527333157 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

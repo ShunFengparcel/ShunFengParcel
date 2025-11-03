@@ -7,11 +7,14 @@ import (
 	"ShunFengParcel/utils"
 	"context"
 	"fmt"
+
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/google/uuid"
+	"github.com/robfig/cron/v3"
 	"github.com/smartwalle/alipay/v3"
+
 	logs "log"
 	"time"
 )
@@ -29,6 +32,15 @@ func NewPaymentService(logger log.Logger) *PaymentService {
 	client, err := alipay.New("2021000148652076", privateKey, false)
 	if err != nil {
 		log.NewHelper(logger).Errorf("初始化支付宝客户端失败: %v", err)
+		return &PaymentService{log: log.NewHelper(logger)}
+	}
+
+	// 加载支付宝公钥用于验证回调签名
+	// ⚠️ 注意：这里必须使用支付宝公钥，不是应用公钥！
+	// 支付宝公钥从支付宝开放平台的"开发信息"中获取
+	alipayPublicKey := "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4ggbHWY0sLakPRJ1e/nFZsKC8D3y2+JrKNaE1LuAjpLCLZ/Kst36p6OY0SnHUuqf2oMkPiSAp/S1DfZhBBrJUKdzVR4gqPQTKnE2K4Uk7bA+Y7NVcLvMO3jCJiUy0yZnV8V5YvhLKTqbqUDZvKGsNJzJSUlIJDl6/lvcz9+/0qlXMjXdGseFHsJPKYO9BYU4l6cLZsKqL8k/HVrFLBxz2nRfXPrYUBxPfKKfWhDuPz8KUwBZLqsHWMiHJhLtXfXPvN3JzQQnBBQG0JWZXMeLTLqbLJPfDQfCvLjyEjnOiAyhFYJ3oP+0VTYTzj8j5+CgaLzVPBfLNKkPSZKEj/BPQwIDAQAB"
+	if err := client.LoadAliPayPublicKey(alipayPublicKey); err != nil {
+		log.NewHelper(logger).Errorf("加载支付宝公钥失败: %v", err)
 		return &PaymentService{log: log.NewHelper(logger)}
 	}
 
@@ -82,6 +94,15 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 	//WAIT_BUYER_PAY	交易创建	false（不触发通知）
 	//TRADE_CLOSED	交易关闭	true（触发通知）
 
+	err := order.FIndByOrderSn(inits.DB, outTradeNo)
+	if err != nil {
+		return nil, err
+	}
+
+	if order.Id == 0 {
+		logs.Println("该")
+	}
+
 	if tradeStatus == "TRADE_SUCCESS" {
 		order.OrderStatus = "paid"
 		err := order.UpdateOrderStatus(inits.DB, alipayTradeNo)
@@ -92,8 +113,42 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 
 	}
 
+	go CreatePayment(outTradeNo, alipayTradeNo)
+
 	// 5. 返回结果（必须返回 "success"，否则支付宝会重复回调）
 	return &pb.UpdatePaymentReply{Result: "success"}, nil
+}
+
+func CreatePayment(ordersn string, alipayNo string) error {
+	var order config.SfOrders
+	err := order.FIndByOrderSn(inits.DB, ordersn)
+	if err != nil {
+		logs.Println("查询订单失败", err.Error())
+		return err
+	}
+
+	var pay config.SfPayments
+	pay = config.SfPayments{
+		OrderId: order.Id,
+		PayNo:   ordersn,
+		Channel: "alipay",
+		Amount:  order.ActualFee,
+
+		Status:    "success",
+		PaidAt:    time.Time{},
+		ThirdTxId: alipayNo,
+		CreatedAt: time.Time{},
+		UpdatedAt: time.Time{},
+		DeleteAt:  time.Time{},
+	}
+
+	err = pay.Created(inits.DB)
+	if err != nil {
+		logs.Println("支付记录失败", err.Error())
+		return err
+	}
+
+	return nil
 }
 
 func (s *PaymentService) CreatedReconciliation(ctx context.Context, req *pb.CreatedReconciliationRequest) (*pb.CreatedReconciliationReply, error) {
@@ -115,7 +170,9 @@ func (s *PaymentService) CreatedReconciliation(ctx context.Context, req *pb.Crea
 	fmt.Println(orders)
 
 	sum := 0.00
+	count := 0
 	for _, order := range orders {
+		count++
 		sum += order.ActualFee
 	}
 
@@ -140,11 +197,13 @@ func (s *PaymentService) CreatedReconciliation(ctx context.Context, req *pb.Crea
 	}
 
 	reconciliation := config.Reconciliation{
+
 		TaskName:           fmt.Sprintf("%s对账", todaystr3),
 		ReconciliationNo:   uuid.NewString(),
 		ReconciliationDate: time.Now(),
 		Amount:             sum,
 		ActualAmount:       sum,
+		Count:              int64(count),
 		Proportion:         proportion,
 		HandlerStatus:      "待处理", // 设置默认状态
 	}
@@ -167,8 +226,23 @@ func (s *PaymentService) ListReconciliation(ctx context.Context, req *pb.ListRec
 		fmt.Println("查询失败", err.Error())
 		return nil, err
 	}
+
+	// 转换为 protobuf 类型
+	var pbList []*pb.ReconciliationItem
+	for _, rec := range list {
+		pbList = append(pbList, &pb.ReconciliationItem{
+			TaskName:           rec.TaskName,
+			ReconciliationNo:   rec.ReconciliationNo,
+			ReconciliationDate: rec.ReconciliationDate.Format("2006-01-02 15:04:05"),
+			Amount:             float32(rec.Amount),
+			ActualAmount:       float32(rec.ActualAmount),
+			Proportion:         fmt.Sprintf("%.2f", rec.Proportion),
+			HandlerStatus:      rec.HandlerStatus,
+		})
+	}
+
 	return &pb.ListReconciliationReply{
-		List: list,
+		List: pbList,
 	}, nil
 }
 
@@ -180,11 +254,178 @@ func (s *PaymentService) PaymentOrder(ctx context.Context, req *pb.PaymentOrderR
 		return nil, err
 	}
 
-	var pay utils.AliPay
+	if o.Id == 0 {
+		logs.Println("该订单不存在")
+		return nil, errors.New(400, err.Error(), "该订单不存在")
+	}
+	var url string
+	if req.PaymentType == "1" {
+		var pay utils.AliPay
 
-	price := fmt.Sprintf("%.2f", o.ActualFee)
-	url := pay.Pay(o.OrderNo, price)
+		price := fmt.Sprintf("%.2f", o.ActualFee)
+		url = pay.Pay(o.OrderNo, price)
+	}
+
 	return &pb.PaymentOrderReply{
 		Url: url,
 	}, nil
+}
+
+func (s *PaymentService) MonitorCreate(ctx context.Context, req *pb.MonitorCreateRequest) (*pb.MonitorCreateReply, error) {
+	var err error
+	var o config.SfOrders
+	err = o.FIndByOrderSn(inits.DB, req.OrderNo)
+	if err != nil {
+		logs.Println("查询订单号错误", err.Error())
+		return nil, err
+	}
+	Level := ""
+	score := 0
+	if o.ActualFee >= 100 {
+		Level = "low"
+	}
+
+	var m config.TransactionMonitor
+	m = config.TransactionMonitor{
+		MonitorNo:         uuid.NewString(),
+		OrderNo:           req.OrderNo,
+		UserId:            o.UserId,
+		TransactionAmount: o.ActualFee,
+		MonitorType:       req.MonitorType,
+		RiskLevel:         Level,
+		RiskScore:         int64(score),
+	}
+
+	if err = m.Created(inits.DB); err != nil {
+		logs.Println("监控订单失败", err.Error())
+		return nil, err
+	}
+	return &pb.MonitorCreateReply{
+		Id: int64(m.ID),
+	}, nil
+}
+func (s *PaymentService) MonitorUpdate(ctx context.Context, req *pb.MonitorUpdateRequest) (*pb.MonitorUpdateReply, error) {
+	var err error
+	var m config.TransactionMonitor
+	if err = m.Updated(inits.DB, req.MonitorNo); err != nil {
+		logs.Println("监控情况查询失败", err.Error())
+		return nil, err
+	}
+
+	m.HandleResult = req.HandleResult
+	if err = m.Updated(inits.DB, req.MonitorNo); err != nil {
+		logs.Println("监控情况修改失败", err.Error())
+		return nil, err
+	}
+	return &pb.MonitorUpdateReply{
+		Id: int64(m.ID),
+	}, nil
+}
+func (s *PaymentService) MonitorDelete(ctx context.Context, req *pb.MonitorDeleteRequest) (*pb.MonitorDeleteReply, error) {
+	var err error
+	var m config.TransactionMonitor
+
+	if err = m.Deleted(inits.DB, int(req.Id)); err != nil {
+		logs.Println("监控情况查询失败", err.Error())
+		return nil, err
+	}
+
+	if err = m.FindByID(inits.DB, req.Id); err != nil {
+		logs.Println("监控情况查询失败", err.Error())
+		return nil, err
+	}
+	message := ""
+	if m.ID == 0 {
+		message = "删除成功"
+	} else {
+		logs.Println("未删除监控", m.ID)
+	}
+
+	return &pb.MonitorDeleteReply{
+		Message: message,
+	}, nil
+}
+
+func (s *PaymentService) OrderList(ctx context.Context, req *pb.OrderListRequest) (*pb.OrderListReply, error) {
+	var o config.SfOrders
+	list, err := o.FIndByList(inits.DB, req.Status)
+	if err != nil {
+		logs.Println(err.Error())
+		return nil, err
+	}
+
+	// 转换为 protobuf 类型
+	var pbList []*pb.OrderItem
+	for _, order := range list {
+		pbList = append(pbList, &pb.OrderItem{
+			OrderNo:         order.OrderNo,
+			SenderName:      order.SenderName,
+			SenderPhone:     order.SenderPhone,
+			SenderAddress:   order.SenderAddress,
+			ReceiverName:    order.ReceiverName,
+			ReceiverPhone:   order.ReceiverPhone,
+			ReceiverAddress: order.ReceiverAddress,
+			ProductType:     order.ProductType,
+			ActualFee:       fmt.Sprintf("%.2f", order.ActualFee),
+			CreatedAt:       order.CreatedAt.Format("2006-01-02 15:04:05"),
+		})
+	}
+
+	return &pb.OrderListReply{
+		List: pbList,
+	}, nil
+}
+
+func (s *PaymentService) PaymentList(ctx context.Context, req *pb.PaymentListRequest) (*pb.PaymentListReply, error) {
+	var p config.SfPayments
+	list, err := p.FIndByList(inits.DB, req.Status)
+	if err != nil {
+		logs.Println("查询失败", err.Error())
+		return nil, err
+	}
+	fmt.Println(list)
+	if list == nil {
+		logs.Println("未找到对账信息")
+	}
+
+	var payment []*pb.PaymentItem
+	for _, v := range list {
+		payment = append(payment, &pb.PaymentItem{
+			OrderId:   v.OrderId,
+			PayNo:     v.PayNo,
+			Channel:   v.Channel,
+			Amount:    float32(v.Amount),
+			Currency:  v.Currency,
+			Status:    v.Status,
+			PaidAt:    fmt.Sprintf("%s", v.PaidAt),
+			ThirdTxId: v.ThirdTxId,
+			CreatedAt: v.CreatedAt.Format("2006-01-02 15:04:05"),
+		})
+	}
+
+	return &pb.PaymentListReply{
+		List: payment,
+	}, nil
+}
+
+func AddFunc() {
+	// 创建调度器（默认支持分钟级，如需秒级需添加 WithSeconds() 选项）
+	c := cron.New(cron.WithSeconds()) // 支持秒级调度
+
+	// 注册任务：每5秒执行一次（Cron表达式："0 2 * * *"）
+	_, err := c.AddFunc("0 2  * * *", func() {
+
+		fmt.Printf("任务执行时间：%v\n", time.Now().Format("2006-01-02 15:04:05"))
+	})
+	if err != nil {
+		fmt.Printf("注册任务失败：%v\n", err)
+		return
+	}
+
+	// 启动调度器
+	c.Start()
+	defer c.Stop() // 程序退出时停止调度器
+
+	// 阻塞主线程（避免程序退出）
+	select {}
 }
