@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.11
-// source: helloworld/v1/kuai.proto
+// source: api/helloworld/v1/kuai.proto
 
 package v1
 
@@ -19,17 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Kuai_DeleteKuai_FullMethodName      = "/helloworld.v1.Kuai/DeleteKuai"
-	Kuai_GetTask_FullMethodName         = "/helloworld.v1.Kuai/GetTask"
-	Kuai_TaskList_FullMethodName        = "/helloworld.v1.Kuai/TaskList"
-	Kuai_Login_FullMethodName           = "/helloworld.v1.Kuai/Login"
-	Kuai_Register_FullMethodName        = "/helloworld.v1.Kuai/Register"
-	Kuai_StuUpd_FullMethodName          = "/helloworld.v1.Kuai/StuUpd"
-	Kuai_TakeTask_FullMethodName        = "/helloworld.v1.Kuai/TakeTask"
-	Kuai_CreateOrder_FullMethodName     = "/helloworld.v1.Kuai/CreateOrder"
-	Kuai_Performance_FullMethodName     = "/helloworld.v1.Kuai/Performance"
-	Kuai_OrderList_FullMethodName       = "/helloworld.v1.Kuai/OrderList"
-	Kuai_HandleException_FullMethodName = "/helloworld.v1.Kuai/HandleException"
+	Kuai_DeleteKuai_FullMethodName            = "/helloworld.v1.Kuai/DeleteKuai"
+	Kuai_GetTask_FullMethodName               = "/helloworld.v1.Kuai/GetTask"
+	Kuai_TaskList_FullMethodName              = "/helloworld.v1.Kuai/TaskList"
+	Kuai_Login_FullMethodName                 = "/helloworld.v1.Kuai/Login"
+	Kuai_Register_FullMethodName              = "/helloworld.v1.Kuai/Register"
+	Kuai_StuUpd_FullMethodName                = "/helloworld.v1.Kuai/StuUpd"
+	Kuai_TakeTask_FullMethodName              = "/helloworld.v1.Kuai/TakeTask"
+	Kuai_CreateOrder_FullMethodName           = "/helloworld.v1.Kuai/CreateOrder"
+	Kuai_Performance_FullMethodName           = "/helloworld.v1.Kuai/Performance"
+	Kuai_OrderList_FullMethodName             = "/helloworld.v1.Kuai/OrderList"
+	Kuai_IncomeList_FullMethodName            = "/helloworld.v1.Kuai/IncomeList"
+	Kuai_HandleException_FullMethodName       = "/helloworld.v1.Kuai/HandleException"
+	Kuai_CancelOrder_FullMethodName           = "/helloworld.v1.Kuai/CancelOrder"
+	Kuai_ReassignOrder_FullMethodName         = "/helloworld.v1.Kuai/ReassignOrder"
+	Kuai_OrderDetail_FullMethodName           = "/helloworld.v1.Kuai/OrderDetail"
+	Kuai_GetCourierPerformance_FullMethodName = "/helloworld.v1.Kuai/GetCourierPerformance"
 )
 
 // KuaiClient is the client API for Kuai service.
@@ -46,7 +51,16 @@ type KuaiClient interface {
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderReply, error)
 	Performance(ctx context.Context, in *PerformanceRequest, opts ...grpc.CallOption) (*PerformanceReply, error)
 	OrderList(ctx context.Context, in *OrderListRequest, opts ...grpc.CallOption) (*OrderListReply, error)
+	IncomeList(ctx context.Context, in *IncomeListRequest, opts ...grpc.CallOption) (*IncomeListReply, error)
 	HandleException(ctx context.Context, in *HandleExceptionRequest, opts ...grpc.CallOption) (*HandleExceptionReply, error)
+	// 订单取消
+	CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderReply, error)
+	// 订单改派
+	ReassignOrder(ctx context.Context, in *ReassignOrderRequest, opts ...grpc.CallOption) (*ReassignOrderReply, error)
+	// 订单详情（运营与客服深度查询），缓存优先读库回源
+	OrderDetail(ctx context.Context, in *OrderDetailRequest, opts ...grpc.CallOption) (*OrderDetailReply, error)
+	// 数据统计
+	GetCourierPerformance(ctx context.Context, in *GetCourierPerformanceRequest, opts ...grpc.CallOption) (*GetCourierPerformanceReply, error)
 }
 
 type kuaiClient struct {
@@ -157,10 +171,60 @@ func (c *kuaiClient) OrderList(ctx context.Context, in *OrderListRequest, opts .
 	return out, nil
 }
 
+func (c *kuaiClient) IncomeList(ctx context.Context, in *IncomeListRequest, opts ...grpc.CallOption) (*IncomeListReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IncomeListReply)
+	err := c.cc.Invoke(ctx, Kuai_IncomeList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *kuaiClient) HandleException(ctx context.Context, in *HandleExceptionRequest, opts ...grpc.CallOption) (*HandleExceptionReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(HandleExceptionReply)
 	err := c.cc.Invoke(ctx, Kuai_HandleException_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kuaiClient) CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...grpc.CallOption) (*CancelOrderReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelOrderReply)
+	err := c.cc.Invoke(ctx, Kuai_CancelOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kuaiClient) ReassignOrder(ctx context.Context, in *ReassignOrderRequest, opts ...grpc.CallOption) (*ReassignOrderReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReassignOrderReply)
+	err := c.cc.Invoke(ctx, Kuai_ReassignOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kuaiClient) OrderDetail(ctx context.Context, in *OrderDetailRequest, opts ...grpc.CallOption) (*OrderDetailReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OrderDetailReply)
+	err := c.cc.Invoke(ctx, Kuai_OrderDetail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kuaiClient) GetCourierPerformance(ctx context.Context, in *GetCourierPerformanceRequest, opts ...grpc.CallOption) (*GetCourierPerformanceReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCourierPerformanceReply)
+	err := c.cc.Invoke(ctx, Kuai_GetCourierPerformance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +245,16 @@ type KuaiServer interface {
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderReply, error)
 	Performance(context.Context, *PerformanceRequest) (*PerformanceReply, error)
 	OrderList(context.Context, *OrderListRequest) (*OrderListReply, error)
+	IncomeList(context.Context, *IncomeListRequest) (*IncomeListReply, error)
 	HandleException(context.Context, *HandleExceptionRequest) (*HandleExceptionReply, error)
+	// 订单取消
+	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderReply, error)
+	// 订单改派
+	ReassignOrder(context.Context, *ReassignOrderRequest) (*ReassignOrderReply, error)
+	// 订单详情（运营与客服深度查询），缓存优先读库回源
+	OrderDetail(context.Context, *OrderDetailRequest) (*OrderDetailReply, error)
+	// 数据统计
+	GetCourierPerformance(context.Context, *GetCourierPerformanceRequest) (*GetCourierPerformanceReply, error)
 	mustEmbedUnimplementedKuaiServer()
 }
 
@@ -222,8 +295,23 @@ func (UnimplementedKuaiServer) Performance(context.Context, *PerformanceRequest)
 func (UnimplementedKuaiServer) OrderList(context.Context, *OrderListRequest) (*OrderListReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderList not implemented")
 }
+func (UnimplementedKuaiServer) IncomeList(context.Context, *IncomeListRequest) (*IncomeListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IncomeList not implemented")
+}
 func (UnimplementedKuaiServer) HandleException(context.Context, *HandleExceptionRequest) (*HandleExceptionReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HandleException not implemented")
+}
+func (UnimplementedKuaiServer) CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelOrder not implemented")
+}
+func (UnimplementedKuaiServer) ReassignOrder(context.Context, *ReassignOrderRequest) (*ReassignOrderReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReassignOrder not implemented")
+}
+func (UnimplementedKuaiServer) OrderDetail(context.Context, *OrderDetailRequest) (*OrderDetailReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderDetail not implemented")
+}
+func (UnimplementedKuaiServer) GetCourierPerformance(context.Context, *GetCourierPerformanceRequest) (*GetCourierPerformanceReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCourierPerformance not implemented")
 }
 func (UnimplementedKuaiServer) mustEmbedUnimplementedKuaiServer() {}
 func (UnimplementedKuaiServer) testEmbeddedByValue()              {}
@@ -426,6 +514,24 @@ func _Kuai_OrderList_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Kuai_IncomeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IncomeListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KuaiServer).IncomeList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Kuai_IncomeList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KuaiServer).IncomeList(ctx, req.(*IncomeListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Kuai_HandleException_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HandleExceptionRequest)
 	if err := dec(in); err != nil {
@@ -440,6 +546,78 @@ func _Kuai_HandleException_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(KuaiServer).HandleException(ctx, req.(*HandleExceptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Kuai_CancelOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KuaiServer).CancelOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Kuai_CancelOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KuaiServer).CancelOrder(ctx, req.(*CancelOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Kuai_ReassignOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReassignOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KuaiServer).ReassignOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Kuai_ReassignOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KuaiServer).ReassignOrder(ctx, req.(*ReassignOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Kuai_OrderDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KuaiServer).OrderDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Kuai_OrderDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KuaiServer).OrderDetail(ctx, req.(*OrderDetailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Kuai_GetCourierPerformance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCourierPerformanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KuaiServer).GetCourierPerformance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Kuai_GetCourierPerformance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KuaiServer).GetCourierPerformance(ctx, req.(*GetCourierPerformanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -492,10 +670,30 @@ var Kuai_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Kuai_OrderList_Handler,
 		},
 		{
+			MethodName: "IncomeList",
+			Handler:    _Kuai_IncomeList_Handler,
+		},
+		{
 			MethodName: "HandleException",
 			Handler:    _Kuai_HandleException_Handler,
 		},
+		{
+			MethodName: "CancelOrder",
+			Handler:    _Kuai_CancelOrder_Handler,
+		},
+		{
+			MethodName: "ReassignOrder",
+			Handler:    _Kuai_ReassignOrder_Handler,
+		},
+		{
+			MethodName: "OrderDetail",
+			Handler:    _Kuai_OrderDetail_Handler,
+		},
+		{
+			MethodName: "GetCourierPerformance",
+			Handler:    _Kuai_GetCourierPerformance_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "helloworld/v1/kuai.proto",
+	Metadata: "api/helloworld/v1/kuai.proto",
 }

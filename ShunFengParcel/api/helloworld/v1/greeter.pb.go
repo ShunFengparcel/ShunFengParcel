@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.11
-// source: api/helloworld/v1/greeter.proto
+// source: helloworld/v1/greeter.proto
 
 package v1
 
@@ -34,7 +34,7 @@ type ReportCourierLocationRequest struct {
 
 func (x *ReportCourierLocationRequest) Reset() {
 	*x = ReportCourierLocationRequest{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[0]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46,7 +46,7 @@ func (x *ReportCourierLocationRequest) String() string {
 func (*ReportCourierLocationRequest) ProtoMessage() {}
 
 func (x *ReportCourierLocationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[0]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +59,7 @@ func (x *ReportCourierLocationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportCourierLocationRequest.ProtoReflect.Descriptor instead.
 func (*ReportCourierLocationRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{0}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ReportCourierLocationRequest) GetCourierId() int64 {
@@ -91,7 +91,7 @@ type ReportCourierLocationReply struct {
 
 func (x *ReportCourierLocationReply) Reset() {
 	*x = ReportCourierLocationReply{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[1]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -103,7 +103,7 @@ func (x *ReportCourierLocationReply) String() string {
 func (*ReportCourierLocationReply) ProtoMessage() {}
 
 func (x *ReportCourierLocationReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[1]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -116,7 +116,7 @@ func (x *ReportCourierLocationReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportCourierLocationReply.ProtoReflect.Descriptor instead.
 func (*ReportCourierLocationReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{1}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{1}
 }
 
 // ========== 轨迹 ==========
@@ -130,7 +130,7 @@ type GetCourierTrajectoryRequest struct {
 
 func (x *GetCourierTrajectoryRequest) Reset() {
 	*x = GetCourierTrajectoryRequest{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[2]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -142,7 +142,7 @@ func (x *GetCourierTrajectoryRequest) String() string {
 func (*GetCourierTrajectoryRequest) ProtoMessage() {}
 
 func (x *GetCourierTrajectoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[2]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -155,7 +155,7 @@ func (x *GetCourierTrajectoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCourierTrajectoryRequest.ProtoReflect.Descriptor instead.
 func (*GetCourierTrajectoryRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{2}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetCourierTrajectoryRequest) GetCourierId() int64 {
@@ -181,7 +181,7 @@ type GetCourierTrajectoryReply struct {
 
 func (x *GetCourierTrajectoryReply) Reset() {
 	*x = GetCourierTrajectoryReply{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[3]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -193,7 +193,7 @@ func (x *GetCourierTrajectoryReply) String() string {
 func (*GetCourierTrajectoryReply) ProtoMessage() {}
 
 func (x *GetCourierTrajectoryReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[3]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -206,7 +206,7 @@ func (x *GetCourierTrajectoryReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCourierTrajectoryReply.ProtoReflect.Descriptor instead.
 func (*GetCourierTrajectoryReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{3}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetCourierTrajectoryReply) GetPoints() []*Point {
@@ -226,7 +226,7 @@ type Point struct {
 
 func (x *Point) Reset() {
 	*x = Point{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[4]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -238,7 +238,7 @@ func (x *Point) String() string {
 func (*Point) ProtoMessage() {}
 
 func (x *Point) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[4]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -251,7 +251,7 @@ func (x *Point) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Point.ProtoReflect.Descriptor instead.
 func (*Point) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{4}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Point) GetLng() float64 {
@@ -281,7 +281,7 @@ type GetTaskDistanceRequest struct {
 
 func (x *GetTaskDistanceRequest) Reset() {
 	*x = GetTaskDistanceRequest{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[5]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -293,7 +293,7 @@ func (x *GetTaskDistanceRequest) String() string {
 func (*GetTaskDistanceRequest) ProtoMessage() {}
 
 func (x *GetTaskDistanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[5]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -306,7 +306,7 @@ func (x *GetTaskDistanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaskDistanceRequest.ProtoReflect.Descriptor instead.
 func (*GetTaskDistanceRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{5}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetTaskDistanceRequest) GetFromLng() float64 {
@@ -347,7 +347,7 @@ type GetTaskDistanceReply struct {
 
 func (x *GetTaskDistanceReply) Reset() {
 	*x = GetTaskDistanceReply{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[6]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -359,7 +359,7 @@ func (x *GetTaskDistanceReply) String() string {
 func (*GetTaskDistanceReply) ProtoMessage() {}
 
 func (x *GetTaskDistanceReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[6]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -372,7 +372,7 @@ func (x *GetTaskDistanceReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaskDistanceReply.ProtoReflect.Descriptor instead.
 func (*GetTaskDistanceReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{6}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetTaskDistanceReply) GetDistance() int32 {
@@ -400,7 +400,7 @@ type GeocodeAddressRequest struct {
 
 func (x *GeocodeAddressRequest) Reset() {
 	*x = GeocodeAddressRequest{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[7]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +412,7 @@ func (x *GeocodeAddressRequest) String() string {
 func (*GeocodeAddressRequest) ProtoMessage() {}
 
 func (x *GeocodeAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[7]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +425,7 @@ func (x *GeocodeAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GeocodeAddressRequest.ProtoReflect.Descriptor instead.
 func (*GeocodeAddressRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{7}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GeocodeAddressRequest) GetSenderAddress() string {
@@ -452,7 +452,7 @@ type GeocodeAddressResponse struct {
 
 func (x *GeocodeAddressResponse) Reset() {
 	*x = GeocodeAddressResponse{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[8]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +464,7 @@ func (x *GeocodeAddressResponse) String() string {
 func (*GeocodeAddressResponse) ProtoMessage() {}
 
 func (x *GeocodeAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[8]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +477,7 @@ func (x *GeocodeAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GeocodeAddressResponse.ProtoReflect.Descriptor instead.
 func (*GeocodeAddressResponse) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{8}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GeocodeAddressResponse) GetSenderLocation() *LocationInfo {
@@ -504,7 +504,7 @@ type LocationInfo struct {
 
 func (x *LocationInfo) Reset() {
 	*x = LocationInfo{}
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[9]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -516,7 +516,7 @@ func (x *LocationInfo) String() string {
 func (*LocationInfo) ProtoMessage() {}
 
 func (x *LocationInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_greeter_proto_msgTypes[9]
+	mi := &file_helloworld_v1_greeter_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -529,7 +529,7 @@ func (x *LocationInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocationInfo.ProtoReflect.Descriptor instead.
 func (*LocationInfo) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_greeter_proto_rawDescGZIP(), []int{9}
+	return file_helloworld_v1_greeter_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *LocationInfo) GetLng() float64 {
@@ -546,11 +546,11 @@ func (x *LocationInfo) GetLat() float64 {
 	return 0
 }
 
-var File_api_helloworld_v1_greeter_proto protoreflect.FileDescriptor
+var File_helloworld_v1_greeter_proto protoreflect.FileDescriptor
 
-const file_api_helloworld_v1_greeter_proto_rawDesc = "" +
+const file_helloworld_v1_greeter_proto_rawDesc = "" +
 	"\n" +
-	"\x1fapi/helloworld/v1/greeter.proto\x12\rhelloworld.v1\x1a\x1cgoogle/api/annotations.proto\"a\n" +
+	"\x1bhelloworld/v1/greeter.proto\x12\rhelloworld.v1\x1a\x1cgoogle/api/annotations.proto\"a\n" +
 	"\x1cReportCourierLocationRequest\x12\x1d\n" +
 	"\n" +
 	"courier_id\x18\x01 \x01(\x03R\tcourierId\x12\x10\n" +
@@ -591,19 +591,19 @@ const file_api_helloworld_v1_greeter_proto_rawDesc = "" +
 	"\x1cdev.kratos.api.helloworld.v1B\x11HelloworldProtoV1P\x01Z#ShunFengParcel/api/helloworld/v1;v1b\x06proto3"
 
 var (
-	file_api_helloworld_v1_greeter_proto_rawDescOnce sync.Once
-	file_api_helloworld_v1_greeter_proto_rawDescData []byte
+	file_helloworld_v1_greeter_proto_rawDescOnce sync.Once
+	file_helloworld_v1_greeter_proto_rawDescData []byte
 )
 
-func file_api_helloworld_v1_greeter_proto_rawDescGZIP() []byte {
-	file_api_helloworld_v1_greeter_proto_rawDescOnce.Do(func() {
-		file_api_helloworld_v1_greeter_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_helloworld_v1_greeter_proto_rawDesc), len(file_api_helloworld_v1_greeter_proto_rawDesc)))
+func file_helloworld_v1_greeter_proto_rawDescGZIP() []byte {
+	file_helloworld_v1_greeter_proto_rawDescOnce.Do(func() {
+		file_helloworld_v1_greeter_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_helloworld_v1_greeter_proto_rawDesc), len(file_helloworld_v1_greeter_proto_rawDesc)))
 	})
-	return file_api_helloworld_v1_greeter_proto_rawDescData
+	return file_helloworld_v1_greeter_proto_rawDescData
 }
 
-var file_api_helloworld_v1_greeter_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
-var file_api_helloworld_v1_greeter_proto_goTypes = []any{
+var file_helloworld_v1_greeter_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_helloworld_v1_greeter_proto_goTypes = []any{
 	(*ReportCourierLocationRequest)(nil), // 0: helloworld.v1.ReportCourierLocationRequest
 	(*ReportCourierLocationReply)(nil),   // 1: helloworld.v1.ReportCourierLocationReply
 	(*GetCourierTrajectoryRequest)(nil),  // 2: helloworld.v1.GetCourierTrajectoryRequest
@@ -615,7 +615,7 @@ var file_api_helloworld_v1_greeter_proto_goTypes = []any{
 	(*GeocodeAddressResponse)(nil),       // 8: helloworld.v1.GeocodeAddressResponse
 	(*LocationInfo)(nil),                 // 9: helloworld.v1.LocationInfo
 }
-var file_api_helloworld_v1_greeter_proto_depIdxs = []int32{
+var file_helloworld_v1_greeter_proto_depIdxs = []int32{
 	4, // 0: helloworld.v1.GetCourierTrajectoryReply.points:type_name -> helloworld.v1.Point
 	9, // 1: helloworld.v1.GeocodeAddressResponse.sender_location:type_name -> helloworld.v1.LocationInfo
 	9, // 2: helloworld.v1.GeocodeAddressResponse.receiver_location:type_name -> helloworld.v1.LocationInfo
@@ -634,26 +634,26 @@ var file_api_helloworld_v1_greeter_proto_depIdxs = []int32{
 	0, // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_api_helloworld_v1_greeter_proto_init() }
-func file_api_helloworld_v1_greeter_proto_init() {
-	if File_api_helloworld_v1_greeter_proto != nil {
+func init() { file_helloworld_v1_greeter_proto_init() }
+func file_helloworld_v1_greeter_proto_init() {
+	if File_helloworld_v1_greeter_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_helloworld_v1_greeter_proto_rawDesc), len(file_api_helloworld_v1_greeter_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_helloworld_v1_greeter_proto_rawDesc), len(file_helloworld_v1_greeter_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_helloworld_v1_greeter_proto_goTypes,
-		DependencyIndexes: file_api_helloworld_v1_greeter_proto_depIdxs,
-		MessageInfos:      file_api_helloworld_v1_greeter_proto_msgTypes,
+		GoTypes:           file_helloworld_v1_greeter_proto_goTypes,
+		DependencyIndexes: file_helloworld_v1_greeter_proto_depIdxs,
+		MessageInfos:      file_helloworld_v1_greeter_proto_msgTypes,
 	}.Build()
-	File_api_helloworld_v1_greeter_proto = out.File
-	file_api_helloworld_v1_greeter_proto_goTypes = nil
-	file_api_helloworld_v1_greeter_proto_depIdxs = nil
+	File_helloworld_v1_greeter_proto = out.File
+	file_helloworld_v1_greeter_proto_goTypes = nil
+	file_helloworld_v1_greeter_proto_depIdxs = nil
 }

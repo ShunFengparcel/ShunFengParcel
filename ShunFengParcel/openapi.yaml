@@ -3,7 +3,7 @@
 
 openapi: 3.0.3
 info:
-    title: ""
+    title: Kuai API
     version: 0.0.1
 paths:
     /addTask:
@@ -15,7 +15,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.TakeTaskRequest'
+                            $ref: '#/components/schemas/TakeTaskRequest'
                 required: true
             responses:
                 "200":
@@ -23,19 +23,38 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.TakeTaskReply'
-    /callback:
-        get:
+                                $ref: '#/components/schemas/TakeTaskReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /count/performance:
+        post:
             tags:
-                - Wei
-            operationId: Wei_Callback
+                - Kuai
+            description: 数据统计
+            operationId: Kuai_GetCourierPerformance
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetCourierPerformanceRequest'
+                required: true
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.CallbackReply'
+                                $ref: '#/components/schemas/GetCourierPerformanceReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /createOrder:
         post:
             tags:
@@ -45,7 +64,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.CreateOrderRequest'
+                            $ref: '#/components/schemas/CreateOrderRequest'
                 required: true
             responses:
                 "200":
@@ -53,7 +72,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.CreateOrderReply'
+                                $ref: '#/components/schemas/CreateOrderReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /gettask:
         post:
             tags:
@@ -63,7 +88,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.GetTaskRequest'
+                            $ref: '#/components/schemas/GetTaskRequest'
                 required: true
             responses:
                 "200":
@@ -71,7 +96,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.GetTaskReply'
+                                $ref: '#/components/schemas/GetTaskReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /handleException:
         post:
             tags:
@@ -81,7 +112,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.HandleExceptionRequest'
+                            $ref: '#/components/schemas/HandleExceptionRequest'
                 required: true
             responses:
                 "200":
@@ -89,18 +120,23 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HandleExceptionReply'
-    /location/v1/geocode:
+                                $ref: '#/components/schemas/HandleExceptionReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /income/list:
         post:
             tags:
-                - Greeter
-            description: 地址解析接口，将寄件地址和收件地址转换为经纬度
-            operationId: Greeter_GeocodeAddress
+                - Kuai
+            operationId: Kuai_IncomeList
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.GeocodeAddressRequest'
+                            $ref: '#/components/schemas/IncomeListRequest'
                 required: true
             responses:
                 "200":
@@ -108,69 +144,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.GeocodeAddressResponse'
-    /location/v1/report:
-        post:
-            tags:
-                - Greeter
-            description: 快递员 App 每 5 秒上报一次
-            operationId: Greeter_ReportCourierLocation
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/helloworld.v1.ReportCourierLocationRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
+                                $ref: '#/components/schemas/IncomeListReply'
+                default:
+                    description: Default error response
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.ReportCourierLocationReply'
-    /location/v1/task_distance:
-        post:
-            tags:
-                - Greeter
-            description: 单次发货→收货距离（复用前一天算法）
-            operationId: Greeter_GetTaskDistance
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/helloworld.v1.GetTaskDistanceRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/helloworld.v1.GetTaskDistanceReply'
-    /location/v1/trajectory/{courierId}:
-        get:
-            tags:
-                - Greeter
-            description: 前端 / 运营后台实时拉轨迹
-            operationId: Greeter_GetCourierTrajectory
-            parameters:
-                - name: courierId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-                - name: lastSeconds
-                  in: query
-                  schema:
-                    type: integer
-                    format: int32
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/helloworld.v1.GetCourierTrajectoryReply'
+                                $ref: '#/components/schemas/Status'
     /login:
         post:
             tags:
@@ -180,7 +160,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.LoginRequest'
+                            $ref: '#/components/schemas/LoginRequest'
                 required: true
             responses:
                 "200":
@@ -188,7 +168,38 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.LoginReply'
+                                $ref: '#/components/schemas/LoginReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /order/detail:
+        post:
+            tags:
+                - Kuai
+            description: 订单详情（运营与客服深度查询），缓存优先读库回源
+            operationId: Kuai_OrderDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/OrderDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/OrderDetailReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /orders:
         post:
             tags:
@@ -198,7 +209,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.OrderListRequest'
+                            $ref: '#/components/schemas/OrderListRequest'
                 required: true
             responses:
                 "200":
@@ -206,7 +217,63 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.OrderListReply'
+                                $ref: '#/components/schemas/OrderListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /orders/cancel:
+        post:
+            tags:
+                - Kuai
+            description: 订单取消
+            operationId: Kuai_CancelOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CancelOrderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CancelOrderReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /orders/reassign:
+        post:
+            tags:
+                - Kuai
+            description: 订单改派
+            operationId: Kuai_ReassignOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReassignOrderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReassignOrderReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /performance:
         post:
             tags:
@@ -216,7 +283,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.PerformanceRequest'
+                            $ref: '#/components/schemas/PerformanceRequest'
                 required: true
             responses:
                 "200":
@@ -224,7 +291,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.PerformanceReply'
+                                $ref: '#/components/schemas/PerformanceReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /register:
         post:
             tags:
@@ -234,7 +307,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.RegisterRequest'
+                            $ref: '#/components/schemas/RegisterRequest'
                 required: true
             responses:
                 "200":
@@ -242,7 +315,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.RegisterReply'
+                                $ref: '#/components/schemas/RegisterReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /stuUpd:
         post:
             tags:
@@ -252,7 +331,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.StuUpdRequest'
+                            $ref: '#/components/schemas/StuUpdRequest'
                 required: true
             responses:
                 "200":
@@ -260,7 +339,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.StuUpdReply'
+                                $ref: '#/components/schemas/StuUpdReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /taskList:
         post:
             tags:
@@ -270,7 +355,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.TaskListRequest'
+                            $ref: '#/components/schemas/TaskListRequest'
                 required: true
             responses:
                 "200":
@@ -278,39 +363,59 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.TaskListReply'
-    /wechatLogin:
-        get:
-            tags:
-                - Wei
-            operationId: Wei_WechatLogin
-            responses:
-                "200":
-                    description: OK
+                                $ref: '#/components/schemas/TaskListReply'
+                default:
+                    description: Default error response
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.WechatLoginReply'
-    /wx:
-        get:
-            tags:
-                - Wei
-            description: Sends a greeting
-            operationId: Wei_WX
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/helloworld.v1.WXReply'
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
-        helloworld.v1.CallbackReply:
+        AuditLogItem:
             type: object
-            properties: {}
-            description: The response message containing the greetings
-        helloworld.v1.CourierRank:
+            properties:
+                actionType:
+                    type: string
+                operatorId:
+                    type: string
+                operatorRole:
+                    type: string
+                beforeStatus:
+                    type: string
+                afterStatus:
+                    type: string
+                reasonType:
+                    type: string
+                reasonText:
+                    type: string
+                createdAt:
+                    type: string
+            description: 审计记录条目
+        CancelOrderReply:
+            type: object
+            properties:
+                success:
+                    type: boolean
+                message:
+                    type: string
+                newStatus:
+                    type: integer
+                    format: enum
+        CancelOrderRequest:
+            type: object
+            properties:
+                orderId:
+                    type: string
+                reason:
+                    type: integer
+                    format: enum
+                reasonText:
+                    type: string
+                idempotencyKey:
+                    type: string
+            description: 取消订单请求，支持幂等键
+        CourierRank:
             type: object
             properties:
                 rank:
@@ -323,13 +428,13 @@ components:
                 performanceScore:
                     type: number
                     format: double
-        helloworld.v1.CreateOrderReply:
+        CreateOrderReply:
             type: object
             properties:
                 orderId:
                     type: integer
                     format: int32
-        helloworld.v1.CreateOrderRequest:
+        CreateOrderRequest:
             type: object
             properties:
                 userId:
@@ -389,54 +494,38 @@ components:
                 orderStatus:
                     type: integer
                     format: enum
-        helloworld.v1.GeocodeAddressRequest:
+        FeeDetail:
             type: object
             properties:
-                senderAddress:
+                estimatedFee:
+                    type: number
+                    format: double
+                actualFee:
+                    type: number
+                    format: double
+                chargeWeight:
+                    type: number
+                    format: double
+                paymentMethod:
                     type: string
-                receiverAddress:
+                paymentStatus:
                     type: string
-            description: ========== 地址解析 ==========
-        helloworld.v1.GeocodeAddressResponse:
+            description: 费用细节（对齐计费侧口径）
+        GetCourierPerformanceReply:
             type: object
             properties:
-                senderLocation:
-                    $ref: '#/components/schemas/helloworld.v1.LocationInfo'
-                receiverLocation:
-                    $ref: '#/components/schemas/helloworld.v1.LocationInfo'
-        helloworld.v1.GetCourierTrajectoryReply:
+                dailyRevenue:
+                    type: number
+                    format: double
+                monthlyRevenue:
+                    type: number
+                    format: double
+                acceptedCount:
+                    type: string
+        GetCourierPerformanceRequest:
             type: object
-            properties:
-                points:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/helloworld.v1.Point'
-        helloworld.v1.GetTaskDistanceReply:
-            type: object
-            properties:
-                distance:
-                    type: integer
-                    format: int32
-                duration:
-                    type: integer
-                    format: int32
-        helloworld.v1.GetTaskDistanceRequest:
-            type: object
-            properties:
-                fromLng:
-                    type: number
-                    format: double
-                fromLat:
-                    type: number
-                    format: double
-                toLng:
-                    type: number
-                    format: double
-                toLat:
-                    type: number
-                    format: double
-            description: ========== 发货→收货距离 ==========
-        helloworld.v1.GetTaskReply:
+            properties: {}
+        GetTaskReply:
             type: object
             properties:
                 id:
@@ -454,12 +543,20 @@ components:
                 taskStatus:
                     type: integer
                     format: enum
-        helloworld.v1.GetTaskRequest:
+        GetTaskRequest:
             type: object
             properties:
                 id:
                     type: string
-        helloworld.v1.HandleExceptionReply:
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        HandleExceptionReply:
             type: object
             properties:
                 success:
@@ -475,7 +572,7 @@ components:
                     type: number
                     format: double
             description: 异常处理响应
-        helloworld.v1.HandleExceptionRequest:
+        HandleExceptionRequest:
             type: object
             properties:
                 orderId:
@@ -488,36 +585,117 @@ components:
                 courierId:
                     type: string
             description: 异常处理请求
-        helloworld.v1.LocationInfo:
+        IncomeItem:
             type: object
             properties:
-                lng:
+                taskId:
+                    type: string
+                orderId:
+                    type: string
+                fee:
                     type: number
                     format: double
-                lat:
-                    type: number
-                    format: double
-                formattedAddress:
+                completedTime:
                     type: string
-                province:
+                senderName:
                     type: string
-                city:
+        IncomeListReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/IncomeItem'
+                total:
+                    type: integer
+                    format: int32
+        IncomeListRequest:
+            type: object
+            properties:
+                courierId:
                     type: string
-                district:
-                    type: string
-        helloworld.v1.LoginReply:
+            description: 收入明细
+        LoginReply:
             type: object
             properties:
                 id:
                     type: string
-        helloworld.v1.LoginRequest:
+        LoginRequest:
             type: object
             properties:
                 phone:
                     type: string
                 passwordHash:
                     type: string
-        helloworld.v1.OrderItem:
+        OrderDetailReply:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 基础信息（对齐 OrderItem 字段）
+                orderNo:
+                    type: string
+                userId:
+                    type: string
+                courierId:
+                    type: string
+                senderName:
+                    type: string
+                senderPhone:
+                    type: string
+                senderAddress:
+                    type: string
+                receiverName:
+                    type: string
+                receiverPhone:
+                    type: string
+                receiverAddress:
+                    type: string
+                serviceType:
+                    type: string
+                productType:
+                    type: string
+                orderStatus:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                acceptedAt:
+                    type: string
+                    description: 时间点（司机接单与到达）
+                pickupActualAt:
+                    type: string
+                deliveryActualAt:
+                    type: string
+                fee:
+                    allOf:
+                        - $ref: '#/components/schemas/FeeDetail'
+                    description: 费用明细
+                statusChanges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AuditLogItem'
+                    description: 状态变更记录（来自审计表）
+                reassignments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ReassignmentItem'
+                    description: 改派链路
+                risk:
+                    allOf:
+                        - $ref: '#/components/schemas/RiskInfo'
+                    description: 风控标记与异常码
+            description: 订单详情响应
+        OrderDetailRequest:
+            type: object
+            properties:
+                orderNo:
+                    type: string
+                orderId:
+                    type: string
+            description: 订单详情请求：支持订单号精确检索或ID
+        OrderItem:
             type: object
             properties:
                 id:
@@ -585,89 +763,126 @@ components:
                     type: string
                 deletedAt:
                     type: string
-        helloworld.v1.OrderListReply:
+        OrderListReply:
             type: object
             properties:
                 list:
                     type: array
                     items:
-                        $ref: '#/components/schemas/helloworld.v1.OrderItem'
-        helloworld.v1.OrderListRequest:
+                        $ref: '#/components/schemas/OrderItem'
+        OrderListRequest:
             type: object
             properties: {}
             description: 订单列表
-        helloworld.v1.PerformanceReply:
+        PerformanceReply:
             type: object
             properties:
                 rankList:
                     type: array
                     items:
-                        $ref: '#/components/schemas/helloworld.v1.CourierRank'
-        helloworld.v1.PerformanceRequest:
+                        $ref: '#/components/schemas/CourierRank'
+        PerformanceRequest:
             type: object
             properties:
                 topN:
                     type: integer
                     format: int32
-        helloworld.v1.Point:
+        ReassignOrderReply:
             type: object
             properties:
-                lng:
-                    type: number
-                    format: double
-                lat:
-                    type: number
-                    format: double
-        helloworld.v1.RegisterReply:
+                success:
+                    type: boolean
+                message:
+                    type: string
+                fromCourierId:
+                    type: string
+                toCourierId:
+                    type: string
+        ReassignOrderRequest:
+            type: object
+            properties:
+                orderId:
+                    type: string
+                targetCourierId:
+                    type: string
+                reasonText:
+                    type: string
+                idempotencyKey:
+                    type: string
+            description: 改派请求，支持幂等键
+        ReassignmentItem:
+            type: object
+            properties:
+                fromCourierId:
+                    type: string
+                toCourierId:
+                    type: string
+                reasonText:
+                    type: string
+                createdAt:
+                    type: string
+            description: 改派链路条目
+        RegisterReply:
             type: object
             properties:
                 id:
                     type: string
-        helloworld.v1.RegisterRequest:
+        RegisterRequest:
             type: object
             properties:
                 phone:
                     type: string
                 passwordHash:
                     type: string
-        helloworld.v1.ReportCourierLocationReply:
-            type: object
-            properties: {}
-        helloworld.v1.ReportCourierLocationRequest:
+        RiskInfo:
             type: object
             properties:
-                courierId:
+                riskFlag:
+                    type: boolean
+                exceptionCode:
                     type: string
-                lng:
-                    type: number
-                    format: double
-                lat:
-                    type: number
-                    format: double
-            description: ========== 上报 ==========
-        helloworld.v1.StuUpdReply:
+                notes:
+                    type: string
+            description: 风控与异常信息
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        StuUpdReply:
             type: object
             properties:
                 status:
                     type: string
-        helloworld.v1.StuUpdRequest:
+        StuUpdRequest:
             type: object
             properties:
                 status:
                     type: string
                 phone:
                     type: string
-        helloworld.v1.TakeTaskReply:
+        TakeTaskReply:
             type: object
             properties:
                 task:
-                    $ref: '#/components/schemas/helloworld.v1.Task'
-        helloworld.v1.TakeTaskRequest:
+                    $ref: '#/components/schemas/Task'
+        TakeTaskRequest:
             type: object
             properties:
                 courierId:
                     type: string
-        helloworld.v1.Task:
+        Task:
             type: object
             properties:
                 id:
@@ -691,30 +906,18 @@ components:
                     type: string
                 receiverAddress:
                     type: string
-        helloworld.v1.TaskListReply:
+        TaskListReply:
             type: object
             properties:
                 tasks:
                     type: array
                     items:
-                        $ref: '#/components/schemas/helloworld.v1.Task'
+                        $ref: '#/components/schemas/Task'
                 total:
                     type: integer
                     format: int32
-        helloworld.v1.TaskListRequest:
+        TaskListRequest:
             type: object
             properties: {}
-        helloworld.v1.WXReply:
-            type: object
-            properties: {}
-            description: The response message containing the greetings
-        helloworld.v1.WechatLoginReply:
-            type: object
-            properties: {}
-            description: The response message containing the greetings
 tags:
-    - name: Greeter
-      description: The greeting service definition.
     - name: Kuai
-    - name: Wei
-      description: The greeting service definition.

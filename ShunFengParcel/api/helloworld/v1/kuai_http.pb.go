@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.9.0
 // - protoc             v3.21.11
-// source: helloworld/v1/kuai.proto
+// source: api/helloworld/v1/kuai.proto
 
 package v1
 
@@ -19,29 +19,44 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationKuaiCancelOrder = "/helloworld.v1.Kuai/CancelOrder"
 const OperationKuaiCreateOrder = "/helloworld.v1.Kuai/CreateOrder"
+const OperationKuaiGetCourierPerformance = "/helloworld.v1.Kuai/GetCourierPerformance"
 const OperationKuaiGetTask = "/helloworld.v1.Kuai/GetTask"
 const OperationKuaiHandleException = "/helloworld.v1.Kuai/HandleException"
+const OperationKuaiIncomeList = "/helloworld.v1.Kuai/IncomeList"
 const OperationKuaiLogin = "/helloworld.v1.Kuai/Login"
+const OperationKuaiOrderDetail = "/helloworld.v1.Kuai/OrderDetail"
 const OperationKuaiOrderList = "/helloworld.v1.Kuai/OrderList"
 const OperationKuaiPerformance = "/helloworld.v1.Kuai/Performance"
+const OperationKuaiReassignOrder = "/helloworld.v1.Kuai/ReassignOrder"
 const OperationKuaiRegister = "/helloworld.v1.Kuai/Register"
 const OperationKuaiStuUpd = "/helloworld.v1.Kuai/StuUpd"
 const OperationKuaiTakeTask = "/helloworld.v1.Kuai/TakeTask"
 const OperationKuaiTaskList = "/helloworld.v1.Kuai/TaskList"
 
 type KuaiHTTPServer interface {
+	// CancelOrder 订单取消
+	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderReply, error)
 	// CreateOrder生成订单
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderReply, error)
+	// GetCourierPerformance数据统计
+	GetCourierPerformance(context.Context, *GetCourierPerformanceRequest) (*GetCourierPerformanceReply, error)
 	// GetTask个人任务详情
 	GetTask(context.Context, *GetTaskRequest) (*GetTaskReply, error)
 	// HandleException异常处理接口
 	HandleException(context.Context, *HandleExceptionRequest) (*HandleExceptionReply, error)
+	// IncomeList 收入明细列表
+	IncomeList(context.Context, *IncomeListRequest) (*IncomeListReply, error)
 	Login(context.Context, *LoginRequest) (*LoginReply, error)
+	// OrderDetail 订单详情（运营与客服深度查询），缓存优先读库回源
+	OrderDetail(context.Context, *OrderDetailRequest) (*OrderDetailReply, error)
 	// OrderList订单列表
 	OrderList(context.Context, *OrderListRequest) (*OrderListReply, error)
 	// Performance绩效排行榜
 	Performance(context.Context, *PerformanceRequest) (*PerformanceReply, error)
+	// ReassignOrder 订单改派
+	ReassignOrder(context.Context, *ReassignOrderRequest) (*ReassignOrderReply, error)
 	Register(context.Context, *RegisterRequest) (*RegisterReply, error)
 	// StuUpd修改快递员在线状态
 	StuUpd(context.Context, *StuUpdRequest) (*StuUpdReply, error)
@@ -62,7 +77,12 @@ func RegisterKuaiHTTPServer(s *http.Server, srv KuaiHTTPServer) {
 	r.POST("/createOrder", _Kuai_CreateOrder0_HTTP_Handler(srv))
 	r.POST("/performance", _Kuai_Performance0_HTTP_Handler(srv))
 	r.POST("/orders", _Kuai_OrderList0_HTTP_Handler(srv))
+	r.POST("/income/list", _Kuai_IncomeList0_HTTP_Handler(srv))
 	r.POST("/handleException", _Kuai_HandleException0_HTTP_Handler(srv))
+	r.POST("/orders/cancel", _Kuai_CancelOrder0_HTTP_Handler(srv))
+	r.POST("/orders/reassign", _Kuai_ReassignOrder0_HTTP_Handler(srv))
+	r.POST("/order/detail", _Kuai_OrderDetail0_HTTP_Handler(srv))
+	r.POST("/count/performance", _Kuai_GetCourierPerformance0_HTTP_Handler(srv))
 }
 
 func _Kuai_GetTask0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
@@ -263,6 +283,28 @@ func _Kuai_OrderList0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) er
 	}
 }
 
+func _Kuai_IncomeList0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in IncomeListRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationKuaiIncomeList)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.IncomeList(ctx, req.(*IncomeListRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*IncomeListReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Kuai_HandleException0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HandleExceptionRequest
@@ -285,18 +327,116 @@ func _Kuai_HandleException0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Conte
 	}
 }
 
+func _Kuai_CancelOrder0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CancelOrderRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationKuaiCancelOrder)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CancelOrder(ctx, req.(*CancelOrderRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CancelOrderReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Kuai_ReassignOrder0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ReassignOrderRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationKuaiReassignOrder)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ReassignOrder(ctx, req.(*ReassignOrderRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ReassignOrderReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Kuai_OrderDetail0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in OrderDetailRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationKuaiOrderDetail)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.OrderDetail(ctx, req.(*OrderDetailRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OrderDetailReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Kuai_GetCourierPerformance0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetCourierPerformanceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationKuaiGetCourierPerformance)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetCourierPerformance(ctx, req.(*GetCourierPerformanceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetCourierPerformanceReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type KuaiHTTPClient interface {
+	// CancelOrder 订单取消
+	CancelOrder(ctx context.Context, req *CancelOrderRequest, opts ...http.CallOption) (rsp *CancelOrderReply, err error)
 	// CreateOrder生成订单
 	CreateOrder(ctx context.Context, req *CreateOrderRequest, opts ...http.CallOption) (rsp *CreateOrderReply, err error)
+	// GetCourierPerformance数据统计
+	GetCourierPerformance(ctx context.Context, req *GetCourierPerformanceRequest, opts ...http.CallOption) (rsp *GetCourierPerformanceReply, err error)
 	// GetTask个人任务详情
 	GetTask(ctx context.Context, req *GetTaskRequest, opts ...http.CallOption) (rsp *GetTaskReply, err error)
 	// HandleException异常处理接口
 	HandleException(ctx context.Context, req *HandleExceptionRequest, opts ...http.CallOption) (rsp *HandleExceptionReply, err error)
+	// IncomeList 收入明细列表
+	IncomeList(ctx context.Context, req *IncomeListRequest, opts ...http.CallOption) (rsp *IncomeListReply, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginReply, err error)
+	// OrderDetail 订单详情（运营与客服深度查询），缓存优先读库回源
+	OrderDetail(ctx context.Context, req *OrderDetailRequest, opts ...http.CallOption) (rsp *OrderDetailReply, err error)
 	// OrderList订单列表
 	OrderList(ctx context.Context, req *OrderListRequest, opts ...http.CallOption) (rsp *OrderListReply, err error)
 	// Performance绩效排行榜
 	Performance(ctx context.Context, req *PerformanceRequest, opts ...http.CallOption) (rsp *PerformanceReply, err error)
+	// ReassignOrder 订单改派
+	ReassignOrder(ctx context.Context, req *ReassignOrderRequest, opts ...http.CallOption) (rsp *ReassignOrderReply, err error)
 	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *RegisterReply, err error)
 	// StuUpd修改快递员在线状态
 	StuUpd(ctx context.Context, req *StuUpdRequest, opts ...http.CallOption) (rsp *StuUpdReply, err error)
@@ -314,12 +454,40 @@ func NewKuaiHTTPClient(client *http.Client) KuaiHTTPClient {
 	return &KuaiHTTPClientImpl{client}
 }
 
+// CancelOrder 订单取消
+func (c *KuaiHTTPClientImpl) CancelOrder(ctx context.Context, in *CancelOrderRequest, opts ...http.CallOption) (*CancelOrderReply, error) {
+	var out CancelOrderReply
+	pattern := "/orders/cancel"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationKuaiCancelOrder))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // CreateOrder生成订单
 func (c *KuaiHTTPClientImpl) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...http.CallOption) (*CreateOrderReply, error) {
 	var out CreateOrderReply
 	pattern := "/createOrder"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationKuaiCreateOrder))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetCourierPerformance数据统计
+func (c *KuaiHTTPClientImpl) GetCourierPerformance(ctx context.Context, in *GetCourierPerformanceRequest, opts ...http.CallOption) (*GetCourierPerformanceReply, error) {
+	var out GetCourierPerformanceReply
+	pattern := "/count/performance"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationKuaiGetCourierPerformance))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -356,11 +524,39 @@ func (c *KuaiHTTPClientImpl) HandleException(ctx context.Context, in *HandleExce
 	return &out, nil
 }
 
+// IncomeList 收入明细列表
+func (c *KuaiHTTPClientImpl) IncomeList(ctx context.Context, in *IncomeListRequest, opts ...http.CallOption) (*IncomeListReply, error) {
+	var out IncomeListReply
+	pattern := "/income/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationKuaiIncomeList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *KuaiHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginReply, error) {
 	var out LoginReply
 	pattern := "/login"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationKuaiLogin))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// OrderDetail 订单详情（运营与客服深度查询），缓存优先读库回源
+func (c *KuaiHTTPClientImpl) OrderDetail(ctx context.Context, in *OrderDetailRequest, opts ...http.CallOption) (*OrderDetailReply, error) {
+	var out OrderDetailReply
+	pattern := "/order/detail"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationKuaiOrderDetail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -389,6 +585,20 @@ func (c *KuaiHTTPClientImpl) Performance(ctx context.Context, in *PerformanceReq
 	pattern := "/performance"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationKuaiPerformance))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ReassignOrder 订单改派
+func (c *KuaiHTTPClientImpl) ReassignOrder(ctx context.Context, in *ReassignOrderRequest, opts ...http.CallOption) (*ReassignOrderReply, error) {
+	var out ReassignOrderReply
+	pattern := "/orders/reassign"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationKuaiReassignOrder))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

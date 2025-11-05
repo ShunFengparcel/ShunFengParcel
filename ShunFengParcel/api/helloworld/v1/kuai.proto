@@ -65,13 +65,60 @@ service Kuai {
       body: "*"
     };
   }
+  rpc IncomeList(IncomeListRequest) returns (IncomeListReply) { // 收入明细列表
+    option (google.api.http) = {
+      post: "/income/list",
+      body: "*"
+    };
+  }
   rpc HandleException(HandleExceptionRequest) returns (HandleExceptionReply) {//异常处理接口
     option (google.api.http) = {
       post: "/handleException",
       body: "*"
     };
   }
-}
+
+  // 订单取消
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderReply) {
+    option (google.api.http) = {
+      post: "/orders/cancel",
+      body: "*"
+    };
+  }
+
+  // 订单改派
+  rpc ReassignOrder(ReassignOrderRequest) returns (ReassignOrderReply) {
+    option (google.api.http) = {
+      post: "/orders/reassign",
+      body: "*"
+    };
+  }
+
+  // 订单详情（运营与客服深度查询），缓存优先读库回源
+  rpc OrderDetail(OrderDetailRequest) returns (OrderDetailReply) {
+    option (google.api.http) = {
+      post: "/order/detail",
+      body: "*"
+    };
+  }
+
+  //数据统计
+    rpc GetCourierPerformance (GetCourierPerformanceRequest) returns (GetCourierPerformanceReply) {
+      option (google.api.http) = {
+        post: "/count/performance"
+        body: "*"
+      };
+    }
+  }
+
+  message GetCourierPerformanceRequest {}
+
+  message GetCourierPerformanceReply {
+    double daily_revenue = 1;
+    double monthly_revenue = 2;
+    int64 accepted_count = 3; // 根据快递员ID统计接单数（accepted/completed）
+  }
+
 message PerformanceRequest {
   int32 top_n = 1; // 要前几名
 }
@@ -95,7 +142,7 @@ message CreateOrderRequest {
   string receiver_address           = 11;  // 收件地址（JSON 字符串）
   ServiceType service_type          = 12; // 服务类型枚举
   string product_type               = 13; // 物品类型
-  int32   is_insured                 = 14; // 是否保价
+  int32   is_insured                = 14; // 是否保价 
   double insured_value              = 15; // 保价金额
   double estimated_weight           = 16; // 预估重量kg
   double actual_weight              = 17; // 实际重量kg
@@ -120,7 +167,6 @@ enum ServiceType {
   DELIVERY_OPTION_STANDARD = 2;
   DELIVERY_OPTION_ECONOMY = 3;
 }
-
 enum PaymentMethod {
   PAYMENT_METHOD_UNSPECIFIED = 0;
   PAYMENT_METHOD_SENDER_PAY   = 3;
@@ -134,7 +180,6 @@ enum PaymentStatus {
   PAYMENT_STATUS_FAILED   = 3;   // 支付失败
   PAYMENT_STATUS_REFUNDED = 4;   // 已退款
 }
-
 enum OrderStatus {
   ORDER_STATUS_UNSPECIFIED     = 0;
   ORDER_STATUS_PENDING         = 1;  // 待接单
@@ -146,6 +191,7 @@ enum OrderStatus {
   ORDER_STATUS_CANCELLED       = 7;  // 已取消
   ORDER_STATUS_EXCEPTION       = 8;  // 异常
 }
+
 
 message TakeTaskRequest  {
   int64 courier_id = 1;
@@ -270,6 +316,24 @@ message OrderListReply {
   repeated OrderItem list = 1;
 }
 
+
+// 收入明细
+message IncomeListRequest {
+  int64 courier_id = 1; // 可选，不传则从 X-Courier-ID 读取
+}
+message IncomeItem {
+  int64 task_id = 1;
+  int64 order_id = 2;
+  double fee = 3;            // 费用（使用订单实际费用）
+  string completed_time = 4; // 完成时间（订单实际送达时间或任务完成时间）
+  string sender_name = 5;    // 寄件人姓名
+}
+message IncomeListReply {
+  repeated IncomeItem list = 1;
+  int32 total = 2; // 总数（可选，当前返回列表长度）
+}
+
+
 // 异常处理请求
 message HandleExceptionRequest {
   int64 order_id = 1;           // 订单ID`
@@ -277,7 +341,6 @@ message HandleExceptionRequest {
   string reason = 3;            // 异常原因
   int64 courier_id = 4;         // 快递员ID
 }
-
 // 异常处理响应
 message HandleExceptionReply {
   bool success = 1;             // 处理是否成功
@@ -286,7 +349,6 @@ message HandleExceptionReply {
   bool requires_negotiation = 4; // 是否需要协商空跑费
   double suggested_fee = 5;     // 建议的空跑费金额(0-10元)
 }
-
 // 异常类型枚举
 enum ExceptionType {
   EXCEPTION_TYPE_UNSPECIFIED = 0;
@@ -296,4 +358,120 @@ enum ExceptionType {
   PICKUP_FAILED = 4;            // 取件失败
   ADDRESS_ERROR = 5;            // 地址错误
   CONTACT_FAILED = 6;           // 联系不上收件人
+}
+
+// 取消订单请求，支持幂等键
+message CancelOrderRequest {
+  int64 order_id = 1;              // 订单ID
+  CancelReason reason = 2;         // 取消原因枚举
+  string reason_text = 3;          // 取消备注
+  string idempotency_key = 4;      // 幂等键（header X-Idempotency-Key 优先）
+}
+message CancelOrderReply {
+  bool success = 1;
+  string message = 2;
+  OrderStatus new_status = 3;      // 新订单状态（取消后应为 CANCELLED）
+}
+// 取消原因枚举
+enum CancelReason {
+  CANCEL_REASON_UNSPECIFIED = 0;
+  USER_REQUEST = 1;        // 用户主动取消
+  COURIER_REQUEST = 2;     // 快递员主动取消
+  SYSTEM_TIMEOUT = 3;      // 系统超时取消
+  ADDRESS_ERROR_REASON = 4;// 地址信息错误
+  OTHER = 9;               // 其他
+}
+
+
+// 改派请求，支持幂等键
+message ReassignOrderRequest {
+  int64 order_id = 1;             // 订单ID
+  int64 target_courier_id = 2;    // 改派目标快递员ID
+  string reason_text = 3;         // 改派原因说明
+  string idempotency_key = 4;     // 幂等键（header X-Idempotency-Key 优先）
+}
+message ReassignOrderReply {
+  bool success = 1;
+  string message = 2;
+  int64 from_courier_id = 3;      // 原快递员
+  int64 to_courier_id = 4;        // 新快递员
+}
+
+// 订单详情请求：支持订单号精确检索或ID
+message OrderDetailRequest {
+  string order_no = 1;   // 订单号（推荐）
+  int64 order_id = 2;    // 订单ID（备选）
+}
+
+// 审计记录条目
+message AuditLogItem {
+  string action_type = 1;
+  int64 operator_id = 2;
+  string operator_role = 3;
+  string before_status = 4;
+  string after_status = 5;
+  string reason_type = 6;
+  string reason_text = 7;
+  string created_at = 8;
+}
+
+// 改派链路条目
+message ReassignmentItem {
+  int64 from_courier_id = 1;
+  int64 to_courier_id = 2;
+  string reason_text = 3;
+  string created_at = 4;
+}
+
+// 费用细节（对齐计费侧口径）
+message FeeDetail {
+  double estimated_fee = 1;
+  double actual_fee = 2;
+  double charge_weight = 3;
+  string payment_method = 4;
+  string payment_status = 5;
+}
+
+// 风控与异常信息
+message RiskInfo {
+  bool risk_flag = 1;        // 是否命中风控
+  string exception_code = 2; // 异常码（如派送失败等）
+  string notes = 3;          // 备注
+}
+
+// 订单详情响应
+message OrderDetailReply {
+  // 基础信息（对齐 OrderItem 字段）
+  int64 id = 1;
+  string order_no = 2;
+  int64 user_id = 3;
+  int64 courier_id = 4;
+  string sender_name = 5;
+  string sender_phone = 6;
+  string sender_address = 7;
+  string receiver_name = 8;
+  string receiver_phone = 9;
+  string receiver_address = 10;
+  string service_type = 11;
+  string product_type = 12;
+  string order_status = 13;
+  string created_at = 14;
+  string updated_at = 15;
+
+  // 时间点（司机接单与到达）
+  string accepted_at = 20;           // 接单时间（推导）
+  string pickup_actual_at = 21;      // 实际上门时间
+  string delivery_actual_at = 22;    // 实际送达时间
+
+  // 费用明细
+  FeeDetail fee = 30;
+
+  // 状态变更记录（来自审计表）
+  repeated AuditLogItem status_changes = 40;
+
+  // 改派链路
+  repeated ReassignmentItem reassignments = 50;
+
+  // 风控标记与异常码
+  RiskInfo risk = 60;
 }

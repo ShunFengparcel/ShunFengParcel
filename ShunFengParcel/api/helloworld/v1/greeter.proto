@@ -19,21 +19,21 @@ service Greeter {
     };
   }
 
-  // 前端 / 运营后台实时拉轨迹
-  rpc GetCourierTrajectory (GetCourierTrajectoryRequest) returns (GetCourierTrajectoryReply) {
-    option (google.api.http) = {
-      get: "/location/v1/trajectory/{courier_id}"
-    };
-  }
+//  // 前端 / 运营后台实时拉轨迹
+//  rpc GetCourierTrajectory (GetCourierTrajectoryRequest) returns (GetCourierTrajectoryReply) {
+//    option (google.api.http) = {
+//      get: "/location/v1/trajectory/{courier_id}"
+//    };
+//  }
 
-  // 单次发货→收货距离（复用前一天算法）
-  rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
-    option (google.api.http) = {
-      post: "/location/v1/task_distance"
-      body: "*"
-    };
-  }
-
+//  // 单次发货→收货距离（复用前一天算法）
+//  rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+//    option (google.api.http) = {
+//      post: "/location/v1/task_distance"
+//      body: "*"
+//    };
+//  }
+//
   // 地址解析接口，将寄件地址和收件地址转换为经纬度
   rpc GeocodeAddress (GeocodeAddressRequest) returns (GeocodeAddressResponse) {
     option (google.api.http) = {

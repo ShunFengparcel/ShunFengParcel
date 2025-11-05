@@ -33,10 +33,11 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	greeterUsecase := biz.NewGreeterUsecase(greeterRepo, logger)
 	greeterService := service.NewGreeterService(greeterUsecase)
 	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	universalClient := data.NewRedisClient(confData)
+	kuaiService := service.NewKuaiService(greeterUsecase, universalClient)
+	httpServer := server.NewHTTPServer(confServer, greeterService, kuaiService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()
 	}, nil
 }
-

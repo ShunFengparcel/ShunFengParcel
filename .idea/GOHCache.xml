@@ -3,6 +3,13 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
+        <entry key="AmapGeoResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Bootstrap">
           <value>
             <set>
@@ -24,6 +31,20 @@
             </set>
           </value>
         </entry>
+        <entry key="CancelOrderReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CancelOrderRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Client">
           <value>
             <set>
@@ -31,28 +52,28 @@
             </set>
           </value>
         </entry>
-        <entry key="Courier">
+        <entry key="CourierIDKey">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/model/courier.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/server/auth.go" />
             </set>
           </value>
         </entry>
-        <entry key="CourierTask">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/model/courierTask.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="CreateKuaiReply">
+        <entry key="CourierRank">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
             </set>
           </value>
         </entry>
-        <entry key="CreateKuaiRequest">
+        <entry key="CreateOrderReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateOrderRequest">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
@@ -95,6 +116,48 @@
             </set>
           </value>
         </entry>
+        <entry key="GeocodeAddressRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GeocodeAddressResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetCourierPerformanceReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetCourierPerformanceRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetCourierTrajectoryReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetCourierTrajectoryRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="GetKuaiReply">
           <value>
             <set>
@@ -103,6 +166,34 @@
           </value>
         </entry>
         <entry key="GetKuaiRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetTaskDistanceReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetTaskDistanceRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetTaskReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetTaskRequest">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
@@ -137,17 +228,38 @@
             </set>
           </value>
         </entry>
-        <entry key="HelloReply">
+        <entry key="HandleExceptionReply">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
             </set>
           </value>
         </entry>
-        <entry key="HelloRequest">
+        <entry key="HandleExceptionRequest">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="IncomeItem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="IncomeListReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="IncomeListRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
             </set>
           </value>
         </entry>
@@ -165,17 +277,10 @@
             </set>
           </value>
         </entry>
-        <entry key="ListKuaiReply">
+        <entry key="LocationInfo">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="ListKuaiRequest">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
             </set>
           </value>
         </entry>
@@ -200,10 +305,66 @@
             </set>
           </value>
         </entry>
+        <entry key="OrderItem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderListReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderListRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Pair">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/pkg/gaode.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PerformanceReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PerformanceRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Point">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ReassignOrderReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ReassignOrderRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
             </set>
           </value>
         </entry>
@@ -218,6 +379,20 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ReportCourierLocationReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ReportCourierLocationRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
             </set>
           </value>
         </entry>
@@ -256,6 +431,20 @@
             </set>
           </value>
         </entry>
+        <entry key="SfOrderAuditLogs">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/model/audit.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SfOrderReassignments">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/model/reassign.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="SfOrders">
           <value>
             <set>
@@ -277,6 +466,41 @@
             </set>
           </value>
         </entry>
+        <entry key="TakeTaskReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TakeTaskRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Task">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TaskListReply">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TaskListRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UnimplementedGreeterServer">
           <value>
             <set>
@@ -291,31 +515,10 @@
             </set>
           </value>
         </entry>
-        <entry key="UnimplementedWXServer">
+        <entry key="UnimplementedWeiServer">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei_grpc.pb.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="UpdateKuaiReply">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="UpdateKuaiRequest">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="WXHTTPClientImpl">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei_http.pb.go" />
             </set>
           </value>
         </entry>
@@ -347,10 +550,24 @@
             </set>
           </value>
         </entry>
+        <entry key="WeiHTTPClientImpl">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei_http.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="WeiService">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/wei.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="explainRow">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/kuai.go" />
             </set>
           </value>
         </entry>
@@ -375,6 +592,13 @@
             </set>
           </value>
         </entry>
+        <entry key="lastPoint">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="matrixResp">
           <value>
             <set>
@@ -382,7 +606,7 @@
             </set>
           </value>
         </entry>
-        <entry key="wXClient">
+        <entry key="weiClient">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei_grpc.pb.go" />
@@ -404,17 +628,10 @@
     </option>
     <option name="scannedPathMapping">
       <map>
-        <entry key="file://$PROJECT_DIR$/../11/专高六/hertz/api/biz/handler/hertz/user/wx_service.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1760698601876" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760689586057" />
+              <option name="lastModified" value="1761794987834" />
               <option name="schema">
                 <list>
                   <option value="x" />
@@ -426,11 +643,19 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699125066" />
+              <option name="lastModified" value="1761794987834" />
               <option name="schema">
                 <list>
-                  <option value="HelloRequest" />
-                  <option value="HelloReply" />
+                  <option value="ReportCourierLocationRequest" />
+                  <option value="ReportCourierLocationReply" />
+                  <option value="GetCourierTrajectoryRequest" />
+                  <option value="GetCourierTrajectoryReply" />
+                  <option value="Point" />
+                  <option value="GetTaskDistanceRequest" />
+                  <option value="GetTaskDistanceReply" />
+                  <option value="GeocodeAddressRequest" />
+                  <option value="GeocodeAddressResponse" />
+                  <option value="LocationInfo" />
                   <option value="x" />
                 </list>
               </option>
@@ -440,7 +665,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699125066" />
+              <option name="lastModified" value="1761794987834" />
               <option name="schema">
                 <list>
                   <option value="greeterClient" />
@@ -453,7 +678,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699125066" />
+              <option name="lastModified" value="1761794987834" />
               <option name="schema">
                 <list>
                   <option value="GreeterHTTPClientImpl" />
@@ -465,25 +690,45 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760704132003" />
+              <option name="lastModified" value="1761796041048" />
               <option name="schema">
                 <list>
+                  <option value="GetCourierPerformanceRequest" />
+                  <option value="GetCourierPerformanceReply" />
+                  <option value="PerformanceRequest" />
+                  <option value="PerformanceReply" />
+                  <option value="CourierRank" />
+                  <option value="CreateOrderRequest" />
+                  <option value="CreateOrderReply" />
+                  <option value="TakeTaskRequest" />
+                  <option value="TakeTaskReply" />
+                  <option value="GetTaskRequest" />
+                  <option value="GetTaskReply" />
                   <option value="StuUpdRequest" />
                   <option value="StuUpdReply" />
                   <option value="RegisterRequest" />
                   <option value="RegisterReply" />
                   <option value="LoginRequest" />
                   <option value="LoginReply" />
-                  <option value="CreateKuaiRequest" />
-                  <option value="CreateKuaiReply" />
-                  <option value="UpdateKuaiRequest" />
-                  <option value="UpdateKuaiReply" />
+                  <option value="TaskListRequest" />
+                  <option value="TaskListReply" />
+                  <option value="Task" />
                   <option value="DeleteKuaiRequest" />
                   <option value="DeleteKuaiReply" />
                   <option value="GetKuaiRequest" />
                   <option value="GetKuaiReply" />
-                  <option value="ListKuaiRequest" />
-                  <option value="ListKuaiReply" />
+                  <option value="OrderListRequest" />
+                  <option value="OrderItem" />
+                  <option value="OrderListReply" />
+                  <option value="IncomeListRequest" />
+                  <option value="IncomeItem" />
+                  <option value="IncomeListReply" />
+                  <option value="HandleExceptionRequest" />
+                  <option value="HandleExceptionReply" />
+                  <option value="CancelOrderRequest" />
+                  <option value="CancelOrderReply" />
+                  <option value="ReassignOrderRequest" />
+                  <option value="ReassignOrderReply" />
                   <option value="x" />
                 </list>
               </option>
@@ -493,7 +738,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760704132003" />
+              <option name="lastModified" value="1761796041048" />
               <option name="schema">
                 <list>
                   <option value="kuaiClient" />
@@ -506,7 +751,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/kuai_http.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760704132005" />
+              <option name="lastModified" value="1761796041048" />
               <option name="schema">
                 <list>
                   <option value="KuaiHTTPClientImpl" />
@@ -518,7 +763,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699593343" />
+              <option name="lastModified" value="1761794987836" />
               <option name="schema">
                 <list>
                   <option value="WXRequest" />
@@ -536,11 +781,11 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699593343" />
+              <option name="lastModified" value="1761794987836" />
               <option name="schema">
                 <list>
-                  <option value="wXClient" />
-                  <option value="UnimplementedWXServer" />
+                  <option value="weiClient" />
+                  <option value="UnimplementedWeiServer" />
                 </list>
               </option>
             </ScannedPath>
@@ -549,10 +794,10 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/wei_http.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699593344" />
+              <option name="lastModified" value="1761794987836" />
               <option name="schema">
                 <list>
-                  <option value="WXHTTPClientImpl" />
+                  <option value="WeiHTTPClientImpl" />
                 </list>
               </option>
             </ScannedPath>
@@ -561,49 +806,49 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760689909573" />
+              <option name="lastModified" value="1761179417894" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761015501622" />
+              <option name="lastModified" value="1761618622481" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760944357728" />
+              <option name="lastModified" value="1761619031639" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/basic/config/global.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760921674466" />
+              <option name="lastModified" value="1761129708297" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/basic/inits/initredis.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760941935516" />
+              <option name="lastModified" value="1761129708297" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/basic/inits/inits.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760921685731" />
+              <option name="lastModified" value="1761129708297" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/basic/inits/initsMysql.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760683145951" />
+              <option name="lastModified" value="1761129708301" />
             </ScannedPath>
           </value>
         </entry>
@@ -617,7 +862,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760681584708" />
+              <option name="lastModified" value="1761898890288" />
               <option name="schema">
                 <list>
                   <option value="Greeter" />
@@ -649,7 +894,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/data.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760943011524" />
+              <option name="lastModified" value="1761129708301" />
               <option name="schema">
                 <list>
                   <option value="Data" />
@@ -673,14 +918,26 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/redis.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760942583592" />
+              <option name="lastModified" value="1761129708301" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/model/audit.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761794914791" />
+              <option name="schema">
+                <list>
+                  <option value="SfOrderAuditLogs" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/model/courier.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760686977790" />
+              <option name="lastModified" value="1761129708301" />
               <option name="schema">
                 <list>
                   <option value="SfCouriers" />
@@ -692,7 +949,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/model/courierTask.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761033990845" />
+              <option name="lastModified" value="1761129708301" />
               <option name="schema">
                 <list>
                   <option value="SfCourierTasks" />
@@ -704,7 +961,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/model/order.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761129559455" />
+              <option name="lastModified" value="1762154869035" />
               <option name="schema">
                 <list>
                   <option value="SfOrders" />
@@ -713,10 +970,22 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/model/reassign.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762135469386" />
+              <option name="schema">
+                <list>
+                  <option value="SfOrderReassignments" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/pkg/gaode.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761015442971" />
+              <option name="lastModified" value="1761129708301" />
               <option name="schema">
                 <list>
                   <option value="Client" />
@@ -731,21 +1000,33 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/queue/key.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761007977008" />
+              <option name="lastModified" value="1761129708301" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/auth.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761617305263" />
+              <option name="schema">
+                <list>
+                  <option value="CourierIDKey" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/grpc.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760700396071" />
+              <option name="lastModified" value="1761132581940" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/http.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760700795487" />
+              <option name="lastModified" value="1761727725930" />
             </ScannedPath>
           </value>
         </entry>
@@ -759,10 +1040,12 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760747805150" />
+              <option name="lastModified" value="1761957113730" />
               <option name="schema">
                 <list>
                   <option value="GreeterService" />
+                  <option value="lastPoint" />
+                  <option value="AmapGeoResponse" />
                 </list>
               </option>
             </ScannedPath>
@@ -771,10 +1054,11 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/kuai.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761033116366" />
+              <option name="lastModified" value="1762254176921" />
               <option name="schema">
                 <list>
                   <option value="KuaiService" />
+                  <option value="explainRow" />
                 </list>
               </option>
             </ScannedPath>
@@ -783,14 +1067,14 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/service.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760943023181" />
+              <option name="lastModified" value="1761132591957" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/wei.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760748379671" />
+              <option name="lastModified" value="1761129708304" />
               <option name="schema">
                 <list>
                   <option value="WeiService" />
@@ -803,64 +1087,96 @@
     </option>
     <option name="tableStructMapping">
       <map>
+        <entry key="amap_geo_response" value="AmapGeoResponse" />
         <entry key="bootstrap" value="Bootstrap" />
         <entry key="callback_reply" value="CallbackReply" />
         <entry key="callback_request" value="CallbackRequest" />
+        <entry key="cancel_order_reply" value="CancelOrderReply" />
+        <entry key="cancel_order_request" value="CancelOrderRequest" />
         <entry key="client" value="Client" />
-        <entry key="courier" value="Courier" />
-        <entry key="courier_task" value="CourierTask" />
-        <entry key="create_kuai_reply" value="CreateKuaiReply" />
-        <entry key="create_kuai_request" value="CreateKuaiRequest" />
+        <entry key="courier_id_key" value="CourierIDKey" />
+        <entry key="courier_rank" value="CourierRank" />
+        <entry key="create_order_reply" value="CreateOrderReply" />
+        <entry key="create_order_request" value="CreateOrderRequest" />
         <entry key="data" value="Data" />
         <entry key="data__database" value="Data_Database" />
         <entry key="data__redis" value="Data_Redis" />
         <entry key="delete_kuai_reply" value="DeleteKuaiReply" />
         <entry key="delete_kuai_request" value="DeleteKuaiRequest" />
+        <entry key="explain_row" value="explainRow" />
+        <entry key="geocode_address_request" value="GeocodeAddressRequest" />
+        <entry key="geocode_address_response" value="GeocodeAddressResponse" />
+        <entry key="get_courier_performance_reply" value="GetCourierPerformanceReply" />
+        <entry key="get_courier_performance_request" value="GetCourierPerformanceRequest" />
+        <entry key="get_courier_trajectory_reply" value="GetCourierTrajectoryReply" />
+        <entry key="get_courier_trajectory_request" value="GetCourierTrajectoryRequest" />
         <entry key="get_kuai_reply" value="GetKuaiReply" />
         <entry key="get_kuai_request" value="GetKuaiRequest" />
+        <entry key="get_task_distance_reply" value="GetTaskDistanceReply" />
+        <entry key="get_task_distance_request" value="GetTaskDistanceRequest" />
+        <entry key="get_task_reply" value="GetTaskReply" />
+        <entry key="get_task_request" value="GetTaskRequest" />
         <entry key="greeter" value="Greeter" />
         <entry key="greeter_client" value="greeterClient" />
         <entry key="greeter_http_client_impl" value="GreeterHTTPClientImpl" />
         <entry key="greeter_repo" value="greeterRepo" />
         <entry key="greeter_service" value="GreeterService" />
         <entry key="greeter_usecase" value="GreeterUsecase" />
-        <entry key="hello_reply" value="HelloReply" />
-        <entry key="hello_request" value="HelloRequest" />
+        <entry key="handle_exception_reply" value="HandleExceptionReply" />
+        <entry key="handle_exception_request" value="HandleExceptionRequest" />
+        <entry key="income_item" value="IncomeItem" />
+        <entry key="income_list_reply" value="IncomeListReply" />
+        <entry key="income_list_request" value="IncomeListRequest" />
         <entry key="kuai_client" value="kuaiClient" />
         <entry key="kuai_http_client_impl" value="KuaiHTTPClientImpl" />
         <entry key="kuai_service" value="KuaiService" />
-        <entry key="list_kuai_reply" value="ListKuaiReply" />
-        <entry key="list_kuai_request" value="ListKuaiRequest" />
+        <entry key="last_point" value="lastPoint" />
+        <entry key="location_info" value="LocationInfo" />
         <entry key="login_reply" value="LoginReply" />
         <entry key="login_request" value="LoginRequest" />
         <entry key="matrix_resp" value="matrixResp" />
         <entry key="order_coord" value="OrderCoord" />
+        <entry key="order_item" value="OrderItem" />
+        <entry key="order_list_reply" value="OrderListReply" />
+        <entry key="order_list_request" value="OrderListRequest" />
         <entry key="pair" value="Pair" />
+        <entry key="performance_reply" value="PerformanceReply" />
+        <entry key="performance_request" value="PerformanceRequest" />
+        <entry key="point" value="Point" />
+        <entry key="reassign_order_reply" value="ReassignOrderReply" />
+        <entry key="reassign_order_request" value="ReassignOrderRequest" />
         <entry key="register_reply" value="RegisterReply" />
         <entry key="register_request" value="RegisterRequest" />
+        <entry key="report_courier_location_reply" value="ReportCourierLocationReply" />
+        <entry key="report_courier_location_request" value="ReportCourierLocationRequest" />
         <entry key="server" value="Server" />
         <entry key="server_grpc" value="Server_GRPC" />
         <entry key="server_http" value="Server_HTTP" />
         <entry key="sf_courier_tasks" value="SfCourierTasks" />
         <entry key="sf_couriers" value="SfCouriers" />
+        <entry key="sf_order_audit_logs" value="SfOrderAuditLogs" />
+        <entry key="sf_order_reassignments" value="SfOrderReassignments" />
         <entry key="sf_orders" value="SfOrders" />
         <entry key="stu_upd_reply" value="StuUpdReply" />
         <entry key="stu_upd_request" value="StuUpdRequest" />
+        <entry key="take_task_reply" value="TakeTaskReply" />
+        <entry key="take_task_request" value="TakeTaskRequest" />
+        <entry key="task" value="Task" />
+        <entry key="task_list_reply" value="TaskListReply" />
+        <entry key="task_list_request" value="TaskListRequest" />
         <entry key="unimplemented_greeter_server" value="UnimplementedGreeterServer" />
         <entry key="unimplemented_kuai_server" value="UnimplementedKuaiServer" />
-        <entry key="unimplemented_wx_server" value="UnimplementedWXServer" />
-        <entry key="update_kuai_reply" value="UpdateKuaiReply" />
-        <entry key="update_kuai_request" value="UpdateKuaiRequest" />
-        <entry key="w_x_client" value="wXClient" />
+        <entry key="unimplemented_wei_server" value="UnimplementedWeiServer" />
         <entry key="wechat_login_reply" value="WechatLoginReply" />
         <entry key="wechat_login_request" value="WechatLoginRequest" />
+        <entry key="wei_client" value="weiClient" />
+        <entry key="wei_http_client_impl" value="WeiHTTPClientImpl" />
         <entry key="wei_service" value="WeiService" />
         <entry key="wx_reply" value="WXReply" />
         <entry key="wx_request" value="WXRequest" />
-        <entry key="wxhttp_client_impl" value="WXHTTPClientImpl" />
         <entry key="x" value="x" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1760686670398" />
+    <option name="lastTimeChecked" value="1761796020572" />
   </component>
 </project>
