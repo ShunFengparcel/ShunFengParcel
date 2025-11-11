@@ -20,8 +20,6 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Greeter_ReportCourierLocation_FullMethodName = "/helloworld.v1.Greeter/ReportCourierLocation"
-	Greeter_GetCourierTrajectory_FullMethodName  = "/helloworld.v1.Greeter/GetCourierTrajectory"
-	Greeter_GetTaskDistance_FullMethodName       = "/helloworld.v1.Greeter/GetTaskDistance"
 	Greeter_GeocodeAddress_FullMethodName        = "/helloworld.v1.Greeter/GeocodeAddress"
 )
 
@@ -33,10 +31,14 @@ const (
 type GreeterClient interface {
 	// 快递员 App 每 5 秒上报一次
 	ReportCourierLocation(ctx context.Context, in *ReportCourierLocationRequest, opts ...grpc.CallOption) (*ReportCourierLocationReply, error)
-	// 前端 / 运营后台实时拉轨迹
-	GetCourierTrajectory(ctx context.Context, in *GetCourierTrajectoryRequest, opts ...grpc.CallOption) (*GetCourierTrajectoryReply, error)
-	// 单次发货→收货距离（复用前一天算法）
-	GetTaskDistance(ctx context.Context, in *GetTaskDistanceRequest, opts ...grpc.CallOption) (*GetTaskDistanceReply, error)
+	//	// 单次发货→收货距离（复用前一天算法）
+	//	rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+	//	  option (google.api.http) = {
+	//	    post: "/location/v1/task_distance"
+	//	    body: "*"
+	//	  };
+	//	}
+	//
 	// 地址解析接口，将寄件地址和收件地址转换为经纬度
 	GeocodeAddress(ctx context.Context, in *GeocodeAddressRequest, opts ...grpc.CallOption) (*GeocodeAddressResponse, error)
 }
@@ -53,26 +55,6 @@ func (c *greeterClient) ReportCourierLocation(ctx context.Context, in *ReportCou
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReportCourierLocationReply)
 	err := c.cc.Invoke(ctx, Greeter_ReportCourierLocation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *greeterClient) GetCourierTrajectory(ctx context.Context, in *GetCourierTrajectoryRequest, opts ...grpc.CallOption) (*GetCourierTrajectoryReply, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCourierTrajectoryReply)
-	err := c.cc.Invoke(ctx, Greeter_GetCourierTrajectory_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *greeterClient) GetTaskDistance(ctx context.Context, in *GetTaskDistanceRequest, opts ...grpc.CallOption) (*GetTaskDistanceReply, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTaskDistanceReply)
-	err := c.cc.Invoke(ctx, Greeter_GetTaskDistance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -97,10 +79,14 @@ func (c *greeterClient) GeocodeAddress(ctx context.Context, in *GeocodeAddressRe
 type GreeterServer interface {
 	// 快递员 App 每 5 秒上报一次
 	ReportCourierLocation(context.Context, *ReportCourierLocationRequest) (*ReportCourierLocationReply, error)
-	// 前端 / 运营后台实时拉轨迹
-	GetCourierTrajectory(context.Context, *GetCourierTrajectoryRequest) (*GetCourierTrajectoryReply, error)
-	// 单次发货→收货距离（复用前一天算法）
-	GetTaskDistance(context.Context, *GetTaskDistanceRequest) (*GetTaskDistanceReply, error)
+	//	// 单次发货→收货距离（复用前一天算法）
+	//	rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+	//	  option (google.api.http) = {
+	//	    post: "/location/v1/task_distance"
+	//	    body: "*"
+	//	  };
+	//	}
+	//
 	// 地址解析接口，将寄件地址和收件地址转换为经纬度
 	GeocodeAddress(context.Context, *GeocodeAddressRequest) (*GeocodeAddressResponse, error)
 	mustEmbedUnimplementedGreeterServer()
@@ -115,12 +101,6 @@ type UnimplementedGreeterServer struct{}
 
 func (UnimplementedGreeterServer) ReportCourierLocation(context.Context, *ReportCourierLocationRequest) (*ReportCourierLocationReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportCourierLocation not implemented")
-}
-func (UnimplementedGreeterServer) GetCourierTrajectory(context.Context, *GetCourierTrajectoryRequest) (*GetCourierTrajectoryReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCourierTrajectory not implemented")
-}
-func (UnimplementedGreeterServer) GetTaskDistance(context.Context, *GetTaskDistanceRequest) (*GetTaskDistanceReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTaskDistance not implemented")
 }
 func (UnimplementedGreeterServer) GeocodeAddress(context.Context, *GeocodeAddressRequest) (*GeocodeAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GeocodeAddress not implemented")
@@ -164,42 +144,6 @@ func _Greeter_ReportCourierLocation_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Greeter_GetCourierTrajectory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCourierTrajectoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GreeterServer).GetCourierTrajectory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Greeter_GetCourierTrajectory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreeterServer).GetCourierTrajectory(ctx, req.(*GetCourierTrajectoryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Greeter_GetTaskDistance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTaskDistanceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GreeterServer).GetTaskDistance(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Greeter_GetTaskDistance_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreeterServer).GetTaskDistance(ctx, req.(*GetTaskDistanceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Greeter_GeocodeAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GeocodeAddressRequest)
 	if err := dec(in); err != nil {
@@ -228,14 +172,6 @@ var Greeter_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportCourierLocation",
 			Handler:    _Greeter_ReportCourierLocation_Handler,
-		},
-		{
-			MethodName: "GetCourierTrajectory",
-			Handler:    _Greeter_GetCourierTrajectory_Handler,
-		},
-		{
-			MethodName: "GetTaskDistance",
-			Handler:    _Greeter_GetTaskDistance_Handler,
 		},
 		{
 			MethodName: "GeocodeAddress",

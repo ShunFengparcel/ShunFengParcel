@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.11
-// source: api/helloworld/v1/kuai.proto
+// source: helloworld/v1/kuai.proto
 
 package v1
 
@@ -35,6 +35,7 @@ const (
 	Kuai_ReassignOrder_FullMethodName         = "/helloworld.v1.Kuai/ReassignOrder"
 	Kuai_OrderDetail_FullMethodName           = "/helloworld.v1.Kuai/OrderDetail"
 	Kuai_GetCourierPerformance_FullMethodName = "/helloworld.v1.Kuai/GetCourierPerformance"
+	Kuai_DispatchAssign_FullMethodName        = "/helloworld.v1.Kuai/DispatchAssign"
 )
 
 // KuaiClient is the client API for Kuai service.
@@ -61,6 +62,8 @@ type KuaiClient interface {
 	OrderDetail(ctx context.Context, in *OrderDetailRequest, opts ...grpc.CallOption) (*OrderDetailReply, error)
 	// 数据统计
 	GetCourierPerformance(ctx context.Context, in *GetCourierPerformanceRequest, opts ...grpc.CallOption) (*GetCourierPerformanceReply, error)
+	// 派单决策：从候选池选择最优司机并给出可解释理由
+	DispatchAssign(ctx context.Context, in *DispatchAssignRequest, opts ...grpc.CallOption) (*DispatchAssignReply, error)
 }
 
 type kuaiClient struct {
@@ -231,6 +234,16 @@ func (c *kuaiClient) GetCourierPerformance(ctx context.Context, in *GetCourierPe
 	return out, nil
 }
 
+func (c *kuaiClient) DispatchAssign(ctx context.Context, in *DispatchAssignRequest, opts ...grpc.CallOption) (*DispatchAssignReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DispatchAssignReply)
+	err := c.cc.Invoke(ctx, Kuai_DispatchAssign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // KuaiServer is the server API for Kuai service.
 // All implementations must embed UnimplementedKuaiServer
 // for forward compatibility.
@@ -255,6 +268,8 @@ type KuaiServer interface {
 	OrderDetail(context.Context, *OrderDetailRequest) (*OrderDetailReply, error)
 	// 数据统计
 	GetCourierPerformance(context.Context, *GetCourierPerformanceRequest) (*GetCourierPerformanceReply, error)
+	// 派单决策：从候选池选择最优司机并给出可解释理由
+	DispatchAssign(context.Context, *DispatchAssignRequest) (*DispatchAssignReply, error)
 	mustEmbedUnimplementedKuaiServer()
 }
 
@@ -312,6 +327,9 @@ func (UnimplementedKuaiServer) OrderDetail(context.Context, *OrderDetailRequest)
 }
 func (UnimplementedKuaiServer) GetCourierPerformance(context.Context, *GetCourierPerformanceRequest) (*GetCourierPerformanceReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCourierPerformance not implemented")
+}
+func (UnimplementedKuaiServer) DispatchAssign(context.Context, *DispatchAssignRequest) (*DispatchAssignReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DispatchAssign not implemented")
 }
 func (UnimplementedKuaiServer) mustEmbedUnimplementedKuaiServer() {}
 func (UnimplementedKuaiServer) testEmbeddedByValue()              {}
@@ -622,6 +640,24 @@ func _Kuai_GetCourierPerformance_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Kuai_DispatchAssign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DispatchAssignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KuaiServer).DispatchAssign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Kuai_DispatchAssign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KuaiServer).DispatchAssign(ctx, req.(*DispatchAssignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Kuai_ServiceDesc is the grpc.ServiceDesc for Kuai service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -693,7 +729,11 @@ var Kuai_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetCourierPerformance",
 			Handler:    _Kuai_GetCourierPerformance_Handler,
 		},
+		{
+			MethodName: "DispatchAssign",
+			Handler:    _Kuai_DispatchAssign_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/helloworld/v1/kuai.proto",
+	Metadata: "helloworld/v1/kuai.proto",
 }

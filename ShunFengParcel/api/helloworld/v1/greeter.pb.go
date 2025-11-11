@@ -582,11 +582,9 @@ const file_helloworld_v1_greeter_proto_rawDesc = "" +
 	"\x11receiver_location\x18\x02 \x01(\v2\x1b.helloworld.v1.LocationInfoR\x10receiverLocation\"2\n" +
 	"\fLocationInfo\x12\x10\n" +
 	"\x03lng\x18\x01 \x01(\x01R\x03lng\x12\x10\n" +
-	"\x03lat\x18\x02 \x01(\x01R\x03lat2\xbf\x04\n" +
+	"\x03lat\x18\x02 \x01(\x01R\x03lat2\x9b\x02\n" +
 	"\aGreeter\x12\x8f\x01\n" +
-	"\x15ReportCourierLocation\x12+.helloworld.v1.ReportCourierLocationRequest\x1a).helloworld.v1.ReportCourierLocationReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/location/v1/report\x12\x9a\x01\n" +
-	"\x14GetCourierTrajectory\x12*.helloworld.v1.GetCourierTrajectoryRequest\x1a(.helloworld.v1.GetCourierTrajectoryReply\",\x82\xd3\xe4\x93\x02&\x12$/location/v1/trajectory/{courier_id}\x12\x84\x01\n" +
-	"\x0fGetTaskDistance\x12%.helloworld.v1.GetTaskDistanceRequest\x1a#.helloworld.v1.GetTaskDistanceReply\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/location/v1/task_distance\x12~\n" +
+	"\x15ReportCourierLocation\x12+.helloworld.v1.ReportCourierLocationRequest\x1a).helloworld.v1.ReportCourierLocationReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/location/v1/report\x12~\n" +
 	"\x0eGeocodeAddress\x12$.helloworld.v1.GeocodeAddressRequest\x1a%.helloworld.v1.GeocodeAddressResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/location/v1/geocodeBX\n" +
 	"\x1cdev.kratos.api.helloworld.v1B\x11HelloworldProtoV1P\x01Z#ShunFengParcel/api/helloworld/v1;v1b\x06proto3"
 
@@ -620,15 +618,11 @@ var file_helloworld_v1_greeter_proto_depIdxs = []int32{
 	9, // 1: helloworld.v1.GeocodeAddressResponse.sender_location:type_name -> helloworld.v1.LocationInfo
 	9, // 2: helloworld.v1.GeocodeAddressResponse.receiver_location:type_name -> helloworld.v1.LocationInfo
 	0, // 3: helloworld.v1.Greeter.ReportCourierLocation:input_type -> helloworld.v1.ReportCourierLocationRequest
-	2, // 4: helloworld.v1.Greeter.GetCourierTrajectory:input_type -> helloworld.v1.GetCourierTrajectoryRequest
-	5, // 5: helloworld.v1.Greeter.GetTaskDistance:input_type -> helloworld.v1.GetTaskDistanceRequest
-	7, // 6: helloworld.v1.Greeter.GeocodeAddress:input_type -> helloworld.v1.GeocodeAddressRequest
-	1, // 7: helloworld.v1.Greeter.ReportCourierLocation:output_type -> helloworld.v1.ReportCourierLocationReply
-	3, // 8: helloworld.v1.Greeter.GetCourierTrajectory:output_type -> helloworld.v1.GetCourierTrajectoryReply
-	6, // 9: helloworld.v1.Greeter.GetTaskDistance:output_type -> helloworld.v1.GetTaskDistanceReply
-	8, // 10: helloworld.v1.Greeter.GeocodeAddress:output_type -> helloworld.v1.GeocodeAddressResponse
-	7, // [7:11] is the sub-list for method output_type
-	3, // [3:7] is the sub-list for method input_type
+	7, // 4: helloworld.v1.Greeter.GeocodeAddress:input_type -> helloworld.v1.GeocodeAddressRequest
+	1, // 5: helloworld.v1.Greeter.ReportCourierLocation:output_type -> helloworld.v1.ReportCourierLocationReply
+	8, // 6: helloworld.v1.Greeter.GeocodeAddress:output_type -> helloworld.v1.GeocodeAddressResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name

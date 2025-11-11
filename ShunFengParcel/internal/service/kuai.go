@@ -10,6 +10,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math"
+	"sort"
 	"strconv"
 	"time"
 
@@ -248,6 +250,45 @@ func (s *KuaiService) GetCourierPerformance(ctx context.Context, req *pb.GetCour
 	}, nil
 }
 
+// 快递员绩效排行榜
+func (s *KuaiService) Performance(ctx context.Context, req *pb.PerformanceRequest) (*pb.PerformanceReply, error) {
+	db := config.DB
+	now := time.Now()
+	startOfMonth := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, now.Location())
+	var courierRanks []struct {
+		CourierID   int64   `json:"courier_id"`
+		CourierName string  `json:"courier_name"`
+		TotalFee    float64 `json:"total_fee"`
+	}
+	// 查询快递员绩效排行榜
+	err := db.Table("sf_courier_tasks t").
+		Select("t.courier_id, c.real_name as courier_name, SUM(o.actual_fee) as total_fee").
+		Joins("LEFT JOIN sf_couriers c ON t.courier_id = c.id").
+		Joins("LEFT JOIN sf_orders o ON t.order_id = o.id").
+		Where("t.task_status = ? AND t.updated_at >= ?", "completed", startOfMonth).
+		Group("t.courier_id, c.real_name").
+		Order("total_fee DESC").
+		Limit(int(req.TopN)).
+		Scan(&courierRanks).Error
+
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "查询绩效排行榜失败: %v", err)
+	}
+
+	var rankList []*pb.CourierRank
+	for i, rank := range courierRanks {
+		rankList = append(rankList, &pb.CourierRank{
+			Rank:             int32(i + 1),
+			CourierId:        rank.CourierID,
+			CourierName:      rank.CourierName,
+			PerformanceScore: rank.TotalFee,
+		})
+	}
+
+	return &pb.PerformanceReply{
+		RankList: rankList,
+	}, nil
+}
 func (s *KuaiService) calculateRevenue(ctx context.Context, courierID int64, startTime time.Time) (float64, error) {
 	var tasks []model.SfCourierTasks
 	if err := config.DB.WithContext(ctx).Where("courier_id = ? AND task_status = ? AND updated_at >= ?", courierID, "completed", startTime).Find(&tasks).Error; err != nil {
@@ -328,11 +369,6 @@ func (s *KuaiService) OrderList(ctx context.Context, req *pb.OrderListRequest) (
 	return &pb.OrderListReply{List: items}, nil
 }
 
-// 根据新的优先级规则计算任务优先级
-// P0（最高）：超时订单
-// P1（高）：预约时间即将到期的订单
-// P2（中）：普通已接单订单
-// P3（低）：新订单
 func calcPriority(req *pb.CreateOrderRequest) int8 {
 	// 获取当前时间作为基准
 	now := time.Now()
@@ -445,6 +481,50 @@ func (s *KuaiService) CreateOrder(ctx context.Context, req *pb.CreateOrderReques
 	return &pb.CreateOrderReply{OrderId: int32(orders.Id)}, nil
 }
 
+// 快递员接任务列表
+func (s *KuaiService) TakeTask(ctx context.Context, req *pb.TakeTaskRequest) (*pb.TakeTaskReply, error) {
+	//从队里弹出一个任务id，原子操作
+	taskID, err := queue.PopTask(s.RDB)
+	if err == redis.Nil {
+		return nil, status.Error(codes.NotFound, "暂无可接任务")
+	}
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+	//乐观锁只改“待抢”状态，防止重复抢
+	res := config.DB.Model(&model.SfCourierTasks{}).
+		Where("id = ? AND task_status = ?", taskID, "pending").
+		Updates(map[string]interface{}{
+			"courier_id":  req.CourierId,
+			"task_status": "accepted",
+		})
+	if res.RowsAffected == 0 {
+		return nil, status.Error(codes.AlreadyExists, "手慢啦，任务已被接走")
+	}
+
+	var task model.SfCourierTasks
+	if err := config.DB.First(&task, taskID).Error; err != nil {
+		return nil, status.Error(codes.Internal, "查询任务失败")
+	}
+
+	// 联查订单与快递员，补全返回字段
+	var order model.SfOrders
+	_ = config.DB.First(&order, task.OrderId).Error
+
+	var courier model.SfCouriers
+	if task.CourierId > 0 {
+		_ = config.DB.First(&courier, task.CourierId).Error
+	}
+
+	respTask := convertTask(&task)
+	respTask.CreatedAt = task.CreatedAt.Format(time.RFC3339)
+	respTask.SenderAddress = order.SenderAddress
+	respTask.ReceiverAddress = order.ReceiverAddress
+	respTask.CourierName = courier.RealName
+
+	return &pb.TakeTaskReply{Task: respTask}, nil
+}
+
 // ------- 幂等与审计辅助 -------
 func (s *KuaiService) getIdempotencyKey(ctx context.Context, key string) string {
 	if tr, ok := transport.FromServerContext(ctx); ok {
@@ -479,12 +559,10 @@ func operatorFromCtx(ctx context.Context) (id int64, role string) {
 // CancelOrder 处理“取消订单”请求，支持用户/快递员主动取消，全程幂等、事务、审计。
 func (s *KuaiService) CancelOrder(ctx context.Context, req *pb.CancelOrderRequest) (*pb.CancelOrderReply, error) {
 
-	// 从请求上下文里取出客户端生成的幂等键（Idempotency-Key）
 	idem := s.getIdempotencyKey(ctx, req.IdempotencyKey)
 
-	// 去 Redis 登记：如果已经登记过 表示重复请求
 	first, err := s.checkAndSetIdempotency(ctx,
-		fmt.Sprintf("cancel:order:%d", req.OrderId), // Redis key 前缀
+		fmt.Sprintf("cancel:order:%d", req.OrderId),
 		idem,
 		time.Minute*10) // 10 分钟内重复请求直接短路
 	if err != nil {
@@ -506,7 +584,6 @@ func (s *KuaiService) CancelOrder(ctx context.Context, req *pb.CancelOrderReques
 	}()
 
 	// 查询订单并加行锁（FOR UPDATE）
-	//查到订单并立刻加写锁，防止别人同时改这条订单，避免并发冲突
 	var order model.SfOrders
 	if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
 		Where("id = ?", req.OrderId).
@@ -581,7 +658,6 @@ func (s *KuaiService) CancelOrder(ctx context.Context, req *pb.CancelOrderReques
 		IdempotencyKey: idem, // 把本次幂等键也落库，方便以后对账
 	}).Error
 
-	// 提交事务
 	if err := tx.Commit().Error; err != nil {
 		return nil, status.Errorf(codes.Internal, "提交事务失败: %v", err)
 	}
@@ -601,11 +677,10 @@ func (s *KuaiService) CancelOrder(ctx context.Context, req *pb.CancelOrderReques
 	}, nil
 }
 
-// ReassignOrder 订单改派接口（含协商逻辑）
-// 协商场景：用户/运营/系统提出改派 → 校验合法性 → 决定是否立即生效 or 需要额外确认
+// ReassignOrder 订单改派接口
 func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRequest) (*pb.ReassignOrderReply, error) {
 
-	// ① 幂等协商：同一请求 10 分钟内多次点击，直接返回上次结果，避免重复转单
+	// 同一请求 10 分钟内多次点击，直接返回上次结果，避免重复转单
 	idem := s.getIdempotencyKey(ctx, req.IdempotencyKey)
 	scope := fmt.Sprintf("reassign:order:%d:to:%d", req.OrderId, req.TargetCourierId)
 	first, err := s.checkAndSetIdempotency(ctx, scope, idem, time.Minute*10)
@@ -613,21 +688,18 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 		return nil, status.Errorf(codes.Internal, "幂等登记失败: %v", err)
 	}
 
-	// ② 表结构协商：开发阶段自动建表，生产环境可关闭
 	_ = config.DB.AutoMigrate(&model.SfOrderAuditLogs{}, &model.SfOrderReassignments{})
 
-	// ③ 操作人协商：从 JWT 解析出“谁”在发起改派（用户/运营/系统）
 	opId, opRole := operatorFromCtx(ctx)
 
-	// ④ 事务协商：开启事务，保证“订单+任务+链路+审计”要么一起成功，一起失败
 	tx := config.DB.Begin()
 	defer func() {
 		if r := recover(); r != nil {
-			tx.Rollback() // 异常时回滚，避免半吊子数据
+			tx.Rollback()
 		}
 	}()
 
-	// ⑤ 订单存在性协商：锁行读，防止并发改派时订单被删除
+	// 订单协商：防止并发改派时订单被删除
 	var order model.SfOrders
 	if err := tx.Where("id = ?", req.OrderId).First(&order).Error; err != nil {
 		tx.Rollback()
@@ -637,13 +709,13 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 		return nil, status.Errorf(codes.Internal, "查询订单失败: %v", err)
 	}
 
-	// ⑥ 状态合法性协商：已取消/已签收 → 不允许再改派，直接拒绝
+	// 状态合法性协商：已取消/已签收 → 不允许再改派，直接拒绝
 	if order.OrderStatus == "cancelled" || order.OrderStatus == "delivered" {
 		tx.Rollback()
 		return &pb.ReassignOrderReply{Success: false, Message: "订单状态不可改派"}, nil
 	}
 
-	// ⑦ 目标快递员协商：已是当前快递员 → 幂等成功，无需再转
+	// 目标快递员协商：已是当前快递员
 	from := order.CourierId
 	if from == req.TargetCourierId {
 		return &pb.ReassignOrderReply{
@@ -654,19 +726,18 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 		}, nil
 	}
 
-	// ⑧ 改派执行协商：更新订单 courier_id（单行更新，锁住行）
+	// 改派
 	if err := tx.Model(&order).Update("courier_id", req.TargetCourierId).Error; err != nil {
 		tx.Rollback()
 		return nil, status.Errorf(codes.Internal, "更新订单快递员失败: %v", err)
 	}
 
-	// ⑨ 任务同步协商：把关联的快递员任务也转给新小哥
+	// 任务同步
 	var task model.SfCourierTasks
 	if err := tx.Where("order_id = ?", req.OrderId).First(&task).Error; err == nil {
 		_ = tx.Model(&task).Updates(map[string]interface{}{"courier_id": req.TargetCourierId}).Error
 	}
 
-	// ⑩ 改派链路协商：记录“从谁→到谁+原因”，方便后台追溯
 	_ = tx.Create(&model.SfOrderReassignments{
 		OrderId:       req.OrderId,
 		FromCourierId: from,
@@ -675,7 +746,6 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 		ReasonText:    req.ReasonText,
 	}).Error
 
-	// ⑪ 审计协商：写审计日志，记录“谁”在“什么时间”做了“改派”动作
 	_ = tx.Create(&model.SfOrderAuditLogs{
 		OrderId:        req.OrderId,
 		ActionType:     "reassign",
@@ -688,12 +758,11 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 		IdempotencyKey: idem,
 	}).Error
 
-	// ⑫ 提交协商：所有步骤无错误，事务提交，改派正式生效
 	if err := tx.Commit().Error; err != nil {
 		return nil, status.Errorf(codes.Internal, "提交事务失败: %v", err)
 	}
 
-	// ⑬ 重复请求协商：非首次调用，告诉调用方“已去重”，但仍返回 from/to 快递员 ID
+	// 重复请求协商：非首次调用，告诉调用方“已去重”，但仍返回 from/to 快递员 ID
 	if !first {
 		return &pb.ReassignOrderReply{
 			Success:       true,
@@ -703,7 +772,7 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 		}, nil
 	}
 
-	// ⑭ 首次成功协商：返回改派成功 + 原快递员与新快递员 ID
+	// 首次成功协商：返回改派成功 + 原快递员与新快递员 ID
 	return &pb.ReassignOrderReply{
 		Success:       true,
 		Message:       "改派成功",
@@ -714,10 +783,8 @@ func (s *KuaiService) ReassignOrder(ctx context.Context, req *pb.ReassignOrderRe
 
 // ------- 订单详情（缓存优先，读库回源） -------
 func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailRequest) (*pb.OrderDetailReply, error) {
-	// 权限隔离：如果请求来自快递员，只能查看由其接单的订单
 	courierID, role := operatorFromCtx(ctx)
 
-	// 构建缓存键
 	keyPart := req.OrderNo
 	if keyPart == "" {
 		keyPart = fmt.Sprintf("%d", req.OrderId)
@@ -728,10 +795,8 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 	cacheKey := fmt.Sprintf("order:detail:%s", keyPart)
 
 	// 优先走缓存，减少数据库压力，提高接口性能。
-
 	if s.RDB != nil {
 		if val, err := s.RDB.Get(ctx, cacheKey).Result(); err == nil && val != "" {
-			// 直接反序列化
 			var res pb.OrderDetailReply
 			if err := json.Unmarshal([]byte(val), &res); err == nil {
 				// 权限二次检查（缓存命中也要防越权）
@@ -742,7 +807,6 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 			}
 		}
 	}
-
 	// 读库回源：精确检索订单
 	var order model.SfOrders
 	db := config.DB.WithContext(ctx)
@@ -771,7 +835,7 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 	var task model.SfCourierTasks
 	_ = db.Where("order_id = ?", order.Id).First(&task).Error
 
-	// 审计日志（状态变更记录）
+	// 审计日志
 	var logs []model.SfOrderAuditLogs
 	_ = db.Where("order_id = ?", order.Id).Order("created_at ASC").Find(&logs).Error
 
@@ -779,7 +843,6 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 	var rs []model.SfOrderReassignments
 	_ = db.Where("order_id = ?", order.Id).Order("created_at ASC").Find(&rs).Error
 
-	// 构造响应
 	resp := &pb.OrderDetailReply{
 		Id:              order.Id,
 		OrderNo:         order.OrderNo,
@@ -799,7 +862,7 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 		Fee: &pb.FeeDetail{
 			EstimatedFee: order.EstimatedFee,
 			ActualFee:    order.ActualFee,
-			// 计费重量：对齐计费口径，采用体积重量与实际称重取较大值
+			// 取较大值
 			ChargeWeight: func() float64 {
 				vw := order.VolumeWeight
 				aw := order.ActualWeight
@@ -813,8 +876,6 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 		},
 	}
 
-	// 司机接单与到达时间点推导
-	// 接单时间：若任务存在且状态为 accepted，则使用任务 UpdatedAt；否则若订单状态 accepted，用订单 UpdatedAt
 	if task.TaskStatus == "accepted" {
 		resp.AcceptedAt = task.UpdatedAt.Format("2006-01-02 15:04:05")
 	} else if order.OrderStatus == "accepted" {
@@ -855,41 +916,23 @@ func (s *KuaiService) OrderDetail(ctx context.Context, req *pb.OrderDetailReques
 
 	// 风控标记与异常码：简化策略
 	// 若订单状态为 exception 或存在异常类型审计记录，则标记风险；异常码取最近一次异常的 ReasonType
-	riskFlag := order.OrderStatus == "exception" // 如果订单当前状态就是异常，先立个 flag
-	exceptionCode := ""                          // 准备存最近一次异常原因
+	riskFlag := order.OrderStatus == "exception"
+	exceptionCode := ""
 	// 逆序扫审计日志，找到最后一次出现异常的记录
 	for i := len(logs) - 1; i >= 0; i-- {
 		if logs[i].ActionType == "exception" || logs[i].AfterStatus == "exception" {
-			riskFlag = true                    // 只要有异常动作，就强制标风险
-			exceptionCode = logs[i].ReasonType // 取异常原因代码
-			break                              // 找到最新的就停
+			riskFlag = true
+			exceptionCode = logs[i].ReasonType
+			break
 		}
 	}
 	resp.Risk = &pb.RiskInfo{RiskFlag: riskFlag, ExceptionCode: exceptionCode, Notes: ""}
 
-	// 写缓存下次同样订单号再进来，直接走缓存，不再查库，60 秒后自动过期，防止脏数据长期残留。
+	// 缓存
 	if s.RDB != nil {
 		if b, err := json.Marshal(resp); err == nil {
 			_ = s.RDB.Set(ctx, cacheKey, string(b), time.Minute).Err() // TTL 60s
 		}
-	}
-
-	// 可选：慢查询 explain 审核（仅日志输出，不影响功能）
-	// 仅对 order_no 精确检索进行 explain
-	if req.OrderNo != "" {
-		type explainRow struct {
-			id            int
-			select_type   string
-			table         string
-			type_         string `gorm:"column:type"`
-			possible_keys string
-			key           string
-			rows          int
-			extra         string
-		}
-		// 忽略错误，避免影响主流程
-		var e []explainRow
-		_ = config.DB.Raw("EXPLAIN SELECT * FROM sf_orders WHERE order_no = ? LIMIT 1", req.OrderNo).Scan(&e).Error
 	}
 
 	return resp, nil
@@ -915,72 +958,6 @@ func convertTask(src *model.SfCourierTasks) *pb.Task {
 		TaskStatus: taskStatusMap[src.TaskStatus],
 		// 其他字段按需继续补
 	}
-}
-
-// 快递员接任务列表
-func (s *KuaiService) TakeTask(ctx context.Context, req *pb.TakeTaskRequest) (*pb.TakeTaskReply, error) {
-	//从队里弹出一个任务id，原子操作
-	taskID, err := queue.PopTask(s.RDB)
-	if err == redis.Nil {
-		return nil, status.Error(codes.NotFound, "暂无可接任务")
-	}
-	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
-	}
-	//乐观锁只改“待抢”状态，防止重复抢
-	res := config.DB.Model(&model.SfCourierTasks{}).
-		Where("id = ? AND task_status = ?", taskID, "pending").
-		Updates(map[string]interface{}{
-			"courier_id":  req.CourierId,
-			"task_status": "accepted",
-		})
-	if res.RowsAffected == 0 {
-		return nil, status.Error(codes.AlreadyExists, "手慢啦，任务已被接走")
-	}
-
-	var task model.SfCourierTasks
-	config.DB.First(&task, taskID)
-	return &pb.TakeTaskReply{Task: convertTask(&task)}, nil
-}
-
-// 快递员绩效排行榜
-func (s *KuaiService) Performance(ctx context.Context, req *pb.PerformanceRequest) (*pb.PerformanceReply, error) {
-	db := config.DB
-	now := time.Now()
-	startOfMonth := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, now.Location())
-	var courierRanks []struct {
-		CourierID   int64   `json:"courier_id"`
-		CourierName string  `json:"courier_name"`
-		TotalFee    float64 `json:"total_fee"`
-	}
-	// 查询快递员绩效排行榜
-	err := db.Table("sf_courier_tasks t").
-		Select("t.courier_id, c.real_name as courier_name, SUM(o.actual_fee) as total_fee").
-		Joins("LEFT JOIN sf_couriers c ON t.courier_id = c.id").
-		Joins("LEFT JOIN sf_orders o ON t.order_id = o.id").
-		Where("t.task_status = ? AND t.updated_at >= ?", "completed", startOfMonth).
-		Group("t.courier_id, c.real_name").
-		Order("total_fee DESC").
-		Limit(int(req.TopN)).
-		Scan(&courierRanks).Error
-
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "查询绩效排行榜失败: %v", err)
-	}
-
-	var rankList []*pb.CourierRank
-	for i, rank := range courierRanks {
-		rankList = append(rankList, &pb.CourierRank{
-			Rank:             int32(i + 1),
-			CourierId:        rank.CourierID,
-			CourierName:      rank.CourierName,
-			PerformanceScore: rank.TotalFee,
-		})
-	}
-
-	return &pb.PerformanceReply{
-		RankList: rankList,
-	}, nil
 }
 
 // HandleException 处理异常情况处理多种异常 ，包括用户取消、快递员取消、派送失败、地址错误等
@@ -1180,4 +1157,270 @@ func (s *KuaiService) HandleException(ctx context.Context, req *pb.HandleExcepti
 		RequiresNegotiation: false, // 其他异常类型不需要协商
 		SuggestedFee:        0,
 	}, nil
+}
+
+// DispatchAssign 智能派单：根据距离、服务、接单率与时间窗罚分进行综合评分，选最优快递员
+func (s *KuaiService) DispatchAssign(ctx context.Context, req *pb.DispatchAssignRequest) (*pb.DispatchAssignReply, error) {
+	// 参数校验与默认值
+	if req.PickupLng == 0 || req.PickupLat == 0 {
+		return nil, status.Error(codes.InvalidArgument, "缺少取件点经纬度")
+	}
+	radius := req.SearchRadiusM
+	if radius <= 0 {
+		radius = 5000
+	}
+	topK := req.TopK
+	if topK <= 0 {
+		topK = 10
+	}
+
+	// 权重策略：若未传入，按昼夜分段默认权重
+	now := time.Now()
+	hour := now.Hour()
+	isDay := hour >= 6 && hour < 20
+	var distanceWeight, ratingWeight, acceptanceWeight, timePenaltyWeight float64
+	if req.Strategy != nil {
+		distanceWeight = req.Strategy.GetDistanceWeight()
+		ratingWeight = req.Strategy.GetRatingWeight()
+		acceptanceWeight = req.Strategy.GetAcceptanceRateWeight()
+		timePenaltyWeight = req.Strategy.GetTimePenaltyWeight()
+		// 合理兜底
+		if distanceWeight == 0 && ratingWeight == 0 && acceptanceWeight == 0 && timePenaltyWeight == 0 {
+			if isDay {
+				distanceWeight, ratingWeight, acceptanceWeight, timePenaltyWeight = 0.6, 0.2, 0.2, 0.2
+			} else {
+				distanceWeight, ratingWeight, acceptanceWeight, timePenaltyWeight = 0.3, 0.4, 0.3, 0.2
+			}
+		}
+	} else {
+		if isDay {
+			distanceWeight, ratingWeight, acceptanceWeight, timePenaltyWeight = 0.6, 0.2, 0.2, 0.2
+		} else {
+			distanceWeight, ratingWeight, acceptanceWeight, timePenaltyWeight = 0.3, 0.4, 0.3, 0.2
+		}
+	}
+
+	// 候选池：优先使用请求指定的候选，若为空则从 Redis GEO 搜索
+	candidateIDs := make([]int64, 0)
+	if len(req.CandidateCourierIds) > 0 {
+		candidateIDs = append(candidateIDs, req.CandidateCourierIds...)
+	} else if s.RDB != nil {
+		// 使用 Redis GEORADIUS 搜索最近的快递员
+		// GEORADIUS geo:couriers lng lat radius m WITHDIST COUNT topK ASC
+		cmd := s.RDB.Do(ctx, "GEORADIUS", "geo:couriers", fmt.Sprintf("%f", req.PickupLng), fmt.Sprintf("%f", req.PickupLat), fmt.Sprintf("%d", radius), "m", "WITHDIST", "COUNT", fmt.Sprintf("%d", topK*3), "ASC")
+		if cmd.Err() == nil {
+			if raw, err := cmd.Result(); err == nil {
+				if arr, ok := raw.([]interface{}); ok {
+					for _, it := range arr {
+						if row, ok := it.([]interface{}); ok && len(row) >= 2 {
+							// row[0]=name(row member), row[1]=dist string
+							switch name := row[0].(type) {
+							case string:
+								if id64, err := strconv.ParseInt(name, 10, 64); err == nil {
+									candidateIDs = append(candidateIDs, id64)
+								}
+							case []byte:
+								if id64, err := strconv.ParseInt(string(name), 10, 64); err == nil {
+									candidateIDs = append(candidateIDs, id64)
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// 去重
+	idSeen := make(map[int64]struct{})
+	uniqIDs := make([]int64, 0, len(candidateIDs))
+	for _, id := range candidateIDs {
+		if _, ok := idSeen[id]; !ok {
+			idSeen[id] = struct{}{}
+			uniqIDs = append(uniqIDs, id)
+		}
+	}
+	candidateIDs = uniqIDs
+	if len(candidateIDs) == 0 {
+		return &pb.DispatchAssignReply{ChosenCourierId: 0, ChosenScore: 0, DecisionReasons: []string{"附近暂无可派快递员"}}, nil
+	}
+
+	// 过滤：只保留 active 状态、未超最大接单量（pending/accepted <= 5）
+	filtered := make([]int64, 0, len(candidateIDs))
+	for _, id := range candidateIDs {
+		var c model.SfCouriers
+		if err := config.DB.WithContext(ctx).Where("id = ?", id).First(&c).Error; err != nil {
+			continue
+		}
+		if c.Status != "active" {
+			continue
+		}
+		var cur int64
+		_ = config.DB.WithContext(ctx).Model(&model.SfCourierTasks{}).
+			Where("courier_id = ? AND task_status IN (?)", id, []string{"pending", "accepted"}).Count(&cur).Error
+		if cur > 5 {
+			continue
+		}
+		filtered = append(filtered, id)
+	}
+	if len(filtered) == 0 {
+		return &pb.DispatchAssignReply{ChosenCourierId: 0, ChosenScore: 0, DecisionReasons: []string{"候选均不在可派状态或已满载"}}, nil
+	}
+
+	// 评分计算准备：时间窗罚分（越大越差 0~1）
+	var timePenalty float64
+	if req.RideTime > 0 {
+		t := time.Unix(req.RideTime, 0)
+		diff := time.Until(t)
+		// 紧急阈值：30分钟，越接近/超过则罚分越高
+		threshold := 30 * time.Minute
+		if diff <= 0 {
+			timePenalty = 1.0
+		} else if diff >= threshold {
+			timePenalty = 0.0
+		} else {
+			// 线性：剩余时间越少，罚分越高
+			timePenalty = 1.0 - float64(diff)/float64(threshold)
+		}
+	} else {
+		timePenalty = 0.0
+	}
+
+	// 评分：收集候选距离、评分、接单率
+	candidates := make([]*pb.CandidateScoreItem, 0, len(filtered))
+	// 辅助：从 Redis 获取距离；若失败，回退到 GEOPOS + haversine
+	// 预先计算距离归一化的最大尺度，使用搜索半径归一化
+	maxDist := float64(radius)
+	for _, id := range filtered {
+		// 距离（米）
+		var distM float64 = -1
+		// 首先尝试 GEODIST pickup 点无成员，故使用 GEOPOS 得到 courier 坐标后计算 haversine
+		var posRaw interface{}
+		var err error
+		if s.RDB != nil {
+			posCmd := s.RDB.Do(ctx, "GEOPOS", "geo:couriers", fmt.Sprintf("%d", id))
+			if posCmd.Err() == nil {
+				posRaw, err = posCmd.Result()
+			}
+		}
+		var lngLatOK bool
+		var lngC, latC float64
+		if err == nil {
+			if arr, ok := posRaw.([]interface{}); ok && len(arr) >= 1 {
+				if pair, ok2 := arr[0].([]interface{}); ok2 && len(pair) == 2 {
+					// 解析经纬度
+					switch v := pair[0].(type) {
+					case string:
+						lngC, _ = strconv.ParseFloat(v, 64)
+					case []byte:
+						lngC, _ = strconv.ParseFloat(string(v), 64)
+					}
+					switch v := pair[1].(type) {
+					case string:
+						latC, _ = strconv.ParseFloat(v, 64)
+					case []byte:
+						latC, _ = strconv.ParseFloat(string(v), 64)
+					}
+					lngLatOK = true
+				}
+			}
+		}
+		if lngLatOK {
+			distM = haversineMeters(latC, lngC, req.PickupLat, req.PickupLng)
+		}
+		if distM < 0 {
+			// 回退：无法获取坐标时，设为搜索半径（最差）
+			distM = maxDist
+		}
+
+		// 评分（映射）
+		var c model.SfCouriers
+		_ = config.DB.WithContext(ctx).Where("id = ?", id).First(&c).Error
+		// 将综合绩效分映射到 0~5 的评分，默认 3.0
+		rating := 3.0
+		if c.PerformanceScore > 0 {
+			// 简化映射：score(0~5?) 不确定，按 0~2 叠加到 3.0 基准
+			rating = math.Min(5.0, 3.0+math.Min(2.0, c.PerformanceScore))
+		}
+
+		// 接单率：accepted/completed ÷ 总任务
+		var totalCnt, accCnt int64
+		_ = config.DB.WithContext(ctx).Model(&model.SfCourierTasks{}).Where("courier_id = ?", id).Count(&totalCnt).Error
+		_ = config.DB.WithContext(ctx).Model(&model.SfCourierTasks{}).
+			Where("courier_id = ? AND task_status IN (?)", id, []string{"accepted", "completed"}).Count(&accCnt).Error
+		var accRate float64 = 0.5
+		if totalCnt > 0 {
+			accRate = float64(accCnt) / float64(totalCnt)
+		}
+
+		// 归一化项：距离越近分越高 0~1
+		distScore := 0.0
+		if maxDist > 0 {
+			d := math.Min(distM, maxDist)
+			distScore = 1.0 - d/maxDist
+		}
+		// 归一化评分：rating(0~5) -> 0~1
+		ratingScore := math.Max(0.0, math.Min(1.0, rating/5.0))
+		acceptanceScore := math.Max(0.0, math.Min(1.0, accRate))
+
+		// 综合得分：加权 - 时间罚分
+		total := distanceWeight*distScore + ratingWeight*ratingScore + acceptanceWeight*acceptanceScore - timePenaltyWeight*timePenalty
+		if total < 0 {
+			total = 0
+		}
+
+		candidates = append(candidates, &pb.CandidateScoreItem{
+			CourierId:      id,
+			DistanceM:      distM,
+			Rating:         rating,
+			AcceptanceRate: accRate,
+			TimePenalty:    timePenalty,
+			TotalScore:     total,
+		})
+	}
+
+	// 排序与截断 TopK
+	sort.Slice(candidates, func(i, j int) bool { return candidates[i].TotalScore > candidates[j].TotalScore })
+	if len(candidates) > int(topK) {
+		candidates = candidates[:topK]
+	}
+
+	var chosenId int64
+	var chosenScore float64
+	if len(candidates) > 0 {
+		chosenId = candidates[0].CourierId
+		chosenScore = candidates[0].TotalScore
+	}
+
+	// 决策理由
+	reasons := make([]string, 0)
+	if len(candidates) > 0 {
+		best := candidates[0]
+		segment := "白天"
+		if !isDay {
+			segment = "夜间"
+		}
+		// 距离 km 保留 1 位
+		km := best.DistanceM / 1000.0
+		reasons = append(reasons, fmt.Sprintf("%s时段，权重组合(距%.1f、评%.2f、接%.0f%%、时罚%.2f)", segment, km, best.Rating, best.AcceptanceRate*100, best.TimePenalty))
+		reasons = append(reasons, fmt.Sprintf("综合最优，建议派给快递员ID %d", best.CourierId))
+	}
+
+	return &pb.DispatchAssignReply{
+		ChosenCourierId: chosenId,
+		ChosenScore:     chosenScore,
+		DecisionReasons: reasons,
+		Candidates:      candidates,
+	}, nil
+}
+
+// haversineMeters 计算两点间球面距离（单位：米）
+func haversineMeters(lat1, lon1, lat2, lon2 float64) float64 {
+	const R = 6371000.0 // 地球半径（米）
+	toRad := func(d float64) float64 { return d * math.Pi / 180.0 }
+	dLat := toRad(lat2 - lat1)
+	dLon := toRad(lon2 - lon1)
+	a := math.Sin(dLat/2)*math.Sin(dLat/2) + math.Cos(toRad(lat1))*math.Cos(toRad(lat2))*math.Sin(dLon/2)*math.Sin(dLon/2)
+	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
+	return R * c
 }

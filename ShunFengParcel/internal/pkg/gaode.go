@@ -1,16 +1,16 @@
 package pkg
 
 import (
-	"context"
-	"encoding/json"
-	"fmt"
-	"net/url"
-	"strconv"
-	"strings"
-	"time"
+    "context"
+    "encoding/json"
+    "fmt"
+    "net/http"
+    "net/url"
+    "strconv"
+    "strings"
+    "time"
 
-	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-kratos/kratos/v2/transport/http"
+    "github.com/go-kratos/kratos/v2/log"
 )
 
 const matrixURL = "https://restapi.amap.com/v3/distance"
@@ -57,8 +57,13 @@ func (c *Client) BatchDistance(ctx context.Context, riderLng, riderLat float64, 
 	ctx, cancel := context.WithTimeout(ctx, c.timeout)
 	defer cancel()
 
-	req, _ := http.NewRequestWithContext(ctx, "GET", reqURL, nil)
-	resp, err := c.client.Do(req)
+    // 兼容旧版 Go：使用 NewRequest + WithContext
+    req, err := http.NewRequest("GET", reqURL, nil)
+    if err != nil {
+        return nil, fmt.Errorf("gaode matrix build request err: %w", err)
+    }
+    req = req.WithContext(ctx)
+    resp, err := c.client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("gaode matrix http err: %w", err)
 	}

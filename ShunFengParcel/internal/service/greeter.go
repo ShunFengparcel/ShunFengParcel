@@ -1,18 +1,18 @@
 package service
 
 import (
-    "context"
-    "encoding/json"
-    "fmt"
-    "log"
-    "math"
-    "math/rand"
-    "net/http"
-    "net/url"
-    "sort"
-    "strings"
-    "time"
-    "unicode/utf8"
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+	"math"
+	"math/rand"
+	"net/http"
+	"net/url"
+	"sort"
+	"strings"
+	"time"
+	"unicode/utf8"
 
 	v1 "ShunFengParcel/api/helloworld/v1"
 	"ShunFengParcel/internal/basic/config"
@@ -133,74 +133,73 @@ func courierIDFromCtx(ctx context.Context, fallback int64) int64 {
 
 // -------- 快递员位置上报 --------
 func (s *GreeterService) ReportCourierLocation(ctx context.Context, req *v1.ReportCourierLocationRequest) (*v1.ReportCourierLocationReply, error) {
-    courierID := courierIDFromCtx(ctx, req.CourierId)
-    if courierID == 0 {
-        return nil, status.Error(codes.InvalidArgument, "缺少快递员ID")
-    }
+	courierID := courierIDFromCtx(ctx, req.CourierId)
+	if courierID == 0 {
+		return nil, status.Error(codes.InvalidArgument, "缺少快递员ID")
+	}
 
-    // 纠偏：假定客户端上报 WGS84，转换到 GCJ-02（中国境内）；境外保持原值
-    lat, lng := wgs84ToGcj02(req.Lat, req.Lng)
-    // 请求体无时间戳字段，统一以服务器当前时间
-    ts := timeNow()
+	// 纠偏：假定客户端上报 WGS84，转换到 GCJ-02（中国境内）；境外保持原值
+	lat, lng := wgs84ToGcj02(req.Lat, req.Lng)
+	// 请求体无时间戳字段，统一以服务器当前时间
+	ts := timeNow()
 
-    // 调试/联调开关：通过请求头控制是否跳过平滑或重置上一点
-    var ignoreSmooth, resetLast bool
-    if tr, ok := transport.FromServerContext(ctx); ok {
-        if strings.EqualFold(tr.RequestHeader().Get("X-Ignore-Smooth"), "true") {
-            ignoreSmooth = true
-        }
-        if strings.EqualFold(tr.RequestHeader().Get("X-Reset-Last"), "true") {
-            resetLast = true
-        }
-    }
+	// 调试/联调开关：通过请求头控制是否跳过平滑或重置上一点
+	var ignoreSmooth, resetLast bool
+	if tr, ok := transport.FromServerContext(ctx); ok {
+		if strings.EqualFold(tr.RequestHeader().Get("X-Ignore-Smooth"), "true") {
+			ignoreSmooth = true
+		}
+		if strings.EqualFold(tr.RequestHeader().Get("X-Reset-Last"), "true") {
+			resetLast = true
+		}
+	}
+	// 获取上一点用于平滑
+	var prev *lastPoint
+	if config.RDB != nil {
+		if !resetLast {
+			if val, err := config.RDB.Get(ctx, lastKey(courierID)).Result(); err == nil && val != "" {
+				var p lastPoint
+				if json.Unmarshal([]byte(val), &p) == nil {
+					prev = &p
+				}
+			}
+		}
+	}
+	// 指数平滑与速度门限
+	latSm, lngSm := lat, lng
+	if !ignoreSmooth {
+		latSm, lngSm = smoothPoint(prev, lat, lng, ts)
+	}
 
-    // 获取上一点用于平滑
-    var prev *lastPoint
-    if config.RDB != nil {
-        if !resetLast {
-            if val, err := config.RDB.Get(ctx, lastKey(courierID)).Result(); err == nil && val != "" {
-                var p lastPoint
-                if json.Unmarshal([]byte(val), &p) == nil {
-                    prev = &p
-                }
-            }
-        }
-    }
-    // 指数平滑与速度门限
-    latSm, lngSm := lat, lng
-    if !ignoreSmooth {
-        latSm, lngSm = smoothPoint(prev, lat, lng, ts)
-    }
+	// 存储：last + 有序集合轨迹
+	if config.RDB != nil {
+		b, _ := json.Marshal(lastPoint{Lat: latSm, Lng: lngSm, Ts: ts})
+		pipe := config.RDB.Pipeline()
+		pipe.Set(ctx, lastKey(courierID), string(b), 0)
+		pipe.ZAdd(ctx, trajKey(courierID), redis.Z{Score: float64(ts), Member: fmt.Sprintf("%f,%f,%d", latSm, lngSm, ts)})
+		// GEO 实时位置：用于附近搜索/实时展示
+		pipe.GeoAdd(ctx, "geo:couriers", &redis.GeoLocation{Longitude: lngSm, Latitude: latSm, Name: fmt.Sprintf("%d", courierID)})
+		// 仅保留最近 30 分钟的轨迹，避免集合无限膨胀
+		pipe.ZRemRangeByScore(ctx, trajKey(courierID), "-inf", fmt.Sprintf("%f", float64(ts-1800)))
+		_, _ = pipe.Exec(ctx)
 
-    // 存储：last + 有序集合轨迹
-    if config.RDB != nil {
-        b, _ := json.Marshal(lastPoint{Lat: latSm, Lng: lngSm, Ts: ts})
-        pipe := config.RDB.Pipeline()
-        pipe.Set(ctx, lastKey(courierID), string(b), 0)
-        pipe.ZAdd(ctx, trajKey(courierID), redis.Z{Score: float64(ts), Member: fmt.Sprintf("%f,%f,%d", latSm, lngSm, ts)})
-        // GEO 实时位置：用于附近搜索/实时展示
-        pipe.GeoAdd(ctx, "geo:couriers", &redis.GeoLocation{Longitude: lngSm, Latitude: latSm, Name: fmt.Sprintf("%d", courierID)})
-        // 仅保留最近 30 分钟的轨迹，避免集合无限膨胀
-        pipe.ZRemRangeByScore(ctx, trajKey(courierID), "-inf", fmt.Sprintf("%f", float64(ts-1800)))
-        _, _ = pipe.Exec(ctx)
-
-        // 即时广播：按订单通道推送位置（X-Order-ID）
-        if tr, ok := transport.FromServerContext(ctx); ok {
-            orderID := tr.RequestHeader().Get("X-Order-ID")
-            if orderID != "" {
-                msg := map[string]interface{}{
-                    "order_id":   orderID,
-                    "courier_id": courierID,
-                    "lat":        latSm,
-                    "lng":        lngSm,
-                    "ts":         ts,
-                }
-                if payload, err := json.Marshal(msg); err == nil {
-                    _ = config.RDB.Publish(ctx, "order:location:"+orderID, string(payload)).Err()
-                }
-            }
-        }
-    }
+		// 即时广播：按订单通道推送位置（X-Order-ID）
+		if tr, ok := transport.FromServerContext(ctx); ok {
+			orderID := tr.RequestHeader().Get("X-Order-ID")
+			if orderID != "" {
+				msg := map[string]interface{}{
+					"order_id":   orderID,
+					"courier_id": courierID,
+					"lat":        latSm,
+					"lng":        lngSm,
+					"ts":         ts,
+				}
+				if payload, err := json.Marshal(msg); err == nil {
+					_ = config.RDB.Publish(ctx, "order:location:"+orderID, string(payload)).Err()
+				}
+			}
+		}
+	}
 	//每上来一个 GPS 点，先纠偏→平滑→存最新点→追加轨迹→自动清旧点，全程 Redis 内存操作，毫秒级完成，为后续派单、轨迹回放、实时位置推送提供干净数据
 	return &v1.ReportCourierLocationReply{}, nil
 }

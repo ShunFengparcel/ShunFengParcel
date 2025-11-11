@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.9.0
 // - protoc             v3.21.11
-// source: api/helloworld/v1/kuai.proto
+// source: helloworld/v1/kuai.proto
 
 package v1
 
@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationKuaiCancelOrder = "/helloworld.v1.Kuai/CancelOrder"
 const OperationKuaiCreateOrder = "/helloworld.v1.Kuai/CreateOrder"
+const OperationKuaiDispatchAssign = "/helloworld.v1.Kuai/DispatchAssign"
 const OperationKuaiGetCourierPerformance = "/helloworld.v1.Kuai/GetCourierPerformance"
 const OperationKuaiGetTask = "/helloworld.v1.Kuai/GetTask"
 const OperationKuaiHandleException = "/helloworld.v1.Kuai/HandleException"
@@ -40,6 +41,8 @@ type KuaiHTTPServer interface {
 	CancelOrder(context.Context, *CancelOrderRequest) (*CancelOrderReply, error)
 	// CreateOrder生成订单
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderReply, error)
+	// DispatchAssign 派单决策：从候选池选择最优司机并给出可解释理由
+	DispatchAssign(context.Context, *DispatchAssignRequest) (*DispatchAssignReply, error)
 	// GetCourierPerformance数据统计
 	GetCourierPerformance(context.Context, *GetCourierPerformanceRequest) (*GetCourierPerformanceReply, error)
 	// GetTask个人任务详情
@@ -83,6 +86,7 @@ func RegisterKuaiHTTPServer(s *http.Server, srv KuaiHTTPServer) {
 	r.POST("/orders/reassign", _Kuai_ReassignOrder0_HTTP_Handler(srv))
 	r.POST("/order/detail", _Kuai_OrderDetail0_HTTP_Handler(srv))
 	r.POST("/count/performance", _Kuai_GetCourierPerformance0_HTTP_Handler(srv))
+	r.POST("/dispatch/assign", _Kuai_DispatchAssign0_HTTP_Handler(srv))
 }
 
 func _Kuai_GetTask0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
@@ -415,11 +419,35 @@ func _Kuai_GetCourierPerformance0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http
 	}
 }
 
+func _Kuai_DispatchAssign0_HTTP_Handler(srv KuaiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DispatchAssignRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationKuaiDispatchAssign)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DispatchAssign(ctx, req.(*DispatchAssignRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DispatchAssignReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type KuaiHTTPClient interface {
 	// CancelOrder 订单取消
 	CancelOrder(ctx context.Context, req *CancelOrderRequest, opts ...http.CallOption) (rsp *CancelOrderReply, err error)
 	// CreateOrder生成订单
 	CreateOrder(ctx context.Context, req *CreateOrderRequest, opts ...http.CallOption) (rsp *CreateOrderReply, err error)
+	// DispatchAssign 派单决策：从候选池选择最优司机并给出可解释理由
+	DispatchAssign(ctx context.Context, req *DispatchAssignRequest, opts ...http.CallOption) (rsp *DispatchAssignReply, err error)
 	// GetCourierPerformance数据统计
 	GetCourierPerformance(ctx context.Context, req *GetCourierPerformanceRequest, opts ...http.CallOption) (rsp *GetCourierPerformanceReply, err error)
 	// GetTask个人任务详情
@@ -474,6 +502,20 @@ func (c *KuaiHTTPClientImpl) CreateOrder(ctx context.Context, in *CreateOrderReq
 	pattern := "/createOrder"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationKuaiCreateOrder))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// DispatchAssign 派单决策：从候选池选择最优司机并给出可解释理由
+func (c *KuaiHTTPClientImpl) DispatchAssign(ctx context.Context, in *DispatchAssignRequest, opts ...http.CallOption) (*DispatchAssignReply, error) {
+	var out DispatchAssignReply
+	pattern := "/dispatch/assign"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationKuaiDispatchAssign))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

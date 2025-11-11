@@ -20,17 +20,19 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationGreeterGeocodeAddress = "/helloworld.v1.Greeter/GeocodeAddress"
-const OperationGreeterGetCourierTrajectory = "/helloworld.v1.Greeter/GetCourierTrajectory"
-const OperationGreeterGetTaskDistance = "/helloworld.v1.Greeter/GetTaskDistance"
 const OperationGreeterReportCourierLocation = "/helloworld.v1.Greeter/ReportCourierLocation"
 
 type GreeterHTTPServer interface {
-	// GeocodeAddress 地址解析接口，将寄件地址和收件地址转换为经纬度
+	// GeocodeAddress  // 单次发货→收货距离（复用前一天算法）
+	//  rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+	//    option (google.api.http) = {
+	//      post: "/location/v1/task_distance"
+	//      body: "*"
+	//    };
+	//  }
+	//
+	// 地址解析接口，将寄件地址和收件地址转换为经纬度
 	GeocodeAddress(context.Context, *GeocodeAddressRequest) (*GeocodeAddressResponse, error)
-	// GetCourierTrajectory 前端 / 运营后台实时拉轨迹
-	GetCourierTrajectory(context.Context, *GetCourierTrajectoryRequest) (*GetCourierTrajectoryReply, error)
-	// GetTaskDistance 单次发货→收货距离（复用前一天算法）
-	GetTaskDistance(context.Context, *GetTaskDistanceRequest) (*GetTaskDistanceReply, error)
 	// ReportCourierLocation 快递员 App 每 5 秒上报一次
 	ReportCourierLocation(context.Context, *ReportCourierLocationRequest) (*ReportCourierLocationReply, error)
 }
@@ -38,8 +40,6 @@ type GreeterHTTPServer interface {
 func RegisterGreeterHTTPServer(s *http.Server, srv GreeterHTTPServer) {
 	r := s.Route("/")
 	r.POST("/location/v1/report", _Greeter_ReportCourierLocation0_HTTP_Handler(srv))
-	r.GET("/location/v1/trajectory/{courier_id}", _Greeter_GetCourierTrajectory0_HTTP_Handler(srv))
-	r.POST("/location/v1/task_distance", _Greeter_GetTaskDistance0_HTTP_Handler(srv))
 	r.POST("/location/v1/geocode", _Greeter_GeocodeAddress0_HTTP_Handler(srv))
 }
 
@@ -61,50 +61,6 @@ func _Greeter_ReportCourierLocation0_HTTP_Handler(srv GreeterHTTPServer) func(ct
 			return err
 		}
 		reply := out.(*ReportCourierLocationReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Greeter_GetCourierTrajectory0_HTTP_Handler(srv GreeterHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetCourierTrajectoryRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationGreeterGetCourierTrajectory)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetCourierTrajectory(ctx, req.(*GetCourierTrajectoryRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetCourierTrajectoryReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Greeter_GetTaskDistance0_HTTP_Handler(srv GreeterHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetTaskDistanceRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationGreeterGetTaskDistance)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetTaskDistance(ctx, req.(*GetTaskDistanceRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetTaskDistanceReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -132,12 +88,16 @@ func _Greeter_GeocodeAddress0_HTTP_Handler(srv GreeterHTTPServer) func(ctx http.
 }
 
 type GreeterHTTPClient interface {
-	// GeocodeAddress 地址解析接口，将寄件地址和收件地址转换为经纬度
+	// GeocodeAddress  // 单次发货→收货距离（复用前一天算法）
+	//  rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+	//    option (google.api.http) = {
+	//      post: "/location/v1/task_distance"
+	//      body: "*"
+	//    };
+	//  }
+	//
+	// 地址解析接口，将寄件地址和收件地址转换为经纬度
 	GeocodeAddress(ctx context.Context, req *GeocodeAddressRequest, opts ...http.CallOption) (rsp *GeocodeAddressResponse, err error)
-	// GetCourierTrajectory 前端 / 运营后台实时拉轨迹
-	GetCourierTrajectory(ctx context.Context, req *GetCourierTrajectoryRequest, opts ...http.CallOption) (rsp *GetCourierTrajectoryReply, err error)
-	// GetTaskDistance 单次发货→收货距离（复用前一天算法）
-	GetTaskDistance(ctx context.Context, req *GetTaskDistanceRequest, opts ...http.CallOption) (rsp *GetTaskDistanceReply, err error)
 	// ReportCourierLocation 快递员 App 每 5 秒上报一次
 	ReportCourierLocation(ctx context.Context, req *ReportCourierLocationRequest, opts ...http.CallOption) (rsp *ReportCourierLocationReply, err error)
 }
@@ -150,40 +110,20 @@ func NewGreeterHTTPClient(client *http.Client) GreeterHTTPClient {
 	return &GreeterHTTPClientImpl{client}
 }
 
-// GeocodeAddress 地址解析接口，将寄件地址和收件地址转换为经纬度
+// GeocodeAddress  // 单次发货→收货距离（复用前一天算法）
+//  rpc GetTaskDistance (GetTaskDistanceRequest) returns (GetTaskDistanceReply) {
+//    option (google.api.http) = {
+//      post: "/location/v1/task_distance"
+//      body: "*"
+//    };
+//  }
+//
+// 地址解析接口，将寄件地址和收件地址转换为经纬度
 func (c *GreeterHTTPClientImpl) GeocodeAddress(ctx context.Context, in *GeocodeAddressRequest, opts ...http.CallOption) (*GeocodeAddressResponse, error) {
 	var out GeocodeAddressResponse
 	pattern := "/location/v1/geocode"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGreeterGeocodeAddress))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// GetCourierTrajectory 前端 / 运营后台实时拉轨迹
-func (c *GreeterHTTPClientImpl) GetCourierTrajectory(ctx context.Context, in *GetCourierTrajectoryRequest, opts ...http.CallOption) (*GetCourierTrajectoryReply, error) {
-	var out GetCourierTrajectoryReply
-	pattern := "/location/v1/trajectory/{courier_id}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationGreeterGetCourierTrajectory))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// GetTaskDistance 单次发货→收货距离（复用前一天算法）
-func (c *GreeterHTTPClientImpl) GetTaskDistance(ctx context.Context, in *GetTaskDistanceRequest, opts ...http.CallOption) (*GetTaskDistanceReply, error) {
-	var out GetTaskDistanceReply
-	pattern := "/location/v1/task_distance"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationGreeterGetTaskDistance))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

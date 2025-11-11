@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.11
-// source: api/helloworld/v1/kuai.proto
+// source: helloworld/v1/kuai.proto
 
 package v1
 
@@ -59,11 +59,11 @@ func (x ServiceType) String() string {
 }
 
 func (ServiceType) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[0].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[0].Descriptor()
 }
 
 func (ServiceType) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[0]
+	return &file_helloworld_v1_kuai_proto_enumTypes[0]
 }
 
 func (x ServiceType) Number() protoreflect.EnumNumber {
@@ -72,7 +72,7 @@ func (x ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ServiceType.Descriptor instead.
 func (ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{0}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{0}
 }
 
 type PaymentMethod int32
@@ -111,11 +111,11 @@ func (x PaymentMethod) String() string {
 }
 
 func (PaymentMethod) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[1].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[1].Descriptor()
 }
 
 func (PaymentMethod) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[1]
+	return &file_helloworld_v1_kuai_proto_enumTypes[1]
 }
 
 func (x PaymentMethod) Number() protoreflect.EnumNumber {
@@ -124,7 +124,7 @@ func (x PaymentMethod) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PaymentMethod.Descriptor instead.
 func (PaymentMethod) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{1}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{1}
 }
 
 type PaymentStatus int32
@@ -166,11 +166,11 @@ func (x PaymentStatus) String() string {
 }
 
 func (PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[2].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[2].Descriptor()
 }
 
 func (PaymentStatus) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[2]
+	return &file_helloworld_v1_kuai_proto_enumTypes[2]
 }
 
 func (x PaymentStatus) Number() protoreflect.EnumNumber {
@@ -179,7 +179,7 @@ func (x PaymentStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PaymentStatus.Descriptor instead.
 func (PaymentStatus) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{2}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{2}
 }
 
 type OrderStatus int32
@@ -233,11 +233,11 @@ func (x OrderStatus) String() string {
 }
 
 func (OrderStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[3].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[3].Descriptor()
 }
 
 func (OrderStatus) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[3]
+	return &file_helloworld_v1_kuai_proto_enumTypes[3]
 }
 
 func (x OrderStatus) Number() protoreflect.EnumNumber {
@@ -246,7 +246,7 @@ func (x OrderStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OrderStatus.Descriptor instead.
 func (OrderStatus) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{3}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{3}
 }
 
 type TaskType int32
@@ -282,11 +282,11 @@ func (x TaskType) String() string {
 }
 
 func (TaskType) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[4].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[4].Descriptor()
 }
 
 func (TaskType) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[4]
+	return &file_helloworld_v1_kuai_proto_enumTypes[4]
 }
 
 func (x TaskType) Number() protoreflect.EnumNumber {
@@ -295,7 +295,7 @@ func (x TaskType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TaskType.Descriptor instead.
 func (TaskType) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{4}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{4}
 }
 
 type TaskStatus int32
@@ -337,11 +337,11 @@ func (x TaskStatus) String() string {
 }
 
 func (TaskStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[5].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[5].Descriptor()
 }
 
 func (TaskStatus) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[5]
+	return &file_helloworld_v1_kuai_proto_enumTypes[5]
 }
 
 func (x TaskStatus) Number() protoreflect.EnumNumber {
@@ -350,7 +350,7 @@ func (x TaskStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TaskStatus.Descriptor instead.
 func (TaskStatus) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{5}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{5}
 }
 
 // 异常类型枚举
@@ -399,11 +399,11 @@ func (x ExceptionType) String() string {
 }
 
 func (ExceptionType) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[6].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[6].Descriptor()
 }
 
 func (ExceptionType) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[6]
+	return &file_helloworld_v1_kuai_proto_enumTypes[6]
 }
 
 func (x ExceptionType) Number() protoreflect.EnumNumber {
@@ -412,7 +412,7 @@ func (x ExceptionType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ExceptionType.Descriptor instead.
 func (ExceptionType) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{6}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{6}
 }
 
 // 取消原因枚举
@@ -458,11 +458,11 @@ func (x CancelReason) String() string {
 }
 
 func (CancelReason) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_helloworld_v1_kuai_proto_enumTypes[7].Descriptor()
+	return file_helloworld_v1_kuai_proto_enumTypes[7].Descriptor()
 }
 
 func (CancelReason) Type() protoreflect.EnumType {
-	return &file_api_helloworld_v1_kuai_proto_enumTypes[7]
+	return &file_helloworld_v1_kuai_proto_enumTypes[7]
 }
 
 func (x CancelReason) Number() protoreflect.EnumNumber {
@@ -471,7 +471,7 @@ func (x CancelReason) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use CancelReason.Descriptor instead.
 func (CancelReason) EnumDescriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{7}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{7}
 }
 
 type GetCourierPerformanceRequest struct {
@@ -482,7 +482,7 @@ type GetCourierPerformanceRequest struct {
 
 func (x *GetCourierPerformanceRequest) Reset() {
 	*x = GetCourierPerformanceRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[0]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -494,7 +494,7 @@ func (x *GetCourierPerformanceRequest) String() string {
 func (*GetCourierPerformanceRequest) ProtoMessage() {}
 
 func (x *GetCourierPerformanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[0]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -507,7 +507,7 @@ func (x *GetCourierPerformanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCourierPerformanceRequest.ProtoReflect.Descriptor instead.
 func (*GetCourierPerformanceRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{0}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{0}
 }
 
 type GetCourierPerformanceReply struct {
@@ -521,7 +521,7 @@ type GetCourierPerformanceReply struct {
 
 func (x *GetCourierPerformanceReply) Reset() {
 	*x = GetCourierPerformanceReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[1]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -533,7 +533,7 @@ func (x *GetCourierPerformanceReply) String() string {
 func (*GetCourierPerformanceReply) ProtoMessage() {}
 
 func (x *GetCourierPerformanceReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[1]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -546,7 +546,7 @@ func (x *GetCourierPerformanceReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCourierPerformanceReply.ProtoReflect.Descriptor instead.
 func (*GetCourierPerformanceReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{1}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetCourierPerformanceReply) GetDailyRevenue() float64 {
@@ -579,7 +579,7 @@ type PerformanceRequest struct {
 
 func (x *PerformanceRequest) Reset() {
 	*x = PerformanceRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[2]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -591,7 +591,7 @@ func (x *PerformanceRequest) String() string {
 func (*PerformanceRequest) ProtoMessage() {}
 
 func (x *PerformanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[2]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -604,7 +604,7 @@ func (x *PerformanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PerformanceRequest.ProtoReflect.Descriptor instead.
 func (*PerformanceRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{2}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PerformanceRequest) GetTopN() int32 {
@@ -623,7 +623,7 @@ type PerformanceReply struct {
 
 func (x *PerformanceReply) Reset() {
 	*x = PerformanceReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[3]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -635,7 +635,7 @@ func (x *PerformanceReply) String() string {
 func (*PerformanceReply) ProtoMessage() {}
 
 func (x *PerformanceReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[3]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -648,7 +648,7 @@ func (x *PerformanceReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PerformanceReply.ProtoReflect.Descriptor instead.
 func (*PerformanceReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{3}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PerformanceReply) GetRankList() []*CourierRank {
@@ -670,7 +670,7 @@ type CourierRank struct {
 
 func (x *CourierRank) Reset() {
 	*x = CourierRank{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[4]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -682,7 +682,7 @@ func (x *CourierRank) String() string {
 func (*CourierRank) ProtoMessage() {}
 
 func (x *CourierRank) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[4]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -695,7 +695,7 @@ func (x *CourierRank) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CourierRank.ProtoReflect.Descriptor instead.
 func (*CourierRank) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{4}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CourierRank) GetRank() int32 {
@@ -724,6 +724,354 @@ func (x *CourierRank) GetPerformanceScore() float64 {
 		return x.PerformanceScore
 	}
 	return 0
+}
+
+// 派单策略配置（随请求传入，后续可持久化到配置中心）
+type DispatchStrategy struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Name                 string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`                                                                 // 策略名，例如 default/day/night
+	DistanceWeight       float64                `protobuf:"fixed64,2,opt,name=distance_weight,json=distanceWeight,proto3" json:"distance_weight,omitempty"`                     // 距离权重 [0,1]
+	RatingWeight         float64                `protobuf:"fixed64,3,opt,name=rating_weight,json=ratingWeight,proto3" json:"rating_weight,omitempty"`                           // 评分权重 [0,1]
+	AcceptanceRateWeight float64                `protobuf:"fixed64,4,opt,name=acceptance_rate_weight,json=acceptanceRateWeight,proto3" json:"acceptance_rate_weight,omitempty"` // 接单率权重 [0,1]
+	TimePenaltyWeight    float64                `protobuf:"fixed64,5,opt,name=time_penalty_weight,json=timePenaltyWeight,proto3" json:"time_penalty_weight,omitempty"`          // 时间窗罚分权重 [0,1]
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *DispatchStrategy) Reset() {
+	*x = DispatchStrategy{}
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DispatchStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DispatchStrategy) ProtoMessage() {}
+
+func (x *DispatchStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DispatchStrategy.ProtoReflect.Descriptor instead.
+func (*DispatchStrategy) Descriptor() ([]byte, []int) {
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DispatchStrategy) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DispatchStrategy) GetDistanceWeight() float64 {
+	if x != nil {
+		return x.DistanceWeight
+	}
+	return 0
+}
+
+func (x *DispatchStrategy) GetRatingWeight() float64 {
+	if x != nil {
+		return x.RatingWeight
+	}
+	return 0
+}
+
+func (x *DispatchStrategy) GetAcceptanceRateWeight() float64 {
+	if x != nil {
+		return x.AcceptanceRateWeight
+	}
+	return 0
+}
+
+func (x *DispatchStrategy) GetTimePenaltyWeight() float64 {
+	if x != nil {
+		return x.TimePenaltyWeight
+	}
+	return 0
+}
+
+// 派单请求
+type DispatchAssignRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	City                string                 `protobuf:"bytes,1,opt,name=city,proto3" json:"city,omitempty"`                                                                    // 城市编码或名称
+	PickupLng           float64                `protobuf:"fixed64,2,opt,name=pickup_lng,json=pickupLng,proto3" json:"pickup_lng,omitempty"`                                       // 取件点经度
+	PickupLat           float64                `protobuf:"fixed64,3,opt,name=pickup_lat,json=pickupLat,proto3" json:"pickup_lat,omitempty"`                                       // 取件点纬度
+	RideTime            int64                  `protobuf:"varint,4,opt,name=ride_time,json=rideTime,proto3" json:"ride_time,omitempty"`                                           // 乘客用车时间（秒时间戳）
+	CandidateCourierIds []int64                `protobuf:"varint,5,rep,packed,name=candidate_courier_ids,json=candidateCourierIds,proto3" json:"candidate_courier_ids,omitempty"` // 候选司机ID列表（可选，空则从 GEO 搜）
+	FleetIds            []string               `protobuf:"bytes,6,rep,name=fleet_ids,json=fleetIds,proto3" json:"fleet_ids,omitempty"`                                            // 车队过滤（可选）
+	GroupIds            []string               `protobuf:"bytes,7,rep,name=group_ids,json=groupIds,proto3" json:"group_ids,omitempty"`                                            // 分组过滤（可选）
+	TopK                int32                  `protobuf:"varint,8,opt,name=top_k,json=topK,proto3" json:"top_k,omitempty"`                                                       // 返回前K个候选（含评分）
+	SearchRadiusM       int32                  `protobuf:"varint,9,opt,name=search_radius_m,json=searchRadiusM,proto3" json:"search_radius_m,omitempty"`                          // GEO 搜索半径（米），默认5000
+	Strategy            *DispatchStrategy      `protobuf:"bytes,10,opt,name=strategy,proto3" json:"strategy,omitempty"`                                                           // 策略权重及名称（可选）
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *DispatchAssignRequest) Reset() {
+	*x = DispatchAssignRequest{}
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DispatchAssignRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DispatchAssignRequest) ProtoMessage() {}
+
+func (x *DispatchAssignRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DispatchAssignRequest.ProtoReflect.Descriptor instead.
+func (*DispatchAssignRequest) Descriptor() ([]byte, []int) {
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DispatchAssignRequest) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *DispatchAssignRequest) GetPickupLng() float64 {
+	if x != nil {
+		return x.PickupLng
+	}
+	return 0
+}
+
+func (x *DispatchAssignRequest) GetPickupLat() float64 {
+	if x != nil {
+		return x.PickupLat
+	}
+	return 0
+}
+
+func (x *DispatchAssignRequest) GetRideTime() int64 {
+	if x != nil {
+		return x.RideTime
+	}
+	return 0
+}
+
+func (x *DispatchAssignRequest) GetCandidateCourierIds() []int64 {
+	if x != nil {
+		return x.CandidateCourierIds
+	}
+	return nil
+}
+
+func (x *DispatchAssignRequest) GetFleetIds() []string {
+	if x != nil {
+		return x.FleetIds
+	}
+	return nil
+}
+
+func (x *DispatchAssignRequest) GetGroupIds() []string {
+	if x != nil {
+		return x.GroupIds
+	}
+	return nil
+}
+
+func (x *DispatchAssignRequest) GetTopK() int32 {
+	if x != nil {
+		return x.TopK
+	}
+	return 0
+}
+
+func (x *DispatchAssignRequest) GetSearchRadiusM() int32 {
+	if x != nil {
+		return x.SearchRadiusM
+	}
+	return 0
+}
+
+func (x *DispatchAssignRequest) GetStrategy() *DispatchStrategy {
+	if x != nil {
+		return x.Strategy
+	}
+	return nil
+}
+
+// 候选司机评分项
+type CandidateScoreItem struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	CourierId      int64                  `protobuf:"varint,1,opt,name=courier_id,json=courierId,proto3" json:"courier_id,omitempty"`
+	DistanceM      float64                `protobuf:"fixed64,2,opt,name=distance_m,json=distanceM,proto3" json:"distance_m,omitempty"`
+	Rating         float64                `protobuf:"fixed64,3,opt,name=rating,proto3" json:"rating,omitempty"`                                       // 司机评分（0~5），缺省按 3.0
+	AcceptanceRate float64                `protobuf:"fixed64,4,opt,name=acceptance_rate,json=acceptanceRate,proto3" json:"acceptance_rate,omitempty"` // 历史接单率（0~1），缺省按 0.5
+	TimePenalty    float64                `protobuf:"fixed64,5,opt,name=time_penalty,json=timePenalty,proto3" json:"time_penalty,omitempty"`          // 时间窗罚分（0~1），越大越差
+	TotalScore     float64                `protobuf:"fixed64,6,opt,name=total_score,json=totalScore,proto3" json:"total_score,omitempty"`             // 综合分
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CandidateScoreItem) Reset() {
+	*x = CandidateScoreItem{}
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CandidateScoreItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CandidateScoreItem) ProtoMessage() {}
+
+func (x *CandidateScoreItem) ProtoReflect() protoreflect.Message {
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CandidateScoreItem.ProtoReflect.Descriptor instead.
+func (*CandidateScoreItem) Descriptor() ([]byte, []int) {
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CandidateScoreItem) GetCourierId() int64 {
+	if x != nil {
+		return x.CourierId
+	}
+	return 0
+}
+
+func (x *CandidateScoreItem) GetDistanceM() float64 {
+	if x != nil {
+		return x.DistanceM
+	}
+	return 0
+}
+
+func (x *CandidateScoreItem) GetRating() float64 {
+	if x != nil {
+		return x.Rating
+	}
+	return 0
+}
+
+func (x *CandidateScoreItem) GetAcceptanceRate() float64 {
+	if x != nil {
+		return x.AcceptanceRate
+	}
+	return 0
+}
+
+func (x *CandidateScoreItem) GetTimePenalty() float64 {
+	if x != nil {
+		return x.TimePenalty
+	}
+	return 0
+}
+
+func (x *CandidateScoreItem) GetTotalScore() float64 {
+	if x != nil {
+		return x.TotalScore
+	}
+	return 0
+}
+
+// 派单响应
+type DispatchAssignReply struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	ChosenCourierId int64                  `protobuf:"varint,1,opt,name=chosen_courier_id,json=chosenCourierId,proto3" json:"chosen_courier_id,omitempty"` // 选中的司机
+	ChosenScore     float64                `protobuf:"fixed64,2,opt,name=chosen_score,json=chosenScore,proto3" json:"chosen_score,omitempty"`              // 司机综合得分
+	DecisionReasons []string               `protobuf:"bytes,3,rep,name=decision_reasons,json=decisionReasons,proto3" json:"decision_reasons,omitempty"`    // 可解释的决策理由
+	Candidates      []*CandidateScoreItem  `protobuf:"bytes,4,rep,name=candidates,proto3" json:"candidates,omitempty"`                                     // TopK 候选与细则
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DispatchAssignReply) Reset() {
+	*x = DispatchAssignReply{}
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DispatchAssignReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DispatchAssignReply) ProtoMessage() {}
+
+func (x *DispatchAssignReply) ProtoReflect() protoreflect.Message {
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DispatchAssignReply.ProtoReflect.Descriptor instead.
+func (*DispatchAssignReply) Descriptor() ([]byte, []int) {
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *DispatchAssignReply) GetChosenCourierId() int64 {
+	if x != nil {
+		return x.ChosenCourierId
+	}
+	return 0
+}
+
+func (x *DispatchAssignReply) GetChosenScore() float64 {
+	if x != nil {
+		return x.ChosenScore
+	}
+	return 0
+}
+
+func (x *DispatchAssignReply) GetDecisionReasons() []string {
+	if x != nil {
+		return x.DecisionReasons
+	}
+	return nil
+}
+
+func (x *DispatchAssignReply) GetCandidates() []*CandidateScoreItem {
+	if x != nil {
+		return x.Candidates
+	}
+	return nil
 }
 
 type CreateOrderRequest struct {
@@ -757,7 +1105,7 @@ type CreateOrderRequest struct {
 
 func (x *CreateOrderRequest) Reset() {
 	*x = CreateOrderRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[5]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -769,7 +1117,7 @@ func (x *CreateOrderRequest) String() string {
 func (*CreateOrderRequest) ProtoMessage() {}
 
 func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[5]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -782,7 +1130,7 @@ func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrderRequest.ProtoReflect.Descriptor instead.
 func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{5}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateOrderRequest) GetUserId() int64 {
@@ -955,7 +1303,7 @@ type CreateOrderReply struct {
 
 func (x *CreateOrderReply) Reset() {
 	*x = CreateOrderReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[6]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +1315,7 @@ func (x *CreateOrderReply) String() string {
 func (*CreateOrderReply) ProtoMessage() {}
 
 func (x *CreateOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[6]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +1328,7 @@ func (x *CreateOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrderReply.ProtoReflect.Descriptor instead.
 func (*CreateOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{6}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateOrderReply) GetOrderId() int32 {
@@ -999,7 +1347,7 @@ type TakeTaskRequest struct {
 
 func (x *TakeTaskRequest) Reset() {
 	*x = TakeTaskRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[7]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1011,7 +1359,7 @@ func (x *TakeTaskRequest) String() string {
 func (*TakeTaskRequest) ProtoMessage() {}
 
 func (x *TakeTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[7]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1024,7 +1372,7 @@ func (x *TakeTaskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TakeTaskRequest.ProtoReflect.Descriptor instead.
 func (*TakeTaskRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{7}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TakeTaskRequest) GetCourierId() int64 {
@@ -1043,7 +1391,7 @@ type TakeTaskReply struct {
 
 func (x *TakeTaskReply) Reset() {
 	*x = TakeTaskReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[8]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1055,7 +1403,7 @@ func (x *TakeTaskReply) String() string {
 func (*TakeTaskReply) ProtoMessage() {}
 
 func (x *TakeTaskReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[8]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1068,7 +1416,7 @@ func (x *TakeTaskReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TakeTaskReply.ProtoReflect.Descriptor instead.
 func (*TakeTaskReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{8}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TakeTaskReply) GetTask() *Task {
@@ -1087,7 +1435,7 @@ type GetTaskRequest struct {
 
 func (x *GetTaskRequest) Reset() {
 	*x = GetTaskRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[9]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1099,7 +1447,7 @@ func (x *GetTaskRequest) String() string {
 func (*GetTaskRequest) ProtoMessage() {}
 
 func (x *GetTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[9]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1112,7 +1460,7 @@ func (x *GetTaskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaskRequest.ProtoReflect.Descriptor instead.
 func (*GetTaskRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{9}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetTaskRequest) GetId() int64 {
@@ -1136,7 +1484,7 @@ type GetTaskReply struct {
 
 func (x *GetTaskReply) Reset() {
 	*x = GetTaskReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[10]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1148,7 +1496,7 @@ func (x *GetTaskReply) String() string {
 func (*GetTaskReply) ProtoMessage() {}
 
 func (x *GetTaskReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[10]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1161,7 +1509,7 @@ func (x *GetTaskReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaskReply.ProtoReflect.Descriptor instead.
 func (*GetTaskReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{10}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetTaskReply) GetId() int64 {
@@ -1216,7 +1564,7 @@ type StuUpdRequest struct {
 
 func (x *StuUpdRequest) Reset() {
 	*x = StuUpdRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[11]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1228,7 +1576,7 @@ func (x *StuUpdRequest) String() string {
 func (*StuUpdRequest) ProtoMessage() {}
 
 func (x *StuUpdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[11]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1241,7 +1589,7 @@ func (x *StuUpdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StuUpdRequest.ProtoReflect.Descriptor instead.
 func (*StuUpdRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{11}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *StuUpdRequest) GetStatus() string {
@@ -1267,7 +1615,7 @@ type StuUpdReply struct {
 
 func (x *StuUpdReply) Reset() {
 	*x = StuUpdReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[12]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1279,7 +1627,7 @@ func (x *StuUpdReply) String() string {
 func (*StuUpdReply) ProtoMessage() {}
 
 func (x *StuUpdReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[12]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1292,7 +1640,7 @@ func (x *StuUpdReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StuUpdReply.ProtoReflect.Descriptor instead.
 func (*StuUpdReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{12}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *StuUpdReply) GetStatus() string {
@@ -1312,7 +1660,7 @@ type RegisterRequest struct {
 
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[13]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1324,7 +1672,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[13]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1337,7 +1685,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{13}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RegisterRequest) GetPhone() string {
@@ -1363,7 +1711,7 @@ type RegisterReply struct {
 
 func (x *RegisterReply) Reset() {
 	*x = RegisterReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[14]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1375,7 +1723,7 @@ func (x *RegisterReply) String() string {
 func (*RegisterReply) ProtoMessage() {}
 
 func (x *RegisterReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[14]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1388,7 +1736,7 @@ func (x *RegisterReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterReply.ProtoReflect.Descriptor instead.
 func (*RegisterReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{14}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RegisterReply) GetId() int64 {
@@ -1408,7 +1756,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[15]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1420,7 +1768,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[15]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1433,7 +1781,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{15}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *LoginRequest) GetPhone() string {
@@ -1459,7 +1807,7 @@ type LoginReply struct {
 
 func (x *LoginReply) Reset() {
 	*x = LoginReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[16]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1471,7 +1819,7 @@ func (x *LoginReply) String() string {
 func (*LoginReply) ProtoMessage() {}
 
 func (x *LoginReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[16]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1484,7 +1832,7 @@ func (x *LoginReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginReply.ProtoReflect.Descriptor instead.
 func (*LoginReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{16}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *LoginReply) GetId() int64 {
@@ -1502,7 +1850,7 @@ type TaskListRequest struct {
 
 func (x *TaskListRequest) Reset() {
 	*x = TaskListRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[17]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1514,7 +1862,7 @@ func (x *TaskListRequest) String() string {
 func (*TaskListRequest) ProtoMessage() {}
 
 func (x *TaskListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[17]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1527,7 +1875,7 @@ func (x *TaskListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskListRequest.ProtoReflect.Descriptor instead.
 func (*TaskListRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{17}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{21}
 }
 
 type TaskListReply struct {
@@ -1540,7 +1888,7 @@ type TaskListReply struct {
 
 func (x *TaskListReply) Reset() {
 	*x = TaskListReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[18]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1552,7 +1900,7 @@ func (x *TaskListReply) String() string {
 func (*TaskListReply) ProtoMessage() {}
 
 func (x *TaskListReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[18]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1565,7 +1913,7 @@ func (x *TaskListReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskListReply.ProtoReflect.Descriptor instead.
 func (*TaskListReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{18}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *TaskListReply) GetTasks() []*Task {
@@ -1599,7 +1947,7 @@ type Task struct {
 
 func (x *Task) Reset() {
 	*x = Task{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[19]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1611,7 +1959,7 @@ func (x *Task) String() string {
 func (*Task) ProtoMessage() {}
 
 func (x *Task) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[19]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1624,7 +1972,7 @@ func (x *Task) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Task.ProtoReflect.Descriptor instead.
 func (*Task) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{19}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *Task) GetId() int64 {
@@ -1698,7 +2046,7 @@ type DeleteKuaiRequest struct {
 
 func (x *DeleteKuaiRequest) Reset() {
 	*x = DeleteKuaiRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[20]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1710,7 +2058,7 @@ func (x *DeleteKuaiRequest) String() string {
 func (*DeleteKuaiRequest) ProtoMessage() {}
 
 func (x *DeleteKuaiRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[20]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1723,7 +2071,7 @@ func (x *DeleteKuaiRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKuaiRequest.ProtoReflect.Descriptor instead.
 func (*DeleteKuaiRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{20}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{24}
 }
 
 type DeleteKuaiReply struct {
@@ -1734,7 +2082,7 @@ type DeleteKuaiReply struct {
 
 func (x *DeleteKuaiReply) Reset() {
 	*x = DeleteKuaiReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[21]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1746,7 +2094,7 @@ func (x *DeleteKuaiReply) String() string {
 func (*DeleteKuaiReply) ProtoMessage() {}
 
 func (x *DeleteKuaiReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[21]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1759,7 +2107,7 @@ func (x *DeleteKuaiReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKuaiReply.ProtoReflect.Descriptor instead.
 func (*DeleteKuaiReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{21}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{25}
 }
 
 type GetKuaiRequest struct {
@@ -1770,7 +2118,7 @@ type GetKuaiRequest struct {
 
 func (x *GetKuaiRequest) Reset() {
 	*x = GetKuaiRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[22]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1782,7 +2130,7 @@ func (x *GetKuaiRequest) String() string {
 func (*GetKuaiRequest) ProtoMessage() {}
 
 func (x *GetKuaiRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[22]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1795,7 +2143,7 @@ func (x *GetKuaiRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKuaiRequest.ProtoReflect.Descriptor instead.
 func (*GetKuaiRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{22}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{26}
 }
 
 type GetKuaiReply struct {
@@ -1806,7 +2154,7 @@ type GetKuaiReply struct {
 
 func (x *GetKuaiReply) Reset() {
 	*x = GetKuaiReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[23]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1818,7 +2166,7 @@ func (x *GetKuaiReply) String() string {
 func (*GetKuaiReply) ProtoMessage() {}
 
 func (x *GetKuaiReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[23]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1831,7 +2179,7 @@ func (x *GetKuaiReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKuaiReply.ProtoReflect.Descriptor instead.
 func (*GetKuaiReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{23}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{27}
 }
 
 // 订单列表
@@ -1843,7 +2191,7 @@ type OrderListRequest struct {
 
 func (x *OrderListRequest) Reset() {
 	*x = OrderListRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[24]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1855,7 +2203,7 @@ func (x *OrderListRequest) String() string {
 func (*OrderListRequest) ProtoMessage() {}
 
 func (x *OrderListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[24]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1868,7 +2216,7 @@ func (x *OrderListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderListRequest.ProtoReflect.Descriptor instead.
 func (*OrderListRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{24}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{28}
 }
 
 type OrderItem struct {
@@ -1908,7 +2256,7 @@ type OrderItem struct {
 
 func (x *OrderItem) Reset() {
 	*x = OrderItem{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[25]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1920,7 +2268,7 @@ func (x *OrderItem) String() string {
 func (*OrderItem) ProtoMessage() {}
 
 func (x *OrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[25]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1933,7 +2281,7 @@ func (x *OrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderItem.ProtoReflect.Descriptor instead.
 func (*OrderItem) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{25}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *OrderItem) GetId() int64 {
@@ -2148,7 +2496,7 @@ type OrderListReply struct {
 
 func (x *OrderListReply) Reset() {
 	*x = OrderListReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[26]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2160,7 +2508,7 @@ func (x *OrderListReply) String() string {
 func (*OrderListReply) ProtoMessage() {}
 
 func (x *OrderListReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[26]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2173,7 +2521,7 @@ func (x *OrderListReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderListReply.ProtoReflect.Descriptor instead.
 func (*OrderListReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{26}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *OrderListReply) GetList() []*OrderItem {
@@ -2193,7 +2541,7 @@ type IncomeListRequest struct {
 
 func (x *IncomeListRequest) Reset() {
 	*x = IncomeListRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[27]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2205,7 +2553,7 @@ func (x *IncomeListRequest) String() string {
 func (*IncomeListRequest) ProtoMessage() {}
 
 func (x *IncomeListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[27]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2218,7 +2566,7 @@ func (x *IncomeListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncomeListRequest.ProtoReflect.Descriptor instead.
 func (*IncomeListRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{27}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *IncomeListRequest) GetCourierId() int64 {
@@ -2241,7 +2589,7 @@ type IncomeItem struct {
 
 func (x *IncomeItem) Reset() {
 	*x = IncomeItem{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[28]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2253,7 +2601,7 @@ func (x *IncomeItem) String() string {
 func (*IncomeItem) ProtoMessage() {}
 
 func (x *IncomeItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[28]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2266,7 +2614,7 @@ func (x *IncomeItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncomeItem.ProtoReflect.Descriptor instead.
 func (*IncomeItem) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{28}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *IncomeItem) GetTaskId() int64 {
@@ -2314,7 +2662,7 @@ type IncomeListReply struct {
 
 func (x *IncomeListReply) Reset() {
 	*x = IncomeListReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[29]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2326,7 +2674,7 @@ func (x *IncomeListReply) String() string {
 func (*IncomeListReply) ProtoMessage() {}
 
 func (x *IncomeListReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[29]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2339,7 +2687,7 @@ func (x *IncomeListReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncomeListReply.ProtoReflect.Descriptor instead.
 func (*IncomeListReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{29}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *IncomeListReply) GetList() []*IncomeItem {
@@ -2369,7 +2717,7 @@ type HandleExceptionRequest struct {
 
 func (x *HandleExceptionRequest) Reset() {
 	*x = HandleExceptionRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[30]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2381,7 +2729,7 @@ func (x *HandleExceptionRequest) String() string {
 func (*HandleExceptionRequest) ProtoMessage() {}
 
 func (x *HandleExceptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[30]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2394,7 +2742,7 @@ func (x *HandleExceptionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HandleExceptionRequest.ProtoReflect.Descriptor instead.
 func (*HandleExceptionRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{30}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *HandleExceptionRequest) GetOrderId() int64 {
@@ -2439,7 +2787,7 @@ type HandleExceptionReply struct {
 
 func (x *HandleExceptionReply) Reset() {
 	*x = HandleExceptionReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[31]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2451,7 +2799,7 @@ func (x *HandleExceptionReply) String() string {
 func (*HandleExceptionReply) ProtoMessage() {}
 
 func (x *HandleExceptionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[31]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2464,7 +2812,7 @@ func (x *HandleExceptionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HandleExceptionReply.ProtoReflect.Descriptor instead.
 func (*HandleExceptionReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{31}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *HandleExceptionReply) GetSuccess() bool {
@@ -2515,7 +2863,7 @@ type CancelOrderRequest struct {
 
 func (x *CancelOrderRequest) Reset() {
 	*x = CancelOrderRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[32]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2527,7 +2875,7 @@ func (x *CancelOrderRequest) String() string {
 func (*CancelOrderRequest) ProtoMessage() {}
 
 func (x *CancelOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[32]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2540,7 +2888,7 @@ func (x *CancelOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelOrderRequest.ProtoReflect.Descriptor instead.
 func (*CancelOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{32}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CancelOrderRequest) GetOrderId() int64 {
@@ -2582,7 +2930,7 @@ type CancelOrderReply struct {
 
 func (x *CancelOrderReply) Reset() {
 	*x = CancelOrderReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[33]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2594,7 +2942,7 @@ func (x *CancelOrderReply) String() string {
 func (*CancelOrderReply) ProtoMessage() {}
 
 func (x *CancelOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[33]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2607,7 +2955,7 @@ func (x *CancelOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelOrderReply.ProtoReflect.Descriptor instead.
 func (*CancelOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{33}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *CancelOrderReply) GetSuccess() bool {
@@ -2644,7 +2992,7 @@ type ReassignOrderRequest struct {
 
 func (x *ReassignOrderRequest) Reset() {
 	*x = ReassignOrderRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[34]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2656,7 +3004,7 @@ func (x *ReassignOrderRequest) String() string {
 func (*ReassignOrderRequest) ProtoMessage() {}
 
 func (x *ReassignOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[34]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2669,7 +3017,7 @@ func (x *ReassignOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReassignOrderRequest.ProtoReflect.Descriptor instead.
 func (*ReassignOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{34}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ReassignOrderRequest) GetOrderId() int64 {
@@ -2712,7 +3060,7 @@ type ReassignOrderReply struct {
 
 func (x *ReassignOrderReply) Reset() {
 	*x = ReassignOrderReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[35]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2724,7 +3072,7 @@ func (x *ReassignOrderReply) String() string {
 func (*ReassignOrderReply) ProtoMessage() {}
 
 func (x *ReassignOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[35]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2737,7 +3085,7 @@ func (x *ReassignOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReassignOrderReply.ProtoReflect.Descriptor instead.
 func (*ReassignOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{35}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ReassignOrderReply) GetSuccess() bool {
@@ -2779,7 +3127,7 @@ type OrderDetailRequest struct {
 
 func (x *OrderDetailRequest) Reset() {
 	*x = OrderDetailRequest{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[36]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2791,7 +3139,7 @@ func (x *OrderDetailRequest) String() string {
 func (*OrderDetailRequest) ProtoMessage() {}
 
 func (x *OrderDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[36]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2804,7 +3152,7 @@ func (x *OrderDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDetailRequest.ProtoReflect.Descriptor instead.
 func (*OrderDetailRequest) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{36}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *OrderDetailRequest) GetOrderNo() string {
@@ -2838,7 +3186,7 @@ type AuditLogItem struct {
 
 func (x *AuditLogItem) Reset() {
 	*x = AuditLogItem{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[37]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2850,7 +3198,7 @@ func (x *AuditLogItem) String() string {
 func (*AuditLogItem) ProtoMessage() {}
 
 func (x *AuditLogItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[37]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2863,7 +3211,7 @@ func (x *AuditLogItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditLogItem.ProtoReflect.Descriptor instead.
 func (*AuditLogItem) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{37}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *AuditLogItem) GetActionType() string {
@@ -2935,7 +3283,7 @@ type ReassignmentItem struct {
 
 func (x *ReassignmentItem) Reset() {
 	*x = ReassignmentItem{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[38]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2947,7 +3295,7 @@ func (x *ReassignmentItem) String() string {
 func (*ReassignmentItem) ProtoMessage() {}
 
 func (x *ReassignmentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[38]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2960,7 +3308,7 @@ func (x *ReassignmentItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReassignmentItem.ProtoReflect.Descriptor instead.
 func (*ReassignmentItem) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{38}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ReassignmentItem) GetFromCourierId() int64 {
@@ -3005,7 +3353,7 @@ type FeeDetail struct {
 
 func (x *FeeDetail) Reset() {
 	*x = FeeDetail{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[39]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3017,7 +3365,7 @@ func (x *FeeDetail) String() string {
 func (*FeeDetail) ProtoMessage() {}
 
 func (x *FeeDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[39]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3030,7 +3378,7 @@ func (x *FeeDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FeeDetail.ProtoReflect.Descriptor instead.
 func (*FeeDetail) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{39}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *FeeDetail) GetEstimatedFee() float64 {
@@ -3080,7 +3428,7 @@ type RiskInfo struct {
 
 func (x *RiskInfo) Reset() {
 	*x = RiskInfo{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[40]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3092,7 +3440,7 @@ func (x *RiskInfo) String() string {
 func (*RiskInfo) ProtoMessage() {}
 
 func (x *RiskInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[40]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3105,7 +3453,7 @@ func (x *RiskInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RiskInfo.ProtoReflect.Descriptor instead.
 func (*RiskInfo) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{40}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *RiskInfo) GetRiskFlag() bool {
@@ -3166,7 +3514,7 @@ type OrderDetailReply struct {
 
 func (x *OrderDetailReply) Reset() {
 	*x = OrderDetailReply{}
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[41]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3178,7 +3526,7 @@ func (x *OrderDetailReply) String() string {
 func (*OrderDetailReply) ProtoMessage() {}
 
 func (x *OrderDetailReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_helloworld_v1_kuai_proto_msgTypes[41]
+	mi := &file_helloworld_v1_kuai_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3191,7 +3539,7 @@ func (x *OrderDetailReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDetailReply.ProtoReflect.Descriptor instead.
 func (*OrderDetailReply) Descriptor() ([]byte, []int) {
-	return file_api_helloworld_v1_kuai_proto_rawDescGZIP(), []int{41}
+	return file_helloworld_v1_kuai_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *OrderDetailReply) GetId() int64 {
@@ -3348,11 +3696,11 @@ func (x *OrderDetailReply) GetRisk() *RiskInfo {
 	return nil
 }
 
-var File_api_helloworld_v1_kuai_proto protoreflect.FileDescriptor
+var File_helloworld_v1_kuai_proto protoreflect.FileDescriptor
 
-const file_api_helloworld_v1_kuai_proto_rawDesc = "" +
+const file_helloworld_v1_kuai_proto_rawDesc = "" +
 	"\n" +
-	"\x1capi/helloworld/v1/kuai.proto\x12\rhelloworld.v1\x1a\x1cgoogle/api/annotations.proto\"\x1e\n" +
+	"\x18helloworld/v1/kuai.proto\x12\rhelloworld.v1\x1a\x1cgoogle/api/annotations.proto\"\x1e\n" +
 	"\x1cGetCourierPerformanceRequest\"\x91\x01\n" +
 	"\x1aGetCourierPerformanceReply\x12#\n" +
 	"\rdaily_revenue\x18\x01 \x01(\x01R\fdailyRevenue\x12'\n" +
@@ -3367,7 +3715,44 @@ const file_api_helloworld_v1_kuai_proto_rawDesc = "" +
 	"\n" +
 	"courier_id\x18\x02 \x01(\x03R\tcourierId\x12!\n" +
 	"\fcourier_name\x18\x03 \x01(\tR\vcourierName\x12+\n" +
-	"\x11performance_score\x18\x04 \x01(\x01R\x10performanceScore\"\xff\a\n" +
+	"\x11performance_score\x18\x04 \x01(\x01R\x10performanceScore\"\xda\x01\n" +
+	"\x10DispatchStrategy\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12'\n" +
+	"\x0fdistance_weight\x18\x02 \x01(\x01R\x0edistanceWeight\x12#\n" +
+	"\rrating_weight\x18\x03 \x01(\x01R\fratingWeight\x124\n" +
+	"\x16acceptance_rate_weight\x18\x04 \x01(\x01R\x14acceptanceRateWeight\x12.\n" +
+	"\x13time_penalty_weight\x18\x05 \x01(\x01R\x11timePenaltyWeight\"\xee\x02\n" +
+	"\x15DispatchAssignRequest\x12\x12\n" +
+	"\x04city\x18\x01 \x01(\tR\x04city\x12\x1d\n" +
+	"\n" +
+	"pickup_lng\x18\x02 \x01(\x01R\tpickupLng\x12\x1d\n" +
+	"\n" +
+	"pickup_lat\x18\x03 \x01(\x01R\tpickupLat\x12\x1b\n" +
+	"\tride_time\x18\x04 \x01(\x03R\brideTime\x122\n" +
+	"\x15candidate_courier_ids\x18\x05 \x03(\x03R\x13candidateCourierIds\x12\x1b\n" +
+	"\tfleet_ids\x18\x06 \x03(\tR\bfleetIds\x12\x1b\n" +
+	"\tgroup_ids\x18\a \x03(\tR\bgroupIds\x12\x13\n" +
+	"\x05top_k\x18\b \x01(\x05R\x04topK\x12&\n" +
+	"\x0fsearch_radius_m\x18\t \x01(\x05R\rsearchRadiusM\x12;\n" +
+	"\bstrategy\x18\n" +
+	" \x01(\v2\x1f.helloworld.v1.DispatchStrategyR\bstrategy\"\xd7\x01\n" +
+	"\x12CandidateScoreItem\x12\x1d\n" +
+	"\n" +
+	"courier_id\x18\x01 \x01(\x03R\tcourierId\x12\x1d\n" +
+	"\n" +
+	"distance_m\x18\x02 \x01(\x01R\tdistanceM\x12\x16\n" +
+	"\x06rating\x18\x03 \x01(\x01R\x06rating\x12'\n" +
+	"\x0facceptance_rate\x18\x04 \x01(\x01R\x0eacceptanceRate\x12!\n" +
+	"\ftime_penalty\x18\x05 \x01(\x01R\vtimePenalty\x12\x1f\n" +
+	"\vtotal_score\x18\x06 \x01(\x01R\n" +
+	"totalScore\"\xd2\x01\n" +
+	"\x13DispatchAssignReply\x12*\n" +
+	"\x11chosen_courier_id\x18\x01 \x01(\x03R\x0fchosenCourierId\x12!\n" +
+	"\fchosen_score\x18\x02 \x01(\x01R\vchosenScore\x12)\n" +
+	"\x10decision_reasons\x18\x03 \x03(\tR\x0fdecisionReasons\x12A\n" +
+	"\n" +
+	"candidates\x18\x04 \x03(\v2!.helloworld.v1.CandidateScoreItemR\n" +
+	"candidates\"\xff\a\n" +
 	"\x12CreateOrderRequest\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\vsender_name\x18\x06 \x01(\tR\n" +
@@ -3657,7 +4042,7 @@ const file_api_helloworld_v1_kuai_proto_rawDesc = "" +
 	"\x0fCOURIER_REQUEST\x10\x02\x12\x12\n" +
 	"\x0eSYSTEM_TIMEOUT\x10\x03\x12\x18\n" +
 	"\x14ADDRESS_ERROR_REASON\x10\x04\x12\t\n" +
-	"\x05OTHER\x10\t2\xfd\f\n" +
+	"\x05OTHER\x10\t2\xf6\r\n" +
 	"\x04Kuai\x12N\n" +
 	"\n" +
 	"DeleteKuai\x12 .helloworld.v1.DeleteKuaiRequest\x1a\x1e.helloworld.v1.DeleteKuaiReply\x12Z\n" +
@@ -3676,24 +4061,25 @@ const file_api_helloworld_v1_kuai_proto_rawDesc = "" +
 	"\vCancelOrder\x12!.helloworld.v1.CancelOrderRequest\x1a\x1f.helloworld.v1.CancelOrderReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/orders/cancel\x12t\n" +
 	"\rReassignOrder\x12#.helloworld.v1.ReassignOrderRequest\x1a!.helloworld.v1.ReassignOrderReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/orders/reassign\x12k\n" +
 	"\vOrderDetail\x12!.helloworld.v1.OrderDetailRequest\x1a\x1f.helloworld.v1.OrderDetailReply\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/order/detail\x12\x8e\x01\n" +
-	"\x15GetCourierPerformance\x12+.helloworld.v1.GetCourierPerformanceRequest\x1a).helloworld.v1.GetCourierPerformanceReply\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/count/performanceBX\n" +
+	"\x15GetCourierPerformance\x12+.helloworld.v1.GetCourierPerformanceRequest\x1a).helloworld.v1.GetCourierPerformanceReply\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/count/performance\x12w\n" +
+	"\x0eDispatchAssign\x12$.helloworld.v1.DispatchAssignRequest\x1a\".helloworld.v1.DispatchAssignReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/dispatch/assignBX\n" +
 	"\x1cdev.kratos.api.helloworld.v1B\x11HelloworldProtoV1P\x01Z#ShunFengParcel/api/helloworld/v1;v1b\x06proto3"
 
 var (
-	file_api_helloworld_v1_kuai_proto_rawDescOnce sync.Once
-	file_api_helloworld_v1_kuai_proto_rawDescData []byte
+	file_helloworld_v1_kuai_proto_rawDescOnce sync.Once
+	file_helloworld_v1_kuai_proto_rawDescData []byte
 )
 
-func file_api_helloworld_v1_kuai_proto_rawDescGZIP() []byte {
-	file_api_helloworld_v1_kuai_proto_rawDescOnce.Do(func() {
-		file_api_helloworld_v1_kuai_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_helloworld_v1_kuai_proto_rawDesc), len(file_api_helloworld_v1_kuai_proto_rawDesc)))
+func file_helloworld_v1_kuai_proto_rawDescGZIP() []byte {
+	file_helloworld_v1_kuai_proto_rawDescOnce.Do(func() {
+		file_helloworld_v1_kuai_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_helloworld_v1_kuai_proto_rawDesc), len(file_helloworld_v1_kuai_proto_rawDesc)))
 	})
-	return file_api_helloworld_v1_kuai_proto_rawDescData
+	return file_helloworld_v1_kuai_proto_rawDescData
 }
 
-var file_api_helloworld_v1_kuai_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_api_helloworld_v1_kuai_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
-var file_api_helloworld_v1_kuai_proto_goTypes = []any{
+var file_helloworld_v1_kuai_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
+var file_helloworld_v1_kuai_proto_msgTypes = make([]protoimpl.MessageInfo, 46)
+var file_helloworld_v1_kuai_proto_goTypes = []any{
 	(ServiceType)(0),                     // 0: helloworld.v1.ServiceType
 	(PaymentMethod)(0),                   // 1: helloworld.v1.PaymentMethod
 	(PaymentStatus)(0),                   // 2: helloworld.v1.PaymentStatus
@@ -3707,126 +4093,134 @@ var file_api_helloworld_v1_kuai_proto_goTypes = []any{
 	(*PerformanceRequest)(nil),           // 10: helloworld.v1.PerformanceRequest
 	(*PerformanceReply)(nil),             // 11: helloworld.v1.PerformanceReply
 	(*CourierRank)(nil),                  // 12: helloworld.v1.CourierRank
-	(*CreateOrderRequest)(nil),           // 13: helloworld.v1.CreateOrderRequest
-	(*CreateOrderReply)(nil),             // 14: helloworld.v1.CreateOrderReply
-	(*TakeTaskRequest)(nil),              // 15: helloworld.v1.TakeTaskRequest
-	(*TakeTaskReply)(nil),                // 16: helloworld.v1.TakeTaskReply
-	(*GetTaskRequest)(nil),               // 17: helloworld.v1.GetTaskRequest
-	(*GetTaskReply)(nil),                 // 18: helloworld.v1.GetTaskReply
-	(*StuUpdRequest)(nil),                // 19: helloworld.v1.StuUpdRequest
-	(*StuUpdReply)(nil),                  // 20: helloworld.v1.StuUpdReply
-	(*RegisterRequest)(nil),              // 21: helloworld.v1.RegisterRequest
-	(*RegisterReply)(nil),                // 22: helloworld.v1.RegisterReply
-	(*LoginRequest)(nil),                 // 23: helloworld.v1.LoginRequest
-	(*LoginReply)(nil),                   // 24: helloworld.v1.LoginReply
-	(*TaskListRequest)(nil),              // 25: helloworld.v1.TaskListRequest
-	(*TaskListReply)(nil),                // 26: helloworld.v1.TaskListReply
-	(*Task)(nil),                         // 27: helloworld.v1.Task
-	(*DeleteKuaiRequest)(nil),            // 28: helloworld.v1.DeleteKuaiRequest
-	(*DeleteKuaiReply)(nil),              // 29: helloworld.v1.DeleteKuaiReply
-	(*GetKuaiRequest)(nil),               // 30: helloworld.v1.GetKuaiRequest
-	(*GetKuaiReply)(nil),                 // 31: helloworld.v1.GetKuaiReply
-	(*OrderListRequest)(nil),             // 32: helloworld.v1.OrderListRequest
-	(*OrderItem)(nil),                    // 33: helloworld.v1.OrderItem
-	(*OrderListReply)(nil),               // 34: helloworld.v1.OrderListReply
-	(*IncomeListRequest)(nil),            // 35: helloworld.v1.IncomeListRequest
-	(*IncomeItem)(nil),                   // 36: helloworld.v1.IncomeItem
-	(*IncomeListReply)(nil),              // 37: helloworld.v1.IncomeListReply
-	(*HandleExceptionRequest)(nil),       // 38: helloworld.v1.HandleExceptionRequest
-	(*HandleExceptionReply)(nil),         // 39: helloworld.v1.HandleExceptionReply
-	(*CancelOrderRequest)(nil),           // 40: helloworld.v1.CancelOrderRequest
-	(*CancelOrderReply)(nil),             // 41: helloworld.v1.CancelOrderReply
-	(*ReassignOrderRequest)(nil),         // 42: helloworld.v1.ReassignOrderRequest
-	(*ReassignOrderReply)(nil),           // 43: helloworld.v1.ReassignOrderReply
-	(*OrderDetailRequest)(nil),           // 44: helloworld.v1.OrderDetailRequest
-	(*AuditLogItem)(nil),                 // 45: helloworld.v1.AuditLogItem
-	(*ReassignmentItem)(nil),             // 46: helloworld.v1.ReassignmentItem
-	(*FeeDetail)(nil),                    // 47: helloworld.v1.FeeDetail
-	(*RiskInfo)(nil),                     // 48: helloworld.v1.RiskInfo
-	(*OrderDetailReply)(nil),             // 49: helloworld.v1.OrderDetailReply
+	(*DispatchStrategy)(nil),             // 13: helloworld.v1.DispatchStrategy
+	(*DispatchAssignRequest)(nil),        // 14: helloworld.v1.DispatchAssignRequest
+	(*CandidateScoreItem)(nil),           // 15: helloworld.v1.CandidateScoreItem
+	(*DispatchAssignReply)(nil),          // 16: helloworld.v1.DispatchAssignReply
+	(*CreateOrderRequest)(nil),           // 17: helloworld.v1.CreateOrderRequest
+	(*CreateOrderReply)(nil),             // 18: helloworld.v1.CreateOrderReply
+	(*TakeTaskRequest)(nil),              // 19: helloworld.v1.TakeTaskRequest
+	(*TakeTaskReply)(nil),                // 20: helloworld.v1.TakeTaskReply
+	(*GetTaskRequest)(nil),               // 21: helloworld.v1.GetTaskRequest
+	(*GetTaskReply)(nil),                 // 22: helloworld.v1.GetTaskReply
+	(*StuUpdRequest)(nil),                // 23: helloworld.v1.StuUpdRequest
+	(*StuUpdReply)(nil),                  // 24: helloworld.v1.StuUpdReply
+	(*RegisterRequest)(nil),              // 25: helloworld.v1.RegisterRequest
+	(*RegisterReply)(nil),                // 26: helloworld.v1.RegisterReply
+	(*LoginRequest)(nil),                 // 27: helloworld.v1.LoginRequest
+	(*LoginReply)(nil),                   // 28: helloworld.v1.LoginReply
+	(*TaskListRequest)(nil),              // 29: helloworld.v1.TaskListRequest
+	(*TaskListReply)(nil),                // 30: helloworld.v1.TaskListReply
+	(*Task)(nil),                         // 31: helloworld.v1.Task
+	(*DeleteKuaiRequest)(nil),            // 32: helloworld.v1.DeleteKuaiRequest
+	(*DeleteKuaiReply)(nil),              // 33: helloworld.v1.DeleteKuaiReply
+	(*GetKuaiRequest)(nil),               // 34: helloworld.v1.GetKuaiRequest
+	(*GetKuaiReply)(nil),                 // 35: helloworld.v1.GetKuaiReply
+	(*OrderListRequest)(nil),             // 36: helloworld.v1.OrderListRequest
+	(*OrderItem)(nil),                    // 37: helloworld.v1.OrderItem
+	(*OrderListReply)(nil),               // 38: helloworld.v1.OrderListReply
+	(*IncomeListRequest)(nil),            // 39: helloworld.v1.IncomeListRequest
+	(*IncomeItem)(nil),                   // 40: helloworld.v1.IncomeItem
+	(*IncomeListReply)(nil),              // 41: helloworld.v1.IncomeListReply
+	(*HandleExceptionRequest)(nil),       // 42: helloworld.v1.HandleExceptionRequest
+	(*HandleExceptionReply)(nil),         // 43: helloworld.v1.HandleExceptionReply
+	(*CancelOrderRequest)(nil),           // 44: helloworld.v1.CancelOrderRequest
+	(*CancelOrderReply)(nil),             // 45: helloworld.v1.CancelOrderReply
+	(*ReassignOrderRequest)(nil),         // 46: helloworld.v1.ReassignOrderRequest
+	(*ReassignOrderReply)(nil),           // 47: helloworld.v1.ReassignOrderReply
+	(*OrderDetailRequest)(nil),           // 48: helloworld.v1.OrderDetailRequest
+	(*AuditLogItem)(nil),                 // 49: helloworld.v1.AuditLogItem
+	(*ReassignmentItem)(nil),             // 50: helloworld.v1.ReassignmentItem
+	(*FeeDetail)(nil),                    // 51: helloworld.v1.FeeDetail
+	(*RiskInfo)(nil),                     // 52: helloworld.v1.RiskInfo
+	(*OrderDetailReply)(nil),             // 53: helloworld.v1.OrderDetailReply
 }
-var file_api_helloworld_v1_kuai_proto_depIdxs = []int32{
+var file_helloworld_v1_kuai_proto_depIdxs = []int32{
 	12, // 0: helloworld.v1.PerformanceReply.rank_list:type_name -> helloworld.v1.CourierRank
-	0,  // 1: helloworld.v1.CreateOrderRequest.service_type:type_name -> helloworld.v1.ServiceType
-	1,  // 2: helloworld.v1.CreateOrderRequest.payment_method:type_name -> helloworld.v1.PaymentMethod
-	2,  // 3: helloworld.v1.CreateOrderRequest.payment_status:type_name -> helloworld.v1.PaymentStatus
-	3,  // 4: helloworld.v1.CreateOrderRequest.order_status:type_name -> helloworld.v1.OrderStatus
-	27, // 5: helloworld.v1.TakeTaskReply.task:type_name -> helloworld.v1.Task
-	4,  // 6: helloworld.v1.GetTaskReply.task_type:type_name -> helloworld.v1.TaskType
-	5,  // 7: helloworld.v1.GetTaskReply.task_status:type_name -> helloworld.v1.TaskStatus
-	27, // 8: helloworld.v1.TaskListReply.tasks:type_name -> helloworld.v1.Task
-	4,  // 9: helloworld.v1.Task.task_type:type_name -> helloworld.v1.TaskType
-	5,  // 10: helloworld.v1.Task.task_status:type_name -> helloworld.v1.TaskStatus
-	33, // 11: helloworld.v1.OrderListReply.list:type_name -> helloworld.v1.OrderItem
-	36, // 12: helloworld.v1.IncomeListReply.list:type_name -> helloworld.v1.IncomeItem
-	6,  // 13: helloworld.v1.HandleExceptionRequest.exception_type:type_name -> helloworld.v1.ExceptionType
-	3,  // 14: helloworld.v1.HandleExceptionReply.new_status:type_name -> helloworld.v1.OrderStatus
-	7,  // 15: helloworld.v1.CancelOrderRequest.reason:type_name -> helloworld.v1.CancelReason
-	3,  // 16: helloworld.v1.CancelOrderReply.new_status:type_name -> helloworld.v1.OrderStatus
-	47, // 17: helloworld.v1.OrderDetailReply.fee:type_name -> helloworld.v1.FeeDetail
-	45, // 18: helloworld.v1.OrderDetailReply.status_changes:type_name -> helloworld.v1.AuditLogItem
-	46, // 19: helloworld.v1.OrderDetailReply.reassignments:type_name -> helloworld.v1.ReassignmentItem
-	48, // 20: helloworld.v1.OrderDetailReply.risk:type_name -> helloworld.v1.RiskInfo
-	28, // 21: helloworld.v1.Kuai.DeleteKuai:input_type -> helloworld.v1.DeleteKuaiRequest
-	17, // 22: helloworld.v1.Kuai.GetTask:input_type -> helloworld.v1.GetTaskRequest
-	25, // 23: helloworld.v1.Kuai.TaskList:input_type -> helloworld.v1.TaskListRequest
-	23, // 24: helloworld.v1.Kuai.Login:input_type -> helloworld.v1.LoginRequest
-	21, // 25: helloworld.v1.Kuai.Register:input_type -> helloworld.v1.RegisterRequest
-	19, // 26: helloworld.v1.Kuai.StuUpd:input_type -> helloworld.v1.StuUpdRequest
-	15, // 27: helloworld.v1.Kuai.TakeTask:input_type -> helloworld.v1.TakeTaskRequest
-	13, // 28: helloworld.v1.Kuai.CreateOrder:input_type -> helloworld.v1.CreateOrderRequest
-	10, // 29: helloworld.v1.Kuai.Performance:input_type -> helloworld.v1.PerformanceRequest
-	32, // 30: helloworld.v1.Kuai.OrderList:input_type -> helloworld.v1.OrderListRequest
-	35, // 31: helloworld.v1.Kuai.IncomeList:input_type -> helloworld.v1.IncomeListRequest
-	38, // 32: helloworld.v1.Kuai.HandleException:input_type -> helloworld.v1.HandleExceptionRequest
-	40, // 33: helloworld.v1.Kuai.CancelOrder:input_type -> helloworld.v1.CancelOrderRequest
-	42, // 34: helloworld.v1.Kuai.ReassignOrder:input_type -> helloworld.v1.ReassignOrderRequest
-	44, // 35: helloworld.v1.Kuai.OrderDetail:input_type -> helloworld.v1.OrderDetailRequest
-	8,  // 36: helloworld.v1.Kuai.GetCourierPerformance:input_type -> helloworld.v1.GetCourierPerformanceRequest
-	29, // 37: helloworld.v1.Kuai.DeleteKuai:output_type -> helloworld.v1.DeleteKuaiReply
-	18, // 38: helloworld.v1.Kuai.GetTask:output_type -> helloworld.v1.GetTaskReply
-	26, // 39: helloworld.v1.Kuai.TaskList:output_type -> helloworld.v1.TaskListReply
-	24, // 40: helloworld.v1.Kuai.Login:output_type -> helloworld.v1.LoginReply
-	22, // 41: helloworld.v1.Kuai.Register:output_type -> helloworld.v1.RegisterReply
-	20, // 42: helloworld.v1.Kuai.StuUpd:output_type -> helloworld.v1.StuUpdReply
-	16, // 43: helloworld.v1.Kuai.TakeTask:output_type -> helloworld.v1.TakeTaskReply
-	14, // 44: helloworld.v1.Kuai.CreateOrder:output_type -> helloworld.v1.CreateOrderReply
-	11, // 45: helloworld.v1.Kuai.Performance:output_type -> helloworld.v1.PerformanceReply
-	34, // 46: helloworld.v1.Kuai.OrderList:output_type -> helloworld.v1.OrderListReply
-	37, // 47: helloworld.v1.Kuai.IncomeList:output_type -> helloworld.v1.IncomeListReply
-	39, // 48: helloworld.v1.Kuai.HandleException:output_type -> helloworld.v1.HandleExceptionReply
-	41, // 49: helloworld.v1.Kuai.CancelOrder:output_type -> helloworld.v1.CancelOrderReply
-	43, // 50: helloworld.v1.Kuai.ReassignOrder:output_type -> helloworld.v1.ReassignOrderReply
-	49, // 51: helloworld.v1.Kuai.OrderDetail:output_type -> helloworld.v1.OrderDetailReply
-	9,  // 52: helloworld.v1.Kuai.GetCourierPerformance:output_type -> helloworld.v1.GetCourierPerformanceReply
-	37, // [37:53] is the sub-list for method output_type
-	21, // [21:37] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	13, // 1: helloworld.v1.DispatchAssignRequest.strategy:type_name -> helloworld.v1.DispatchStrategy
+	15, // 2: helloworld.v1.DispatchAssignReply.candidates:type_name -> helloworld.v1.CandidateScoreItem
+	0,  // 3: helloworld.v1.CreateOrderRequest.service_type:type_name -> helloworld.v1.ServiceType
+	1,  // 4: helloworld.v1.CreateOrderRequest.payment_method:type_name -> helloworld.v1.PaymentMethod
+	2,  // 5: helloworld.v1.CreateOrderRequest.payment_status:type_name -> helloworld.v1.PaymentStatus
+	3,  // 6: helloworld.v1.CreateOrderRequest.order_status:type_name -> helloworld.v1.OrderStatus
+	31, // 7: helloworld.v1.TakeTaskReply.task:type_name -> helloworld.v1.Task
+	4,  // 8: helloworld.v1.GetTaskReply.task_type:type_name -> helloworld.v1.TaskType
+	5,  // 9: helloworld.v1.GetTaskReply.task_status:type_name -> helloworld.v1.TaskStatus
+	31, // 10: helloworld.v1.TaskListReply.tasks:type_name -> helloworld.v1.Task
+	4,  // 11: helloworld.v1.Task.task_type:type_name -> helloworld.v1.TaskType
+	5,  // 12: helloworld.v1.Task.task_status:type_name -> helloworld.v1.TaskStatus
+	37, // 13: helloworld.v1.OrderListReply.list:type_name -> helloworld.v1.OrderItem
+	40, // 14: helloworld.v1.IncomeListReply.list:type_name -> helloworld.v1.IncomeItem
+	6,  // 15: helloworld.v1.HandleExceptionRequest.exception_type:type_name -> helloworld.v1.ExceptionType
+	3,  // 16: helloworld.v1.HandleExceptionReply.new_status:type_name -> helloworld.v1.OrderStatus
+	7,  // 17: helloworld.v1.CancelOrderRequest.reason:type_name -> helloworld.v1.CancelReason
+	3,  // 18: helloworld.v1.CancelOrderReply.new_status:type_name -> helloworld.v1.OrderStatus
+	51, // 19: helloworld.v1.OrderDetailReply.fee:type_name -> helloworld.v1.FeeDetail
+	49, // 20: helloworld.v1.OrderDetailReply.status_changes:type_name -> helloworld.v1.AuditLogItem
+	50, // 21: helloworld.v1.OrderDetailReply.reassignments:type_name -> helloworld.v1.ReassignmentItem
+	52, // 22: helloworld.v1.OrderDetailReply.risk:type_name -> helloworld.v1.RiskInfo
+	32, // 23: helloworld.v1.Kuai.DeleteKuai:input_type -> helloworld.v1.DeleteKuaiRequest
+	21, // 24: helloworld.v1.Kuai.GetTask:input_type -> helloworld.v1.GetTaskRequest
+	29, // 25: helloworld.v1.Kuai.TaskList:input_type -> helloworld.v1.TaskListRequest
+	27, // 26: helloworld.v1.Kuai.Login:input_type -> helloworld.v1.LoginRequest
+	25, // 27: helloworld.v1.Kuai.Register:input_type -> helloworld.v1.RegisterRequest
+	23, // 28: helloworld.v1.Kuai.StuUpd:input_type -> helloworld.v1.StuUpdRequest
+	19, // 29: helloworld.v1.Kuai.TakeTask:input_type -> helloworld.v1.TakeTaskRequest
+	17, // 30: helloworld.v1.Kuai.CreateOrder:input_type -> helloworld.v1.CreateOrderRequest
+	10, // 31: helloworld.v1.Kuai.Performance:input_type -> helloworld.v1.PerformanceRequest
+	36, // 32: helloworld.v1.Kuai.OrderList:input_type -> helloworld.v1.OrderListRequest
+	39, // 33: helloworld.v1.Kuai.IncomeList:input_type -> helloworld.v1.IncomeListRequest
+	42, // 34: helloworld.v1.Kuai.HandleException:input_type -> helloworld.v1.HandleExceptionRequest
+	44, // 35: helloworld.v1.Kuai.CancelOrder:input_type -> helloworld.v1.CancelOrderRequest
+	46, // 36: helloworld.v1.Kuai.ReassignOrder:input_type -> helloworld.v1.ReassignOrderRequest
+	48, // 37: helloworld.v1.Kuai.OrderDetail:input_type -> helloworld.v1.OrderDetailRequest
+	8,  // 38: helloworld.v1.Kuai.GetCourierPerformance:input_type -> helloworld.v1.GetCourierPerformanceRequest
+	14, // 39: helloworld.v1.Kuai.DispatchAssign:input_type -> helloworld.v1.DispatchAssignRequest
+	33, // 40: helloworld.v1.Kuai.DeleteKuai:output_type -> helloworld.v1.DeleteKuaiReply
+	22, // 41: helloworld.v1.Kuai.GetTask:output_type -> helloworld.v1.GetTaskReply
+	30, // 42: helloworld.v1.Kuai.TaskList:output_type -> helloworld.v1.TaskListReply
+	28, // 43: helloworld.v1.Kuai.Login:output_type -> helloworld.v1.LoginReply
+	26, // 44: helloworld.v1.Kuai.Register:output_type -> helloworld.v1.RegisterReply
+	24, // 45: helloworld.v1.Kuai.StuUpd:output_type -> helloworld.v1.StuUpdReply
+	20, // 46: helloworld.v1.Kuai.TakeTask:output_type -> helloworld.v1.TakeTaskReply
+	18, // 47: helloworld.v1.Kuai.CreateOrder:output_type -> helloworld.v1.CreateOrderReply
+	11, // 48: helloworld.v1.Kuai.Performance:output_type -> helloworld.v1.PerformanceReply
+	38, // 49: helloworld.v1.Kuai.OrderList:output_type -> helloworld.v1.OrderListReply
+	41, // 50: helloworld.v1.Kuai.IncomeList:output_type -> helloworld.v1.IncomeListReply
+	43, // 51: helloworld.v1.Kuai.HandleException:output_type -> helloworld.v1.HandleExceptionReply
+	45, // 52: helloworld.v1.Kuai.CancelOrder:output_type -> helloworld.v1.CancelOrderReply
+	47, // 53: helloworld.v1.Kuai.ReassignOrder:output_type -> helloworld.v1.ReassignOrderReply
+	53, // 54: helloworld.v1.Kuai.OrderDetail:output_type -> helloworld.v1.OrderDetailReply
+	9,  // 55: helloworld.v1.Kuai.GetCourierPerformance:output_type -> helloworld.v1.GetCourierPerformanceReply
+	16, // 56: helloworld.v1.Kuai.DispatchAssign:output_type -> helloworld.v1.DispatchAssignReply
+	40, // [40:57] is the sub-list for method output_type
+	23, // [23:40] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
-func init() { file_api_helloworld_v1_kuai_proto_init() }
-func file_api_helloworld_v1_kuai_proto_init() {
-	if File_api_helloworld_v1_kuai_proto != nil {
+func init() { file_helloworld_v1_kuai_proto_init() }
+func file_helloworld_v1_kuai_proto_init() {
+	if File_helloworld_v1_kuai_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_helloworld_v1_kuai_proto_rawDesc), len(file_api_helloworld_v1_kuai_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_helloworld_v1_kuai_proto_rawDesc), len(file_helloworld_v1_kuai_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   42,
+			NumMessages:   46,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_helloworld_v1_kuai_proto_goTypes,
-		DependencyIndexes: file_api_helloworld_v1_kuai_proto_depIdxs,
-		EnumInfos:         file_api_helloworld_v1_kuai_proto_enumTypes,
-		MessageInfos:      file_api_helloworld_v1_kuai_proto_msgTypes,
+		GoTypes:           file_helloworld_v1_kuai_proto_goTypes,
+		DependencyIndexes: file_helloworld_v1_kuai_proto_depIdxs,
+		EnumInfos:         file_helloworld_v1_kuai_proto_enumTypes,
+		MessageInfos:      file_helloworld_v1_kuai_proto_msgTypes,
 	}.Build()
-	File_api_helloworld_v1_kuai_proto = out.File
-	file_api_helloworld_v1_kuai_proto_goTypes = nil
-	file_api_helloworld_v1_kuai_proto_depIdxs = nil
+	File_helloworld_v1_kuai_proto = out.File
+	file_helloworld_v1_kuai_proto_goTypes = nil
+	file_helloworld_v1_kuai_proto_depIdxs = nil
 }
