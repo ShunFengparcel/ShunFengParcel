@@ -5,7 +5,7 @@
 
 // API 基础配置
 const BASE_URL = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:8000/api/v1' 
+  ? 'http://localhost:18000/api/v1' 
   : 'https://api.shunfeng.com/api/v1'
 
 const TIMEOUT = 10000
@@ -44,8 +44,8 @@ function responseInterceptor(response) {
     return Promise.reject(response)
   }
   
-  // 业务状态码检查
-  if (data.code !== 200 && data.code !== 1000) {
+  // 业务状态码检查 (后端返回 code: "0" 表示成功)
+  if (data.code !== "0" && data.code !== 0 && data.code !== 200) {
     handleError(data)
     return Promise.reject(data)
   }

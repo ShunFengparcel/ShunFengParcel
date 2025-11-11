@@ -8,7 +8,7 @@ import { get, post, put, del } from '@/utils/request'
  * @param {number} userId - 用户ID
  */
 export function getAddressList(userId) {
-  return get('/api/v1/addresses', { user_id: userId })
+  return get('/api/v1/list/addresses', { user_id: userId })
 }
 
 /**
@@ -16,7 +16,7 @@ export function getAddressList(userId) {
  * @param {object} data - 地址数据
  */
 export function createAddress(data) {
-  return post('/api/v1/addresses', data)
+  return post('/api/v1/create/addresses', data)
 }
 
 /**

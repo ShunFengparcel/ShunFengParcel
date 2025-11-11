@@ -4,7 +4,39 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67feaf8a-801d-41d1-9326-e2859bc68554" name="更改" comment="shunfeng-user" />
+    <list default="true" id="67feaf8a-801d-41d1-9326-e2859bc68554" name="更改" comment="shunfeng-user">
+      <change beforePath="$PROJECT_DIR$/.idea/GOHCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GOHCache.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TabBar图标修复说明.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/configs/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/configs/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/internal/server/grpc.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/internal/server/grpc.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/internal/server/http.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/internal/server/http.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/api/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/api/address.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/api/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/api/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/pages.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/pages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/pages/index/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/pages/index/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/pages/order/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/pages/order/list.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/home-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/home-active.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/home.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/search-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/search-active.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/search.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/search.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/send-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/send-active.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/send.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/send.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/user-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/user-active.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/static/tabbar/user.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/static/tabbar/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/stores/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/stores/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/stores/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/stores/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/user-client/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/user-client/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/小程序错误修复说明.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/用户认证和授权说明.md" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,21 +44,24 @@
   </component>
   <component name="GOROOT" url="file://$PROJECT_DIR$/../../pkg/go1.25.0" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/server/ShunFengParcel" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "jinhuijuan337-lang"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jinhuijuan337-lang&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ShunFengparcel/ShunFengParcel.git",
-    "accountId": "fe97ee15-5ed7-44c1-833b-e858fce745a0"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ShunFengparcel/ShunFengParcel.git&quot;,
+    &quot;accountId&quot;: &quot;fe97ee15-5ed7-44c1-833b-e858fce745a0&quot;
   }
-}]]></component>
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/api/order/v1/order.proto" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
@@ -36,28 +71,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "git-widget-placeholder": "feature/user-and-order",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/33724",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Go 构建.go build ShunFengParcel/cmd/ShunFengParcel.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/redis-login&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/33724&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\gowork\src\ShunFengParcel\web\user-client\image" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build ShunFengParcel/cmd/ShunFengParcel" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="ShunFengParcel" />
+      <working_directory value="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel" />
+      <kind value="PACKAGE" />
+      <package value="ShunFengParcel/cmd/ShunFengParcel" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/server/ShunFengParcel/ShunFengParcel/cmd/ShunFengParcel/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go 构建.go build ShunFengParcel/cmd/ShunFengParcel" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -79,6 +131,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="shunfeng-user" />

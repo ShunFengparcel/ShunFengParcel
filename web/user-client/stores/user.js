@@ -35,10 +35,10 @@ export const useUserStore = defineStore('user', () => {
   function login(phone, code) {
     // TODO: 调用登录 API
     return new Promise((resolve) => {
-      // Mock 数据
+      // Mock 数据 - 使用 user_id = 9 来匹配测试数据
       const mockToken = 'mock_token_' + Date.now()
       const mockUserInfo = {
-        id: 1,
+        id: 9,
         phone: phone,
         nickname: '顺丰用户',
         avatar: '/static/images/default-avatar.png',

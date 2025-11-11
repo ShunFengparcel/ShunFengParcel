@@ -4,12 +4,7 @@
     <view class="search-bar">
       <view class="search-input" @click="handleSearch">
         <text class="search-icon">🔍</text>
-        <input 
-          v-model="searchKeyword" 
-          class="search-field" 
-          placeholder="运单号查询/关键字索引"
-          @confirm="handleSearchConfirm"
-        />
+        <input v-model="searchKeyword" class="search-field" placeholder="运单号查询/关键字索引" @confirm="handleSearchConfirm" />
       </view>
       <view class="scan-btn" @click="handleScan">
         <text class="scan-icon">📷</text>
@@ -18,13 +13,8 @@
 
     <!-- Tab 切换 -->
     <view class="tabs">
-      <view 
-        v-for="(tab, index) in tabs" 
-        :key="index"
-        class="tab-item"
-        :class="{ active: currentTab === index }"
-        @click="switchTab(index)"
-      >
+      <view v-for="(tab, index) in tabs" :key="index" class="tab-item" :class="{ active: currentTab === index }"
+        @click="switchTab(index)">
         <text class="tab-text">{{ tab.label }}</text>
         <text v-if="tab.count > 0" class="tab-count">{{ tab.count }}</text>
         <view v-if="currentTab === index" class="tab-line"></view>
@@ -36,21 +26,10 @@
     </view>
 
     <!-- 订单列表 -->
-    <scroll-view 
-      class="order-list" 
-      scroll-y 
-      @scrolltolower="loadMore"
-      refresher-enabled
-      :refresher-triggered="refreshing"
-      @refresherrefresh="onRefresh"
-    >
+    <scroll-view class="order-list" scroll-y @scrolltolower="loadMore" refresher-enabled
+      :refresher-triggered="refreshing" @refresherrefresh="onRefresh">
       <view v-if="orderList.length > 0">
-        <view 
-          v-for="order in orderList" 
-          :key="order.id"
-          class="order-card"
-          @click="goToDetail(order.id)"
-        >
+        <view v-for="order in orderList" :key="order.id" class="order-card" @click="goToDetail(order.id)">
           <view class="order-header">
             <view class="order-status">
               <text class="status-icon">{{ getStatusIcon(order.status) }}</text>
@@ -91,13 +70,7 @@
       </view>
 
       <!-- 空状态 -->
-      <sf-empty 
-        v-else
-        text="您最近没有寄出快件，快去寄件吧~"
-        :show-button="true"
-        button-text="去寄件"
-        @click="goToSend"
-      >
+      <sf-empty v-else text="您最近没有寄出快件，快去寄件吧~" :show-button="true" button-text="去寄件" @click="goToSend">
         <view class="empty-image">📦</view>
       </sf-empty>
 
@@ -127,9 +100,16 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useOrderStore } from '@/stores/order'
+import { useUserStore } from '@/stores/user'
+import { get } from '@/utils/request'
 import SfEmpty from '@/components/sf-empty/sf-empty.vue'
 
 const orderStore = useOrderStore()
+const userStore = useUserStore()
+
+console.log('🔵 [订单列表] 模块加载完成')
+console.log('🔵 [订单列表] orderStore:', orderStore)
+console.log('🔵 [订单列表] get函数:', get)
 
 // 搜索关键词
 const searchKeyword = ref('')
@@ -192,63 +172,103 @@ function showFilter() {
 }
 
 async function loadOrders() {
+  console.log('🔵🔵🔵 [订单列表] ========== loadOrders 函数被调用 ==========')
+  
   try {
     console.log('🔵 [订单列表] 开始加载订单...')
     console.log('🔵 [订单列表] 当前页码:', page.value)
     console.log('🔵 [订单列表] 当前Tab:', currentTabType.value)
-    
+    console.log('🔵 [订单列表] orderStore是否存在:', !!orderStore)
+    console.log('🔵 [订单列表] orderStore.getOrderList是否存在:', !!orderStore.getOrderList)
+
     uni.showLoading({
       title: '加载中...',
       mask: true
     })
+
+    // 调用真实的API获取订单数据
+    console.log('🔵 [订单列表] 准备调用API...')
+    console.log('🔵 [订单列表] 参数: type=', currentTabType.value, 'page=', page.value, 'pageSize=10')
     
-    // 调用 API 获取当前用户的订单列表（自动根据登录用户ID过滤）
-    console.log('🔵 [订单列表] 调用 orderStore.getOrderList...')
-    const response = await orderStore.getOrderList('all', page.value, 10)
-    
-    console.log('🔵 [订单列表] API响应:', response)
-    
-    if (response && response.orders) {
-      console.log('🔵 [订单列表] 收到订单数据:', response.orders.length, '条')
-      
-      // 处理订单数据，确保地址格式正确
-      const processedOrders = response.orders.map(order => {
-        console.log('🔵 [订单列表] 处理订单:', order.order_no || order.orderNo)
-        return {
-          ...order,
-          senderAddress: order.sender_address || order.senderAddress || '未知地址',
-          receiverAddress: order.receiver_address || order.receiverAddress || '未知地址',
-          orderNo: order.order_no || order.orderNo || '',
-          serviceType: order.service_type || order.serviceType || '顺丰标快',
-          estimatedFee: order.estimated_fee || order.estimatedFee || 0,
-          createdAt: order.created_at || order.createdAt || new Date().toISOString()
-        }
+    // 测试：直接调用 get 函数
+    console.log('🔵 [订单列表] 🧪 测试：直接调用 get 函数')
+    try {
+      const testResponse = await get('/api/v1/list/orders', {
+        user_id: 9,
+        page: 1,
+        page_size: 10
       })
-      
+      console.log('🔵 [订单列表] 🧪 直接调用成功:', testResponse)
+    } catch (testError) {
+      console.error('🔵 [订单列表] 🧪 直接调用失败:', testError)
+    }
+    
+    let response = null
+    try {
+      console.log('🔵 [订单列表] 开始调用 orderStore.getOrderList...')
+      response = await orderStore.getOrderList(currentTabType.value, page.value, 10)
+      console.log('🔵 [订单列表] orderStore.getOrderList 调用完成')
+    } catch (apiError) {
+      console.error('🔵 [订单列表] ❌ API调用出错:', apiError)
+      console.error('🔵 [订单列表] 错误详情:', apiError.message)
+      console.error('🔵 [订单列表] 错误堆栈:', apiError.stack)
+      throw apiError
+    }
+    
+    console.log('🔵 [订单列表] ========== API响应分析 ==========')
+    console.log('🔵 [订单列表] response类型:', typeof response)
+    console.log('🔵 [订单列表] response:', response)
+    console.log('🔵 [订单列表] response是否为null:', response === null)
+    console.log('🔵 [订单列表] response是否为undefined:', response === undefined)
+    
+    // 尝试序列化
+    try {
+      const responseStr = JSON.stringify(response)
+      console.log('🔵 [订单列表] response序列化:', responseStr)
+    } catch (e) {
+      console.error('🔵 [订单列表] 无法序列化response:', e)
+    }
+    
+    console.log('🔵 [订单列表] response.orders:', response?.orders)
+    console.log('🔵 [订单列表] response.orders长度:', response?.orders?.length)
+    console.log('🔵 [订单列表] response.total:', response?.total)
+    
+    if (response && response.orders && response.orders.length > 0) {
       if (page.value === 1) {
-        orderList.value = processedOrders
+        orderList.value = response.orders
       } else {
-        orderList.value = [...orderList.value, ...processedOrders]
+        orderList.value = [...orderList.value, ...response.orders]
       }
       
-      console.log('🔵 [订单列表] 最终订单列表:', orderList.value)
-      
-      // 更新 tab 计数（只显示当前用户的订单数量）
-      tabs.value[0].count = response.total
-      
-      // 判断是否还有更多数据
       hasMore.value = orderList.value.length < response.total
+      tabs.value[currentTab.value].count = response.total
+      
+      console.log('🔵 [订单列表] ✅ 订单列表已更新，共', orderList.value.length, '条')
+      console.log('🔵 [订单列表] 第一条订单:', orderList.value[0])
     } else {
-      console.log('🔴 [订单列表] 没有收到订单数据')
+      console.log('🔵 [订单列表] ❌ 没有获取到订单数据')
+      orderList.value = []
+      tabs.value[currentTab.value].count = 0
+      hasMore.value = false
     }
     
     uni.hideLoading()
   } catch (error) {
     uni.hideLoading()
     console.error('🔴 [订单列表] 加载订单列表失败:', error)
+
+    // 显示详细错误信息
+    let errorMsg = '加载失败'
+    if (error.message) {
+      errorMsg = error.message
+    } else if (typeof error === 'string') {
+      errorMsg = error
+    }
+
     uni.showToast({
-      title: '加载失败，请重试',
-      icon: 'none'
+      title: errorMsg,
+      icon: 'none',
+      duration: 3000
     })
   }
 }
@@ -257,7 +277,7 @@ function onRefresh() {
   refreshing.value = true
   page.value = 1
   orderList.value = []
-  
+
   setTimeout(() => {
     loadOrders()
     refreshing.value = false
@@ -266,7 +286,7 @@ function onRefresh() {
 
 function loadMore() {
   if (!hasMore.value) return
-  
+
   page.value++
   loadOrders()
 }
@@ -351,8 +371,17 @@ function formatTime(time) {
   return time.split(' ')[0]
 }
 
-onMounted(() => {
+onMounted(async () => {
   console.log('🚀🚀🚀 订单列表页面已加载 🚀🚀🚀')
+  console.log('🚀 [onMounted] 开始执行')
+
+  // 初始化用户store（从本地存储恢复登录状态）
+  userStore.init()
+
+  console.log('🔵 [订单列表] 用户登录状态:', userStore.isLogin)
+  console.log('🔵 [订单列表] 用户信息:', userStore.userInfo)
+
+  // 临时：直接加载订单，不检查登录状态（用于调试）
   uni.showToast({
     title: '正在加载订单...',
     icon: 'loading',

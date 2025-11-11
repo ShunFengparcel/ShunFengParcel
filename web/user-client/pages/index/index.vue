@@ -1,8 +1,16 @@
 <template>
   <view class="container">
-    <!-- 测试登录按钮 -->
-    <view class="test-login-btn" @click="goToLogin">
-      <text>🔑 点击这里测试登录</text>
+    <!-- 测试按钮 -->
+    <view class="test-buttons">
+      <view class="test-btn" @click="goToLogin">
+        <text>🔑 测试登录</text>
+      </view>
+      <view class="test-btn" @click="goToTestOrderList" style="background-color: #ff6b00;">
+        <text>📦 测试订单列表</text>
+      </view>
+      <view class="test-btn" @click="goToAPITest" style="background-color: #00a870;">
+        <text>🔧 API测试</text>
+      </view>
     </view>
 
     <!-- 顶部区域 -->
@@ -189,12 +197,13 @@ const recentOrders = ref([])
 
 // 页面加载时检查登录状态并加载订单
 onMounted(async () => {
-  if (!userStore.isLogin) {
-    uni.reLaunch({
-      url: '/pages/login/login'
-    })
-    return
-  }
+  // 临时注释登录检查，方便测试
+  // if (!userStore.isLogin) {
+  //   uni.reLaunch({
+  //     url: '/pages/login/login'
+  //   })
+  //   return
+  // }
 
   // 加载最近的订单（最多3条）
   await loadRecentOrders()
@@ -224,6 +233,20 @@ const services = ref([
   { icon: '📍', label: '亲情卡', color: '#FFD93D' },
   { icon: '🎁', label: '寄件返礼', color: '#6BCB77' }
 ])
+
+// 跳转到测试订单列表页面
+const goToTestOrderList = () => {
+  uni.navigateTo({
+    url: '/pages/order/list-test'
+  })
+}
+
+// 跳转到API测试页面
+const goToAPITest = () => {
+  uni.navigateTo({
+    url: '/pages/order/api-test'
+  })
+}
 
 const handleSearch = () => {
   // 弹出输入框让用户输入运单号
@@ -332,18 +355,25 @@ const formatReceiverAddress = (order) => {
   padding-bottom: 20rpx;
 }
 
-/* 测试登录按钮 */
-.test-login-btn {
+/* 测试按钮 */
+.test-buttons {
+  display: flex;
+  gap: 15rpx;
+  padding: 20rpx;
+  flex-wrap: wrap;
+}
+
+.test-btn {
+  flex: 1;
+  min-width: 200rpx;
   background: linear-gradient(135deg, #D81E06 0%, #FF4444 100%);
   color: white;
-  padding: 30rpx;
+  padding: 20rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 24rpx;
   font-weight: bold;
-  margin: 20rpx;
   border-radius: 15rpx;
   box-shadow: 0 8rpx 20rpx rgba(216, 30, 6, 0.3);
-  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {

@@ -1,0 +1,44 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+test-*.html
+test-*.js
+test-*.py
+*-test.html
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Build
+bin/
+dist/
+build/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Go
+*.exe
+*.test
+*.out
+go.work
+
+# Backup files
+*.bak
+*.backup

@@ -1,6 +1,94 @@
 {
   "pages": [
     {
+      "path": "pages/debug/connection-debug",
+      "style": {
+        "navigationBarTitleText": "接口连接调试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/manual-request/manual-request",
+      "style": {
+        "navigationBarTitleText": "手动请求测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/import-test/import-test",
+      "style": {
+        "navigationBarTitleText": "导入测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/ultimate-debug/ultimate-debug",
+      "style": {
+        "navigationBarTitleText": "终极调试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/which-file/which-file",
+      "style": {
+        "navigationBarTitleText": "文件路径测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/minimal-test/minimal",
+      "style": {
+        "navigationBarTitleText": "最小化测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/debug/debug",
+      "style": {
+        "navigationBarTitleText": "调试页面",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/test-api/connection-test",
+      "style": {
+        "navigationBarTitleText": "连接测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/direct-test/direct-test",
+      "style": {
+        "navigationBarTitleText": "API直接测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/test-api/test-api",
+      "style": {
+        "navigationBarTitleText": "API连接测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "test-api-connection",
+      "style": {
+        "navigationBarTitleText": "API连接测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "顺丰速运",
@@ -21,6 +109,38 @@
       "path": "pages/order/list",
       "style": {
         "navigationBarTitleText": "查快递",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/order/list-simple",
+      "style": {
+        "navigationBarTitleText": "订单列表测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/order/list-test",
+      "style": {
+        "navigationBarTitleText": "订单测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/order/api-test",
+      "style": {
+        "navigationBarTitleText": "API测试",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/order/test-api-direct",
+      "style": {
+        "navigationBarTitleText": "直接API测试",
         "navigationBarBackgroundColor": "#FFFFFF",
         "navigationBarTextStyle": "black"
       }

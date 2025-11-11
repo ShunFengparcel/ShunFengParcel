@@ -8,7 +8,7 @@ import { get, post } from '@/utils/request'
  * @param {object} data - 订单数据
  */
 export function createOrder(data) {
-  return post('/api/v1/orders', data)
+  return post('/api/v1/create/orders', data)
 }
 
 /**
@@ -16,7 +16,7 @@ export function createOrder(data) {
  * @param {object} params - 查询参数
  */
 export function getOrderList(params) {
-  return get('/api/v1/orders', params)
+  return get('/api/v1/list/orders', params)
 }
 
 /**
@@ -25,10 +25,12 @@ export function getOrderList(params) {
  * @param {string} orderNo - 订单号
  */
 export function getOrderDetail(id, orderNo) {
-  const params = {}
-  if (id) params.id = id
-  if (orderNo) params.order_no = orderNo
-  return get('/api/v1/orders/detail', params)
+  if (id) {
+    return get(`/api/v1/details/orders/${id}`)
+  } else if (orderNo) {
+    return get('/api/v1/details/orders', { order_no: orderNo })
+  }
+  throw new Error('请提供订单ID或订单号')
 }
 
 /**
@@ -36,7 +38,7 @@ export function getOrderDetail(id, orderNo) {
  * @param {number} orderId - 订单ID
  */
 export function getTracking(orderId) {
-  return get('/api/v1/tracking', { order_id: orderId })
+  return get(`/api/v1/tracking/${orderId}`)
 }
 
 /**
@@ -52,5 +54,5 @@ export function cancelOrder(orderId) {
  * @param {object} data - 计算参数
  */
 export function calculateFee(data) {
-  return post('/api/v1/orders/calculate-fee', data)
+  return post('/api/v1/pricing/calculate', data)
 }

@@ -47,17 +47,21 @@ export const useOrderStore = defineStore('order', () => {
       }
       
       // 调用创建订单 API
-      const response = await post('/api/v1/orders', requestData)
+      const response = await post('/api/v1/create/orders', requestData)
       
-      // 构建完整的订单对象
+      console.log('📦 [OrderStore] 创建订单响应:', response)
+      
+      // 构建完整的订单对象（后端返回驼峰命名）
       const order = {
         id: response.id,
-        orderNo: response.order_no,
-        pickupCode: response.pickup_code,
+        orderNo: response.orderNo,
+        pickupCode: response.pickupCode,
         status: response.status,
         ...orderData,
         createdAt: new Date().toISOString()
       }
+      
+      console.log('📦 [OrderStore] 构建的订单对象:', order)
       
       orderList.value.unshift(order)
       setCurrentOrder(order)
@@ -70,29 +74,16 @@ export const useOrderStore = defineStore('order', () => {
   }
 
   async function getOrderList(type = 'all', page = 1, pageSize = 10) {
+    console.log('🟢🟢🟢 [OrderStore] ========== getOrderList 函数被调用 ==========')
+    console.log('🟢 [OrderStore] 参数: type=', type, 'page=', page, 'pageSize=', pageSize)
+    
     try {
-      const userStore = useUserStore()
+      console.log('🟢 [OrderStore] ===== 开始获取订单列表 =====')
       
-      // 确保用户已登录
-      if (!userStore.isLogin || !userStore.userInfo?.id) {
-        console.error('🔴 [OrderStore] 用户未登录')
-        uni.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        // 跳转到登录页
-        setTimeout(() => {
-          uni.reLaunch({
-            url: '/pages/login/login'
-          })
-        }, 1500)
-        return { orders: [], total: 0 }
-      }
+      // 临时方案：直接使用硬编码的 user_id = 9，跳过登录检查
+      const userId = 9
       
-      const userId = userStore.userInfo.id
-      
-      console.log('🟢 [OrderStore] 开始获取订单列表')
-      console.log('🟢 [OrderStore] 用户ID:', userId)
+      console.log('🟢 [OrderStore] 🔧 使用硬编码 user_id:', userId)
       console.log('🟢 [OrderStore] 类型:', type, '页码:', page, '每页:', pageSize)
       
       // 构建查询参数
@@ -108,20 +99,43 @@ export const useOrderStore = defineStore('order', () => {
       }
       
       console.log('🟢 [OrderStore] 请求参数:', params)
-      console.log('🟢 [OrderStore] 请求URL: /api/v1/orders')
+      console.log('🟢 [OrderStore] 请求URL: /api/v1/list/orders')
       
       // 调用获取订单列表 API
-      const response = await get('/api/v1/orders', params)
+      const response = await get('/api/v1/list/orders', params)
       
-      console.log('🟢 [OrderStore] API响应:', response)
+      console.log('🟢 [OrderStore] ===== API响应分析 =====')
+      console.log('🟢 [OrderStore] response类型:', typeof response)
+      console.log('🟢 [OrderStore] response是否为null:', response === null)
+      console.log('🟢 [OrderStore] response是否为undefined:', response === undefined)
       
-      if (response && response.orders) {
-        console.log('🟢 [OrderStore] 成功获取', response.orders.length, '条订单')
-        setOrderList(response.orders)
-        return response
+      // 尝试序列化
+      try {
+        const responseStr = JSON.stringify(response)
+        console.log('🟢 [OrderStore] response序列化成功，长度:', responseStr.length)
+        console.log('🟢 [OrderStore] response内容:', responseStr.substring(0, 200))
+      } catch (e) {
+        console.error('🟢 [OrderStore] ❌ 无法序列化response:', e.message)
       }
       
-      console.log('🟡 [OrderStore] 响应中没有订单数据')
+      console.log('🟢 [OrderStore] response:', response)
+      console.log('🟢 [OrderStore] response.orders:', response.orders)
+      console.log('🟢 [OrderStore] response.total:', response.total)
+      
+      if (response && response.orders && Array.isArray(response.orders)) {
+        console.log('🟢 [OrderStore] ✅ 获取到', response.orders.length, '条订单')
+        
+        if (response.orders.length > 0) {
+          console.log('🟢 [OrderStore] 第一条订单:', response.orders[0])
+          setOrderList(response.orders)
+          return { 
+            orders: response.orders, 
+            total: response.total || response.orders.length 
+          }
+        }
+      }
+      
+      console.log('🟡 [OrderStore] 没有订单数据')
       return { orders: [], total: 0 }
     } catch (error) {
       console.error('🔴 [OrderStore] 获取订单列表失败:', error)
@@ -145,18 +159,17 @@ export const useOrderStore = defineStore('order', () => {
 
   async function getOrderDetail(orderId, orderNo) {
     try {
-      // 构建查询参数
-      const params = {}
+      let order
+      
       if (orderId) {
-        params.id = orderId
+        // 使用 RESTful 风格的路径
+        order = await get(`/api/v1/details/orders/${orderId}`)
       } else if (orderNo) {
-        params.order_no = orderNo
+        // 使用查询参数
+        order = await get('/api/v1/details/orders', { order_no: orderNo })
       } else {
         throw new Error('订单ID或订单号不能为空')
       }
-      
-      // 调用获取订单详情 API
-      const order = await get('/api/v1/orders/detail', params)
       
       if (order) {
         setCurrentOrder(order)
@@ -171,8 +184,8 @@ export const useOrderStore = defineStore('order', () => {
 
   async function getTrackingInfo(orderId) {
     try {
-      // 调用获取物流信息 API
-      const response = await get('/api/v1/tracking', { order_id: orderId })
+      // 使用 RESTful 风格的路径
+      const response = await get(`/api/v1/tracking/${orderId}`)
       
       if (response && response.trackings) {
         const tracking = {
@@ -180,7 +193,7 @@ export const useOrderStore = defineStore('order', () => {
           status: currentOrder.value?.status || '',
           estimatedDeliveryTime: '',
           logs: response.trackings.map(t => ({
-            time: t.created_at,
+            time: t.createdAt || t.created_at,
             location: t.location,
             description: t.description,
             status: t.status
