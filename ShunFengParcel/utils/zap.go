@@ -153,24 +153,6 @@ func Errorf(template string, args ...interface{}) {
 	SugaredLogger.Errorf(template, args...)
 }
 
-// Fatal 记录Fatal级别日志并退出程序
-func Fatal(msg string, fields ...zap.Field) {
-	Logger.Fatal(msg, fields...)
-}
-
-// Fatalf 记录Fatal级别日志并退出程序（格式化）
-func Fatalf(template string, args ...interface{}) {
-	SugaredLogger.Fatalf(template, args...)
-}
-
-// Sync 刷新日志缓冲区
-func Sync() error {
-	if Logger != nil {
-		return Logger.Sync()
-	}
-	return nil
-}
-
 // --- Kratos日志适配器 ---
 
 // NewZapLogger 创建Zap日志适配器（兼容Kratos）

@@ -137,19 +137,15 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 		return nil, err
 	}
 
-	if order.Id == 0 {
-		logs.Println("该")
-	}
-
 	if tradeStatus == "TRADE_SUCCESS" {
 		order.PaymentStatus = "paid"
 
 		err := order.UpdateOrderStatus(inits.DB, outTradeNo)
 		if err != nil {
-			fmt.Println("订单状态修改失败")
+			utils.LogPaymentError(outTradeNo, "订单状态修改失败", err)
 			return nil, errors.New(400, "ORDER_UPDATE_FAILED", "订单状态修改失败")
 		}
-
+		inits.RDB.Del(context.Background(), "payment-order:"+outTradeNo)
 	}
 	Wg.Wait()
 	// 5. 返回结果（必须返回 "success"，否则支付宝会重复回调）
@@ -283,12 +279,12 @@ func (s *PaymentService) PaymentOrder(ctx context.Context, req *pb.PaymentOrderR
 	var o config.SfOrders
 	err := o.FIndByOrderSn(inits.DB, req.OrderSn)
 	if err != nil {
-		logs.Println("查询订单号错误", err.Error())
+		utils.LogOrderError(req.OrderSn, "查询订单号错误", err)
 		return nil, err
 	}
 
 	if o.Id == 0 {
-		logs.Println("该订单不存在")
+		utils.LogOrderError(req.OrderSn, "该订单不存在", err)
 		return nil, errors.New(400, err.Error(), "该订单不存在")
 	}
 
