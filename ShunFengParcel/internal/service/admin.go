@@ -9,6 +9,7 @@ import (
 	"log"
 
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
 )
 
 type AdminService struct {
@@ -30,16 +31,27 @@ func (s *AdminService) AdminRegister(ctx context.Context, req *pb.AdminRegisterR
 	}, nil
 }
 func (s *AdminService) FindAdminByUsername(ctx context.Context, req *pb.FindAdminByUsernameReq) (*pb.FindAdminByUsernameResp, error) {
-	var a config.SysAdmin
-	inits.DB.Where("username = ?", req.Username).Find(&a)
-	if a.Password != pkg.Md5(req.Password) {
-		return nil, nil
-	}
+	// 在方法开始时立即创建 Span
 	ctx, span := otel.Tracer("admin-service").Start(ctx, "FindAdminByUsername")
 	defer span.End() // 确保 Span 结束时被上报
 
+	// 添加 Span 属性，记录关键信息
+	span.SetAttributes(
+		attribute.String("username", req.Username),
+		attribute.String("operation", "find_admin_by_username"),
+	)
+
 	// 打印日志，确认埋点逻辑执行
 	log.Printf("触发 Trace 埋点，用户名: %s", req.Username)
+
+	var a config.SysAdmin
+	inits.DB.Where("username = ?", req.Username).Find(&a)
+	if a.Password != pkg.Md5(req.Password) {
+		span.AddEvent("密码验证失败")
+		return nil, nil
+	}
+
+	span.AddEvent("用户查询成功")
 	return &pb.FindAdminByUsernameResp{
 		Id: a.Id,
 	}, nil

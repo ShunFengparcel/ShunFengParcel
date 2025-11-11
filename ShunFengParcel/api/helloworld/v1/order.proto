@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package stream;
+
+import "google/api/annotations.proto";
+
+option go_package = "ShunFengParcel/api/helloworld/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.helloworld.v1";
+option java_outer_classname = "HelloworldProtoV1";
+
+// The greeting service definition.
+service Order {
+  // Sends a greeting
+  rpc AddOrder (AddOrderReq) returns (AddOrderResp) {
+    option (google.api.http) = {
+     post:"addorder",
+      body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name.
+message AddOrderReq {
+  int64 userid=1;
+  int64 courierid=2;
+  string sendername=3;
+  string senderphone=4;
+  string senderaddress=5;
+  string receivername=6;
+  string receiverphone=7;
+  string receiveraddress=8;
+}
+
+// The response message containing the greetings
+message AddOrderResp {
+  int64 id=1;
+}

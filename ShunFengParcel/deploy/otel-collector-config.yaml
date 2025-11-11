@@ -24,6 +24,12 @@ exporters:
   file:
     path: /var/log/otel-collector/traces.json
   
+  # 输出到 Jaeger（关键配置！）
+  jaeger:
+    endpoint: 14.103.153.242:14250
+    tls:
+      insecure: true
+  
   # 如果有 APM 后端，配置这里
   # otlp:
   #   endpoint: "apmplus-cn-beijing.ivolces.com:4317"
@@ -37,7 +43,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [logging, file]
+      exporters: [logging, file, jaeger]  # 添加 jaeger 导出器
     
     metrics:
       receivers: [otlp]

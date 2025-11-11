@@ -3,6 +3,20 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
+        <entry key="AddOrderReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AddOrderResp">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="AdminHTTPClientImpl">
           <value>
             <set>
@@ -49,6 +63,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Config">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/logger.go" />
             </set>
           </value>
         </entry>
@@ -130,6 +151,48 @@
             </set>
           </value>
         </entry>
+        <entry key="Logger">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MultiWriter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderHTTPClientImpl">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order_http.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrderService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/service/order.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RabbitMQ">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/pkg/rabbitmq.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RotateLogger">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/logger.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="SendSmsReq">
           <value>
             <set>
@@ -165,6 +228,13 @@
             </set>
           </value>
         </entry>
+        <entry key="SfOrders">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/config/sf_order.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="SysAdmin">
           <value>
             <set>
@@ -183,6 +253,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedOrderServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order_grpc.pb.go" />
             </set>
           </value>
         </entry>
@@ -235,12 +312,27 @@
             </set>
           </value>
         </entry>
+        <entry key="logEntry">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="orderClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="x">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/admin.pb.go" />
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go" />
               <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go" />
+              <option value="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order.pb.go" />
               <option value="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go" />
             </set>
           </value>
@@ -252,7 +344,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/admin.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761008243530" />
+              <option name="lastModified" value="1761129634000" />
               <option name="schema">
                 <list>
                   <option value="AdminRegisterReq" />
@@ -276,7 +368,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/admin_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761008243530" />
+              <option name="lastModified" value="1761129634000" />
               <option name="schema">
                 <list>
                   <option value="adminClient" />
@@ -289,7 +381,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/admin_http.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761008243530" />
+              <option name="lastModified" value="1761129634000" />
               <option name="schema">
                 <list>
                   <option value="AdminHTTPClientImpl" />
@@ -301,7 +393,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/error_reason.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159544" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="x" />
@@ -313,7 +405,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159574" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="HelloRequest" />
@@ -327,7 +419,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159613" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="greeterClient" />
@@ -340,7 +432,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/greeter_http.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159638" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="GreeterHTTPClientImpl" />
@@ -349,31 +441,70 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762217408676" />
+              <option name="schema">
+                <list>
+                  <option value="AddOrderReq" />
+                  <option value="AddOrderResp" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762217408676" />
+              <option name="schema">
+                <list>
+                  <option value="orderClient" />
+                  <option value="UnimplementedOrderServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/api/helloworld/v1/order_http.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762217408679" />
+              <option name="schema">
+                <list>
+                  <option value="OrderHTTPClientImpl" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761116780353" />
+              <option name="lastModified" value="1762694331776" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159679" />
+              <option name="lastModified" value="1760528158000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/cmd/ShunFengParcel/wire_gen.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760699618205" />
+              <option name="lastModified" value="1762217120194" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/config/sf_admin.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760939449179" />
+              <option name="lastModified" value="1761129634000" />
               <option name="schema">
                 <list>
                   <option value="SysAdmin" />
@@ -382,31 +513,43 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/config/sf_order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762263121626" />
+              <option name="schema">
+                <list>
+                  <option value="SfOrders" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/inits.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760871025256" />
+              <option name="lastModified" value="1761132336000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/inits/mysql.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760680436584" />
+              <option name="lastModified" value="1761132336000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/biz.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159762" />
+              <option name="lastModified" value="1760528158000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/biz/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159780" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="Greeter" />
@@ -419,7 +562,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/conf/conf.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159803" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="Bootstrap" />
@@ -438,7 +581,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/data.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159847" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="Data" />
@@ -450,7 +593,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/data/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159864" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="greeterRepo" />
@@ -462,28 +605,28 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/grpc.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760938784370" />
+              <option name="lastModified" value="1761963760000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/http.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760920951684" />
+              <option name="lastModified" value="1762217042404" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/server/server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159912" />
+              <option name="lastModified" value="1760528158000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/admin.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1761116592494" />
+              <option name="lastModified" value="1761963760000" />
               <option name="schema">
                 <list>
                   <option value="AdminService" />
@@ -495,7 +638,7 @@
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/greeter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159940" />
+              <option name="lastModified" value="1760528158000" />
               <option name="schema">
                 <list>
                   <option value="GreeterService" />
@@ -504,24 +647,78 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/order.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762349750034" />
+              <option name="schema">
+                <list>
+                  <option value="OrderService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/internal/service/service.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760528159941" />
+              <option name="lastModified" value="1761958910000" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761179846000" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                  <option value="Logger" />
+                  <option value="logEntry" />
+                  <option value="MultiWriter" />
+                  <option value="RotateLogger" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/pkg/logger/middleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761179878000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/pkg/password.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760939535001" />
+              <option name="lastModified" value="1761129634000" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/pkg/rabbitmq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1762217817688" />
+              <option name="schema">
+                <list>
+                  <option value="RabbitMQ" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/ShunFengParcel/pkg/sendsms.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1760940771940" />
+              <option name="lastModified" value="1761129634000" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/ShunFengParcel/test-otlp.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1761562890000" />
             </ScannedPath>
           </value>
         </entry>
@@ -529,6 +726,8 @@
     </option>
     <option name="tableStructMapping">
       <map>
+        <entry key="add_order_req" value="AddOrderReq" />
+        <entry key="add_order_resp" value="AddOrderResp" />
         <entry key="admin_client" value="adminClient" />
         <entry key="admin_http_client_impl" value="AdminHTTPClientImpl" />
         <entry key="admin_register_req" value="AdminRegisterReq" />
@@ -537,6 +736,7 @@
         <entry key="admin_status_req" value="AdminStatusReq" />
         <entry key="admin_status_resp" value="AdminStatusResp" />
         <entry key="bootstrap" value="Bootstrap" />
+        <entry key="config" value="Config" />
         <entry key="data" value="Data" />
         <entry key="data__database" value="Data_Database" />
         <entry key="data__redis" value="Data_Redis" />
@@ -550,14 +750,24 @@
         <entry key="greeter_usecase" value="GreeterUsecase" />
         <entry key="hello_reply" value="HelloReply" />
         <entry key="hello_request" value="HelloRequest" />
+        <entry key="log_entry" value="logEntry" />
+        <entry key="logger" value="Logger" />
+        <entry key="multi_writer" value="MultiWriter" />
+        <entry key="order_client" value="orderClient" />
+        <entry key="order_http_client_impl" value="OrderHTTPClientImpl" />
+        <entry key="order_service" value="OrderService" />
+        <entry key="rabbit_mq" value="RabbitMQ" />
+        <entry key="rotate_logger" value="RotateLogger" />
         <entry key="send_sms_req" value="SendSmsReq" />
         <entry key="send_sms_resp" value="SendSmsResp" />
         <entry key="server" value="Server" />
         <entry key="server_grpc" value="Server_GRPC" />
         <entry key="server_http" value="Server_HTTP" />
+        <entry key="sf_orders" value="SfOrders" />
         <entry key="sys_admin" value="SysAdmin" />
         <entry key="unimplemented_admin_server" value="UnimplementedAdminServer" />
         <entry key="unimplemented_greeter_server" value="UnimplementedGreeterServer" />
+        <entry key="unimplemented_order_server" value="UnimplementedOrderServer" />
         <entry key="update_admin_personal_req" value="UpdateAdminPersonalReq" />
         <entry key="update_admin_personal_resp" value="UpdateAdminPersonalResp" />
         <entry key="update_admin_status_req" value="UpdateAdminStatusReq" />
@@ -565,6 +775,6 @@
         <entry key="x" value="x" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1761093602452" />
+    <option name="lastTimeChecked" value="1762216391092" />
   </component>
 </project>

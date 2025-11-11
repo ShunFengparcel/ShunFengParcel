@@ -3,45 +3,21 @@
 
 openapi: 3.0.3
 info:
-    title: Admin API
+    title: Order API
     description: The greeting service definition.
     version: 0.0.1
 paths:
-    /admin/findadminbyusername:
+    addorder:
         post:
             tags:
-                - Admin
-            operationId: Admin_FindAdminByUsername
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/FindAdminByUsernameReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/FindAdminByUsernameResp'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /admin/register:
-        post:
-            tags:
-                - Admin
+                - Order
             description: Sends a greeting
-            operationId: Admin_AdminRegister
+            operationId: Order_AddOrder
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/AdminRegisterReq'
+                            $ref: '#/components/schemas/AddOrderReq'
                 required: true
             responses:
                 "200":
@@ -49,103 +25,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/AdminRegisterResp'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /admin/status:
-        post:
-            tags:
-                - Admin
-            operationId: Admin_AdminStatus
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/AdminStatusReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/AdminStatusResp'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /admin/status/update:
-        post:
-            tags:
-                - Admin
-            operationId: Admin_UpdateAdminStatus
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpdateAdminStatusReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateAdminStatusResp'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /admin/update/prsonal:
-        post:
-            tags:
-                - Admin
-            operationId: Admin_UpdateAdminPersonal
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpdateAdminPersonalReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateAdminPersonalResp'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /sendsms:
-        post:
-            tags:
-                - Admin
-            operationId: Admin_SendSms
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/SendSmsReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SendSmsResp'
+                                $ref: '#/components/schemas/AddOrderResp'
                 default:
                     description: Default error response
                     content:
@@ -154,39 +34,27 @@ paths:
                                 $ref: '#/components/schemas/Status'
 components:
     schemas:
-        AdminRegisterReq:
+        AddOrderReq:
             type: object
             properties:
-                username:
+                userid:
                     type: string
-                password:
+                courierid:
+                    type: string
+                sendername:
+                    type: string
+                senderphone:
+                    type: string
+                senderaddress:
+                    type: string
+                receivername:
+                    type: string
+                receiverphone:
+                    type: string
+                receiveraddress:
                     type: string
             description: The request message containing the user's name.
-        AdminRegisterResp:
-            type: object
-            properties:
-                id:
-                    type: string
-            description: The response message containing the greetings
-        AdminStatusReq:
-            type: object
-            properties:
-                username:
-                    type: string
-        AdminStatusResp:
-            type: object
-            properties:
-                status:
-                    type: string
-            description: The response message containing the greetings
-        FindAdminByUsernameReq:
-            type: object
-            properties:
-                username:
-                    type: string
-                password:
-                    type: string
-        FindAdminByUsernameResp:
+        AddOrderResp:
             type: object
             properties:
                 id:
@@ -200,17 +68,6 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
-        SendSmsReq:
-            type: object
-            properties:
-                id:
-                    type: string
-                status:
-                    type: string
-        SendSmsResp:
-            type: object
-            properties: {}
-            description: The response message containing the greetings
         Status:
             type: object
             properties:
@@ -227,31 +84,5 @@ components:
                         $ref: '#/components/schemas/GoogleProtobufAny'
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
-        UpdateAdminPersonalReq:
-            type: object
-            properties:
-                id:
-                    type: string
-                nickname:
-                    type: string
-                phone:
-                    type: string
-                email:
-                    type: string
-        UpdateAdminPersonalResp:
-            type: object
-            properties: {}
-            description: The response message containing the greetings
-        UpdateAdminStatusReq:
-            type: object
-            properties:
-                id:
-                    type: string
-                status:
-                    type: string
-        UpdateAdminStatusResp:
-            type: object
-            properties: {}
-            description: The response message containing the greetings
 tags:
-    - name: Admin
+    - name: Order
