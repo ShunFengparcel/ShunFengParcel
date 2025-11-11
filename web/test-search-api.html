@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API测试工具 - 订单搜索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #4ec9b0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .panel {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: #2d2d30;
+            padding: 10px 15px;
+            border-bottom: 1px solid #3e3e42;
+            font-weight: bold;
+            color: #cccccc;
+        }
+
+        .panel-body {
+            padding: 15px;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .test-item {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .test-item:hover {
+            border-color: #007acc;
+            box-shadow: 0 0 10px rgba(0, 122, 204, 0.3);
+        }
+
+        .test-item h3 {
+            color: #4ec9b0;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .test-item p {
+            color: #858585;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .test-item pre {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            overflow-x: auto;
+            color: #ce9178;
+        }
+
+        .run-btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .run-btn:hover {
+            background: #1177bb;
+        }
+
+        .run-btn:active {
+            background: #0d5a8f;
+        }
+
+        .result-panel {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .result-panel.show {
+            display: block;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #3e3e42;
+        }
+
+        .status-success {
+            color: #4ec9b0;
+        }
+
+        .status-error {
+            color: #f48771;
+        }
+
+        .result-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .result-body pre {
+            background: #1e1e1e;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .config-panel {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .config-item {
+            margin-bottom: 10px;
+        }
+
+        .config-item label {
+            display: block;
+            color: #cccccc;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .config-item input {
+            width: 100%;
+            background: #3c3c3c;
+            border: 1px solid #3e3e42;
+            color: #d4d4d4;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .config-item input:focus {
+            outline: none;
+            border-color: #007acc;
+        }
+
+        @media (max-width: 768px) {
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 订单搜索API测试工具</h1>
+
+        <div class="config-panel">
+            <div class="config-item">
+                <label>API地址</label>
+                <input type="text" id="apiUrl" value="http://localhost:18000">
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">测试用例</div>
+            <div class="panel-body">
+                <div class="test-grid">
+                    <!-- 测试1：基础搜索 -->
+                    <div class="test-item">
+                        <h3>1. 基础搜索</h3>
+                        <p>测试不带任何条件的搜索，返回所有订单</p>
+                        <pre>{
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(1)">运行测试</button>
+                        <div id="result-1" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试2：订单号搜索 -->
+                    <div class="test-item">
+                        <h3>2. 订单号精确查询</h3>
+                        <p>通过订单号精确查询，性能要求 &lt;50ms</p>
+                        <pre>{
+  "keyword": "SF202510300001",
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(2)">运行测试</button>
+                        <div id="result-2" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试3：手机号搜索 -->
+                    <div class="test-item">
+                        <h3>3. 手机号模糊查询</h3>
+                        <p>通过手机号查询，性能要求 &lt;200ms</p>
+                        <pre>{
+  "keyword": "138****8000",
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(3)">运行测试</button>
+                        <div id="result-3" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试4：姓名搜索 -->
+                    <div class="test-item">
+                        <h3>4. 姓名全文检索</h3>
+                        <p>通过姓名查询，性能要求 &lt;300ms</p>
+                        <pre>{
+  "keyword": "张三",
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(4)">运行测试</button>
+                        <div id="result-4" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试5：地址搜索 -->
+                    <div class="test-item">
+                        <h3>5. 地址全文检索</h3>
+                        <p>通过地址关键词查询</p>
+                        <pre>{
+  "keyword": "北京市朝阳区",
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(5)">运行测试</button>
+                        <div id="result-5" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试6：时间范围 -->
+                    <div class="test-item">
+                        <h3>6. 时间范围查询</h3>
+                        <p>查询指定时间范围内的订单</p>
+                        <pre>{
+  "start_date": "2025-10-01",
+  "end_date": "2025-10-30",
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(6)">运行测试</button>
+                        <div id="result-6" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试7：状态筛选 -->
+                    <div class="test-item">
+                        <h3>7. 订单状态筛选</h3>
+                        <p>查询特定状态的订单</p>
+                        <pre>{
+  "status": ["SIGNED"],
+  "page": 1,
+  "page_size": 10
+}</pre>
+                        <button class="run-btn" onclick="runTest(7)">运行测试</button>
+                        <div id="result-7" class="result-panel"></div>
+                    </div>
+
+                    <!-- 测试8：组合查询 -->
+                    <div class="test-item">
+                        <h3>8. 多条件组合查询</h3>
+                        <p>组合多个查询条件，性能要求 &lt;500ms</p>
+                        <pre>{
+  "keyword": "张三",
+  "start_date": "2025-10-01",
+  "end_date": "2025-10-30",
+  "status": ["SIGNED"],
+  "product_type": "文件",
+  "min_amount": 50,
+  "max_amount": 100,
+  "page": 1,
+  "page_size": 20
+}</pre>
+                        <button class="run-btn" onclick="runTest(8)">运行测试</button>
+                        <div id="result-8" class="result-panel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const testCases = {
+            1: { page: 1, page_size: 10 },
+            2: { keyword: "SF202510300001", page: 1, page_size: 10 },
+            3: { keyword: "138****8000", page: 1, page_size: 10 },
+            4: { keyword: "张三", page: 1, page_size: 10 },
+            5: { keyword: "北京市朝阳区", page: 1, page_size: 10 },
+            6: { start_date: "2025-10-01", end_date: "2025-10-30", page: 1, page_size: 10 },
+            7: { status: ["SIGNED"], page: 1, page_size: 10 },
+            8: {
+                keyword: "张三",
+                start_date: "2025-10-01",
+                end_date: "2025-10-30",
+                status: ["SIGNED"],
+                product_type: "文件",
+                min_amount: 50,
+                max_amount: 100,
+                page: 1,
+                page_size: 20
+            }
+        };
+
+        async function runTest(testId) {
+            const apiUrl = document.getElementById('apiUrl').value;
+            const resultDiv = document.getElementById(`result-${testId}`);
+            const testData = testCases[testId];
+
+            // 显示结果面板
+            resultDiv.classList.add('show');
+            resultDiv.innerHTML = '<div class="result-header"><span>⏳ 测试中...</span></div>';
+
+            const startTime = performance.now();
+
+            try {
+                const response = await fetch(`${apiUrl}/api/v1/orders/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                const endTime = performance.now();
+                const duration = Math.round(endTime - startTime);
+
+                const result = await response.json();
+
+                // 显示结果
+                const statusClass = response.ok ? 'status-success' : 'status-error';
+                const statusText = response.ok ? '✅ 成功' : '❌ 失败';
+
+                let performanceCheck = '';
+                if (result.data && result.data.took) {
+                    const took = result.data.took;
+                    let perfStatus = '✅';
+                    let perfText = '性能达标';
+                    
+                    // 根据测试类型检查性能
+                    if (testId === 2 && took > 50) {
+                        perfStatus = '⚠️';
+                        perfText = '性能未达标（应<50ms）';
+                    } else if (testId === 3 && took > 200) {
+                        perfStatus = '⚠️';
+                        perfText = '性能未达标（应<200ms）';
+                    } else if ((testId === 4 || testId === 5) && took > 300) {
+                        perfStatus = '⚠️';
+                        perfText = '性能未达标（应<300ms）';
+                    } else if (testId === 8 && took > 500) {
+                        perfStatus = '⚠️';
+                        perfText = '性能未达标（应<500ms）';
+                    }
+
+                    performanceCheck = `
+                        <div style="margin-top: 10px; padding: 10px; background: #2d2d30; border-radius: 4px;">
+                            <div style="color: #cccccc; margin-bottom: 5px;">性能指标：</div>
+                            <div>ES查询耗时: <span style="color: #4ec9b0;">${took}ms</span></div>
+                            <div>总耗时: <span style="color: #4ec9b0;">${duration}ms</span></div>
+                            <div style="margin-top: 5px;">${perfStatus} ${perfText}</div>
+                        </div>
+                    `;
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="result-header">
+                        <span class="${statusClass}">${statusText}</span>
+                        <span style="color: #858585;">HTTP ${response.status}</span>
+                    </div>
+                    ${performanceCheck}
+                    <div class="result-body">
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    </div>
+                `;
+
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result-header">
+                        <span class="status-error">❌ 错误</span>
+                    </div>
+                    <div class="result-body">
+                        <pre style="color: #f48771;">${error.message}</pre>
+                    </div>
+                `;
+            }
+        }
+
+        // 页面加载时运行第一个测试
+        window.onload = function() {
+            console.log('API测试工具已加载');
+            console.log('点击"运行测试"按钮开始测试');
+        };
+    </script>
+</body>
+</html>
