@@ -10,8 +10,8 @@ data:
     driver: mysql
     source: root:mysql_8tDfmn@tcp(14.103.136.136:3306)/shunfeng?parseTime=True&loc=Local
   redis:
-    addr: 14.103.136.136:6379
-    password: mysql_8tDfmn
+    addr: 14.103.175.138:6379
+    password: 3c907a418fdb4cf3112ed3b118669ed4
     read_timeout: 0.2s
     write_timeout: 0.2s
 

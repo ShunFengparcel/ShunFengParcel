@@ -38,7 +38,7 @@ func NewPaymentService(logger log.Logger) *PaymentService {
 	// 加载支付宝公钥用于验证回调签名
 	// ⚠️ 注意：这里必须使用支付宝公钥，不是应用公钥！
 	// 支付宝公钥从支付宝开放平台的"开发信息"中获取
-	alipayPublicKey := "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4ggbHWY0sLakPRJ1e/nFZsKC8D3y2+JrKNaE1LuAjpLCLZ/Kst36p6OY0SnHUuqf2oMkPiSAp/S1DfZhBBrJUKdzVR4gqPQTKnE2K4Uk7bA+Y7NVcLvMO3jCJiUy0yZnV8V5YvhLKTqbqUDZvKGsNJzJSUlIJDl6/lvcz9+/0qlXMjXdGseFHsJPKYO9BYU4l6cLZsKqL8k/HVrFLBxz2nRfXPrYUBxPfKKfWhDuPz8KUwBZLqsHWMiHJhLtXfXPvN3JzQQnBBQG0JWZXMeLTLqbLJPfDQfCvLjyEjnOiAyhFYJ3oP+0VTYTzj8j5+CgaLzVPBfLNKkPSZKEj/BPQwIDAQAB"
+	alipayPublicKey := "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuTeRNKVmgIl3iMzw3X7y76e5M0PWKT8LmfRXbOSC5/JMIV27MIy9Zns/ym98jW4dOI4W+0PO47k4JKdeZzzJBjOBVcXM1lru4m8aMclRqVGLhKWDVSn2CiL8NbOf2fDMflDYlW8eCrBBUTnoTGkhYijTVPL6av3GNCB5WhtGUjyRinMXBo43Xdujgz8SqU2V5Y+tRZoZeMu8Hz68OBCO+yLwT59JDnASsUaHZ6Axk71ZOkINruWMGoxMKL87/Q7+Zggh1tAcVm+UPnaIGf9DTkddBg45+mJL2KOC/J1b7FQqE8VfftR1Ybd88/fxLVF/1hxkvWAMyrpcSXkt/dP4qwIDAQAB"
 	if err := client.LoadAliPayPublicKey(alipayPublicKey); err != nil {
 		log.NewHelper(logger).Errorf("加载支付宝公钥失败: %v", err)
 		return &PaymentService{log: log.NewHelper(logger)}
@@ -51,6 +51,8 @@ func NewPaymentService(logger log.Logger) *PaymentService {
 }
 
 func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymentRequest) (*pb.UpdatePaymentReply, error) {
+	defer Wg.Done()
+	Wg.Add(1)
 	rawReq, ok := http.RequestFromServerContext(ctx)
 	if !ok {
 		return &pb.UpdatePaymentReply{
@@ -64,20 +66,49 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 			Result: "fail",
 		}, nil
 	}
+
+	// 支付宝回调可能通过 POST Form 或 GET Query 传递参数
+	// 需要合并两种方式的参数
 	params := rawReq.PostForm
 
+	// 先处理 POST 参数
+	for k, v := range params {
+		params[k] = v
+	}
+
+	// 再处理 GET 参数（如果有的话）
+	for k, v := range rawReq.URL.Query() {
+		if _, exists := params[k]; !exists {
+			params[k] = v
+		}
+	}
+
+	// 创建 map 用于日志和后续使用
 	paramMap := make(map[string]string)
 	for k, v := range params {
 		if len(v) > 0 {
 			paramMap[k] = v[0]
 		}
 	}
+
+	// 记录接收到的签名和部分参数用于调试
+	s.log.Infof("收到支付宝回调 - 订单号: %s, 签名: %s", paramMap["out_trade_no"], paramMap["sign"][:50]+"...")
+
+	// 使用 url.Values 进行验签
 	if err := s.alipayClient.VerifySign(params); err != nil {
-		s.log.Error("签名验证失败:", err, "参数:", paramMap)
+		s.log.Errorf("❌ 签名验证失败: %v", err)
+		s.log.Errorf("请检查以下配置:")
+		s.log.Errorf("1. 确认使用的是【支付宝公钥】不是【应用公钥】")
+		s.log.Errorf("2. 支付宝公钥需要从支付宝开放平台获取")
+		s.log.Errorf("3. 沙箱环境: https://openhome.alipay.com/platform/appDaily.htm")
+		s.log.Errorf("4. 正式环境: https://open.alipay.com/")
+		s.log.Errorf("当前 app_id: %s, 通知类型: %s", paramMap["app_id"], paramMap["notify_type"])
 		return &pb.UpdatePaymentReply{
 			Result: "fail",
 		}, nil
 	}
+
+	s.log.Info("✅ 签名验证成功")
 
 	outTradeNo := paramMap["out_trade_no"] // 你的系统订单号
 	fmt.Println(outTradeNo)
@@ -87,12 +118,19 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 
 	fmt.Printf("收到支付宝回调: 订单号=%s, 状态=%s, 金额=%s\n", outTradeNo, tradeStatus, totalAmount)
 
+	go func() {
+		err := CreatePayment(outTradeNo, alipayTradeNo, tradeStatus)
+		if err != nil {
+			return
+		}
+	}()
+
 	var order config.SfOrders
 
 	//TRADE_FINISHED	交易完成	true（触发通知）
 	//TRADE_SUCCESS	支付成功	true（触发通知）
 	//WAIT_BUYER_PAY	交易创建	false（不触发通知）
-	//TRADE_CLOSED	交易关闭	true（触发通知）
+	//TRADE_CLOSED	交易关闭	true（触发通知）mm
 
 	err := order.FIndByOrderSn(inits.DB, outTradeNo)
 	if err != nil {
@@ -104,42 +142,37 @@ func (s *PaymentService) UpdatePayment(ctx context.Context, req *pb.UpdatePaymen
 	}
 
 	if tradeStatus == "TRADE_SUCCESS" {
-		order.OrderStatus = "paid"
-		err := order.UpdateOrderStatus(inits.DB, alipayTradeNo)
+		order.PaymentStatus = "paid"
+
+		err := order.UpdateOrderStatus(inits.DB, outTradeNo)
 		if err != nil {
 			fmt.Println("订单状态修改失败")
 			return nil, errors.New(400, "ORDER_UPDATE_FAILED", "订单状态修改失败")
 		}
 
 	}
-
-	go CreatePayment(outTradeNo, alipayTradeNo)
-
+	Wg.Wait()
 	// 5. 返回结果（必须返回 "success"，否则支付宝会重复回调）
 	return &pb.UpdatePaymentReply{Result: "success"}, nil
 }
 
-func CreatePayment(ordersn string, alipayNo string) error {
+func CreatePayment(ordersn string, alipayNo string, status string) error {
 	var order config.SfOrders
 	err := order.FIndByOrderSn(inits.DB, ordersn)
 	if err != nil {
 		logs.Println("查询订单失败", err.Error())
 		return err
 	}
-
+	fmt.Println(order)
 	var pay config.SfPayments
 	pay = config.SfPayments{
-		OrderId: order.Id,
-		PayNo:   ordersn,
-		Channel: "alipay",
-		Amount:  order.ActualFee,
-
-		Status:    "success",
-		PaidAt:    time.Time{},
+		OrderId:   order.Id,
+		PayNo:     ordersn,
+		Channel:   "alipay",
+		Amount:    order.ActualFee,
+		Status:    status,
+		PaidAt:    time.Now(),
 		ThirdTxId: alipayNo,
-		CreatedAt: time.Time{},
-		UpdatedAt: time.Time{},
-		DeleteAt:  time.Time{},
 	}
 
 	err = pay.Created(inits.DB)
@@ -258,6 +291,11 @@ func (s *PaymentService) PaymentOrder(ctx context.Context, req *pb.PaymentOrderR
 		logs.Println("该订单不存在")
 		return nil, errors.New(400, err.Error(), "该订单不存在")
 	}
+
+	if o.PaymentStatus == "paid" {
+		return nil, errors.New(500, "paid", "该订单已被支付")
+	}
+
 	var url string
 	if req.PaymentType == "1" {
 		var pay utils.AliPay
@@ -265,6 +303,8 @@ func (s *PaymentService) PaymentOrder(ctx context.Context, req *pb.PaymentOrderR
 		price := fmt.Sprintf("%.2f", o.ActualFee)
 		url = pay.Pay(o.OrderNo, price)
 	}
+
+	inits.RDB.Set(context.Background(), "payment-order:"+o.OrderNo, o, time.Minute*15)
 
 	return &pb.PaymentOrderReply{
 		Url: url,
@@ -283,6 +323,10 @@ func (s *PaymentService) MonitorCreate(ctx context.Context, req *pb.MonitorCreat
 	score := 0
 	if o.ActualFee >= 100 {
 		Level = "low"
+	} else if o.ActualFee >= 1000 {
+		Level = "medium"
+	} else if o.ActualFee >= 10000 {
+		Level = "high"
 	}
 
 	var m config.TransactionMonitor
@@ -326,11 +370,11 @@ func (s *PaymentService) MonitorDelete(ctx context.Context, req *pb.MonitorDelet
 	var m config.TransactionMonitor
 
 	if err = m.Deleted(inits.DB, int(req.Id)); err != nil {
-		logs.Println("监控情况查询失败", err.Error())
+		logs.Println("监控删除失败", err.Error())
 		return nil, err
 	}
 
-	if err = m.FindByID(inits.DB, req.Id); err != nil {
+	if err = m.FindByID(inits.DB, int(req.Id)); err != nil {
 		logs.Println("监控情况查询失败", err.Error())
 		return nil, err
 	}
@@ -385,26 +429,11 @@ func (s *PaymentService) PaymentList(ctx context.Context, req *pb.PaymentListReq
 	}
 	fmt.Println(list)
 	if list == nil {
-		logs.Println("未找到对账信息")
-	}
-
-	var payment []*pb.PaymentItem
-	for _, v := range list {
-		payment = append(payment, &pb.PaymentItem{
-			OrderId:   v.OrderId,
-			PayNo:     v.PayNo,
-			Channel:   v.Channel,
-			Amount:    float32(v.Amount),
-			Currency:  v.Currency,
-			Status:    v.Status,
-			PaidAt:    fmt.Sprintf("%s", v.PaidAt),
-			ThirdTxId: v.ThirdTxId,
-			CreatedAt: v.CreatedAt.Format("2006-01-02 15:04:05"),
-		})
+		logs.Println("未找到支付信息")
 	}
 
 	return &pb.PaymentListReply{
-		List: payment,
+		List: list,
 	}, nil
 }
 

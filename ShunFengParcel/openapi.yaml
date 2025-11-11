@@ -342,6 +342,8 @@ components:
                     type: string
                 CreatedAt:
                     type: string
+                UserName:
+                    type: string
         PaymentListReply:
             type: object
             properties:

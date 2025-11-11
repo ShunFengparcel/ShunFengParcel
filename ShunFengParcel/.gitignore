@@ -36,3 +36,6 @@ bin/
 .vscode/
 .idea/
 *.swp
+go.mod
+go.sum
+*.md

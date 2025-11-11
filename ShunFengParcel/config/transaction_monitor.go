@@ -20,7 +20,7 @@ func (m *TransactionMonitor) TableName() string {
 	return "transaction_monitor"
 }
 
-func (m *TransactionMonitor) FindByID(DB *gorm.DB, id int64) (err error) {
+func (m *TransactionMonitor) FindByID(DB *gorm.DB, id int) (err error) {
 	return DB.Where("id = ?", id).First(m).Error
 }
 
